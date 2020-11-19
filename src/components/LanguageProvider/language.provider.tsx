@@ -2,10 +2,10 @@ import React, { ReactNode, useContext } from 'react';
 import {useSelector} from 'react-redux';
 
 import {settingsSelectors} from '../../redux/settings/settings.selectors';
-import {languages} from './languages';
+import {languages, ILanguage} from './languages';
 
 interface ContextProps {
-    language: any,
+    language: ILanguage,
     currentLanguage: 'en'|'bash'| 'Russian'
 }
 

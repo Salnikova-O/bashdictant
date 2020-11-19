@@ -10,6 +10,7 @@ const Navigation = () => {
 
     return (
         <NavigationContainer
+        
         ref={navigationRef} onReady={() => {
           (isMountedRef as React.MutableRefObject<boolean>).current=true
         }}

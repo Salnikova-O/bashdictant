@@ -5,10 +5,26 @@ declare module 'styled-components' {
         palette: {
             text: {
                 main: string,
+                primary: string,
+                secondary:string,
+                grey: string,
+                light:string,
+                error: string
             },
             background: {
                 main: string,
             },
+            buttons: {
+                primary: string,
+                secondary: string
+            },
+            grades: {
+                1: string,
+                2: string,
+                3: string,
+                4: string,
+                5: string,
+            }
 
         }
     }
