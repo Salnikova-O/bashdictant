@@ -7,6 +7,7 @@ padding: 16px 20px;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
+background-color:${props => props.theme.palette.background.main}
 `
 
 export const LanguageContainer = styled.TouchableOpacity`

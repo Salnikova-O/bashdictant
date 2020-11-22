@@ -54,6 +54,7 @@ const AuthScreen: React.FC = () => {
         onSubmit={values => handleSignIn(values)}
         validationSchema={validationSchema}
         validateOnChange={false}
+    
         >
             {
             ({handleSubmit, handleChange, values, errors, handleBlur}) => (
@@ -62,6 +63,7 @@ const AuthScreen: React.FC = () => {
                 edges={[ 'bottom']}
                 >
                     <FormContainer
+                    behavior='padding'
                     orientation={orientation}
                     >
 

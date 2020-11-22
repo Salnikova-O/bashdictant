@@ -9,7 +9,7 @@ export const Container = styled(ScreenContainer)<OrientationProps>`
 `
 
 
-export const FormContainer = styled.View<OrientationProps>`
+export const FormContainer = styled.KeyboardAvoidingView<OrientationProps>`
 width: 100%;
 align-items: center;
 flex-direction: ${props => props.orientation==='PORTRAIT'? 'column': 'row'};

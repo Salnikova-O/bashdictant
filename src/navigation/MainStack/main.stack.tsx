@@ -8,6 +8,8 @@ import { useTheme } from 'styled-components';
 import ArrowLeftSVG from '../../assets/arrowLeft.svg';
 import Logout from '../../components/Logout/logout.component';
 import RegistrationScreen from '../../screens/Registration/registration.screen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text } from 'react-native';
 
 
 export type MainStackParamList = {
@@ -30,13 +32,32 @@ const MainStack = () => {
         <Stack.Navigator 
         initialRouteName={'Main'}
         headerMode={'screen'}
-        screenOptions={{
-            headerBackImage: () => <ArrowLeftSVG style={{marginLeft: 20, }}/>,
-            headerBackTitle: 'Назад',
-            headerBackTitleStyle: {
-                color: theme.palette.text.grey,
-                marginLeft: 10
-
+        mode='card'
+        screenOptions={(navigation) => ({
+            // headerBackImage: () => <ArrowLeftSVG style={{marginLeft: 20, }}/>,
+            // headerBackTitle: 'Назад',
+            // headerBackTitleStyle: {
+            //     color: theme.palette.text.grey,
+            //     marginLeft: 10
+            // },
+            headerLeft: (props) => {
+                return (
+                    <TouchableOpacity
+                    onPress={() => navigation.navigation.goBack()}
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center'
+                    }}
+                    >
+                        <ArrowLeftSVG style={{marginLeft: 20, }}/>
+                        <Text
+                        style={{
+                            color: theme.palette.text.grey,
+                            marginLeft: 10
+                        }}
+                        >Назад</Text>
+                    </TouchableOpacity>
+                )
             },
             headerRight: () => {
                 console.log(loggedIn)
@@ -54,7 +75,7 @@ const MainStack = () => {
                 height:20
             },
             headerStatusBarHeight: 0
-        }}
+        })}
         >
             <Stack.Screen 
             name='Main' 

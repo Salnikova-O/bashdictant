@@ -7,6 +7,8 @@ import {Subtitle} from './registration.styles';
 import { ScreenContainer } from '../../components/common/ScreenContainer/screen-container.styles';
 import SocialAuth from '../../components/SocialAuth/social-auth.component';
 import Tabs from '../../components/Tabs/tabs.component';
+import DisplayDictant from '../../components/DisplayDictant/display-dictant.component'
+
 
 const RegistrationScreen: React.FC = () => {
     const [currentTab, setCurrentTab] = useState<'student'|'expert'|'organizer'>('student')
@@ -27,7 +29,7 @@ const RegistrationScreen: React.FC = () => {
                 <Tabs
                 tabNames={['Организатор', 'Эксперт', 'Участник']}
                 >
-                    <Text>1</Text>
+                    <DisplayDictant/>
                     <Text>2</Text>
                     <Text>3</Text>
                 </Tabs>

@@ -7,7 +7,6 @@ import {OrientationProps} from '../../components/OrientationProvider/orientation
 
 export const Container = styled(ScreenContainer)<OrientationProps>`
 flex-direction: ${props => props.orientation==='PORTRAIT'? 'column': 'row-reverse'};
-padding-top:10px;
 `
 
 
