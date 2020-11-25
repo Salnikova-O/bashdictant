@@ -4,9 +4,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components';
 import ExitSVG from '../../assets/exit.svg';
 import { CustomText } from '../common/Text/text.styles';
+import { useLanguage } from '../LanguageProvider/language.provider';
 
 const Logout: React.FC = () => {
     const theme = useTheme()
+    const {language} = useLanguage()
+
 
     const handleLogout = () =>{
 
@@ -30,7 +33,7 @@ const Logout: React.FC = () => {
                 paddingRight:20
             }}
             >
-                Выход
+                {language.navigation.exit}
             </CustomText>
         </TouchableOpacity>
     ) 

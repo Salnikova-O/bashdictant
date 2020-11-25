@@ -4,12 +4,13 @@ export interface ButtonProps {
     bg: string,
     border?: string,
     font: string,
-    height: '50px'|'40px'
+    height: '50px'|'40px',
+    marginTop?: number
 }
 
 
 export const ButtonContainer = styled.TouchableOpacity<ButtonProps>`
-margin-top: 16px;
+margin-top: ${props => props.marginTop? props.marginTop + 16: 16}px;
 justify-content: center;
 align-items: center;
 width: 100%;

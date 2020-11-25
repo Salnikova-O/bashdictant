@@ -8,11 +8,15 @@ import { ScreenContainer } from '../../components/common/ScreenContainer/screen-
 import SocialAuth from '../../components/SocialAuth/social-auth.component';
 import Tabs from '../../components/Tabs/tabs.component';
 import DisplayDictant from '../../components/DisplayDictant/display-dictant.component'
+import RegistrationStudent from '../../components/RegistrationStudent/registration-student.component';
+import RegistrationExpert from '../../components/RegistrationExpert/registration-expert.component';
+import RegistrationOrganizer from '../../components/RegistrationOrganizer/registration-organizer.component';
+import { useLanguage } from '../../components/LanguageProvider/language.provider';
 
 
 const RegistrationScreen: React.FC = () => {
     const [currentTab, setCurrentTab] = useState<'student'|'expert'|'organizer'>('student')
-
+    const {language} = useLanguage()
 
     return (
         <ScreenContainer
@@ -23,15 +27,20 @@ const RegistrationScreen: React.FC = () => {
             contentContainerStyle={{
                 alignItems: 'center'
             }}
+            showsVerticalScrollIndicator={false}
             >
-                <SocialAuth title='Регистрация через соц.сеть' size='lg'/>
-                <Subtitle>Или:</Subtitle>
+                <SocialAuth title={language.registration.social.social} size='lg'/>
+                <Subtitle>{language.registration.social.or}</Subtitle>
                 <Tabs
-                tabNames={['Организатор', 'Эксперт', 'Участник']}
+                tabNames={[
+                    language.registration.tabs.header.organizer,
+                    language.registration.tabs.header.expert, 
+                    language.registration.tabs.header.student
+                ]}
                 >
-                    <DisplayDictant/>
-                    <Text>2</Text>
-                    <Text>3</Text>
+                    <RegistrationOrganizer/>
+                    <RegistrationExpert/>
+                    <RegistrationStudent/>
                 </Tabs>
             </ScrollView>
         </ScreenContainer>

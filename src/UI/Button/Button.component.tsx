@@ -18,6 +18,7 @@ const Button: React.FC<IButton&ButtonProps> = ({
     font,
     height,
     border,
+    marginTop,
     onPress,
     text,
 }) => {
@@ -28,6 +29,7 @@ const Button: React.FC<IButton&ButtonProps> = ({
         font={font}
         height={height}
         border={border}
+        marginTop={marginTop}
         >
             <ButtonText
             bg={bg}

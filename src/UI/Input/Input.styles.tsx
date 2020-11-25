@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 export const CustomInput = styled.TextInput`
 width: 100%;
 border-width: 0px;
+font-size:14px;
 border-bottom-width:1px;
 border-bottom-color: ${props => props.theme.palette.text.grey};
 color: ${props => props.theme.palette.text.main};
@@ -14,9 +15,9 @@ background-color: transparent;
 export const InputContainer = styled.View`
 flex-direction: row;
 width: 100%;
-max-width: 350px;
+max-width: 440px;
 position: relative;
-margin: 8px 0px;
+margin: 0px 0px;
 `
 
 export const IconButton = styled.TouchableOpacity`
@@ -24,5 +25,7 @@ height:100%;
 width: 22.5px;
 justify-content: center;
 align-items: center;
+position: absolute;
+
 `
 

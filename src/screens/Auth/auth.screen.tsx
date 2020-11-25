@@ -18,6 +18,7 @@ import Button from '../../UI/Button/Button.component';
 import Input from '../../UI/Input/Input.component';
 import {Error} from '../../components/common/Error/error.styles';
 import Alert from '../../components/Alert/alert.component';
+import { useLanguage } from '../../components/LanguageProvider/language.provider';
 
 
 const validationSchema = yup.object().shape({
@@ -35,6 +36,9 @@ const AuthScreen: React.FC = () => {
     const {orientation} = useOrientation()
     const theme = useTheme()
     const [error, setError] = useState<{text:string,type:'success'|'error'}>({text: '', type: 'error'})
+    const {language} = useLanguage()
+
+
 
     const closeError = () => {
         setError({text: '', type: 'error'})
@@ -82,7 +86,7 @@ const AuthScreen: React.FC = () => {
                             :null
                         }
                             <SocialAuth
-                            title='Авторизация через соц.сеть'
+                            title={language.auth.social}
                             size='lg'
                             />
                         </View>
@@ -91,25 +95,25 @@ const AuthScreen: React.FC = () => {
                         >
                             {
                                 orientation==='PORTRAIT'?
-                                <Subtitle>Или:</Subtitle>
+                                <Subtitle>{language.auth.or}</Subtitle>
                                 : null
                             }
                             <AuthTitleWrapper>
                                 <AuthTitle>
-                                    Авторизация
+                                    {language.auth.authorizationHeader}
                                 </AuthTitle>
                             </AuthTitleWrapper>
                             <Input
                             onChangeText={handleChange('email')}
                             value={values.email}
-                            placeholder='Адрес электронной почты'
+                            placeholder={language.auth.email}
                             onBlur={handleBlur('email')}
                             />
                             <Error>{errors.email}</Error>
                             <Input
                             onChangeText={handleChange('password')}
                             value={values.password}
-                            placeholder='Пароль'
+                            placeholder={language.auth.password}
                             onBlur={handleBlur('password')}
                             password={true}
                             />
@@ -117,7 +121,7 @@ const AuthScreen: React.FC = () => {
                         </AuthContainer>
                     </FormContainer>
                     <Button
-                    text='Войти'
+                    text={language.auth.enter}
                     bg={theme.palette.buttons.primary}
                     font={theme.palette.text.primary}
                     height='50px'

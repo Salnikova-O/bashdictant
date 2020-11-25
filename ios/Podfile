@@ -23,6 +23,10 @@ target 'bashdictant' do
   end
 end
 
+pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+
+
 target 'bashdictant-tvOS' do
   # Pods for bashdictant-tvOS
 

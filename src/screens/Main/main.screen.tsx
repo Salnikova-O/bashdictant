@@ -13,19 +13,20 @@ import {
 import Button from '../../UI/Button/Button.component';
 import { useOrientation } from '../../components/OrientationProvider/orientation.provider';
 import SocialAuth from '../../components/SocialAuth/social-auth.component';
+import { useLanguage } from '../../components/LanguageProvider/language.provider';
 
 const MainScreen:React.FC = () => {
     const theme = useTheme()
     const navigation = useNavigation()
     const {orientation} = useOrientation()
-
+    const {language, currentLanguage} = useLanguage()
 
     const handleNavigation = (route: string) => {
         navigation.navigate(route)
     }
 
 
-    console.log(orientation)
+    console.log(language, currentLanguage)
 
     return(
         <Container
@@ -34,7 +35,7 @@ const MainScreen:React.FC = () => {
         >
             {
                 orientation==='PORTRAIT'?
-                <Title>Здравствуйте! Приветствуем вас на странице регистрации диктанта</Title>
+                <Title>{language.main.welcome}</Title>
                 :null
             }
             <VideoContainer>
@@ -43,24 +44,24 @@ const MainScreen:React.FC = () => {
                 play={false}
                 fullscreen={false}
                 style={{width: '100%', height: 300, borderRadius: 6}}
-                apiKey=''
+                // apiKey=''
                 />
             </VideoContainer>
             <ButtonsContainer orientation={orientation}>
                 {
                     orientation==='LANDSCAPE'?
-                    <Title>Здравствуйте! Приветствуем вас на странице регистрации диктанта</Title>
+                    <Title>{language.main.welcome}</Title>
                     :null
                 }
                 <Button
-                text='Регистрация'
+                text={language.main.registration}
                 bg={theme.palette.buttons.primary}
                 font={theme.palette.text.primary}
                 height='40px'
                 onPress={ () => handleNavigation('Registration')}
                 />
                 <Button
-                text='Авторизация'
+                text={language.main.authorization}
                 bg={theme.palette.buttons.secondary}
                 font={theme.palette.text.secondary}
                 border={theme.palette.text.secondary}
@@ -68,7 +69,7 @@ const MainScreen:React.FC = () => {
                 onPress={() => handleNavigation('Auth')}
                 />
                 <SocialAuth
-                title='Или войти через'
+                title={language.main.loginWith}
                 />
             </ButtonsContainer>
         </Container>

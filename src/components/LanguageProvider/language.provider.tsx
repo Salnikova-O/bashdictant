@@ -1,8 +1,9 @@
 import React, { ReactNode, useContext } from 'react';
 import {useSelector} from 'react-redux';
+import { ILanguage } from '../../@types/common';
 
 import {settingsSelectors} from '../../redux/settings/settings.selectors';
-import {languages, ILanguage} from './languages';
+import {languages, } from './languages';
 
 interface ContextProps {
     language: ILanguage,
@@ -19,7 +20,7 @@ const LanguageProvider: React.FC<{children: ReactNode}> = ({children}) => {
     return (
         <LanguageContext.Provider
         value={{
-            language: languages[language],
+            language: languages[language] as ILanguage,
             currentLanguage: language
         }}
         >

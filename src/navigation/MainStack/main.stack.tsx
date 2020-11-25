@@ -10,12 +10,15 @@ import Logout from '../../components/Logout/logout.component';
 import RegistrationScreen from '../../screens/Registration/registration.screen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from 'react-native';
+import PersonalScreen from '../../screens/Personal/personal.screen';
+import { useLanguage } from '../../components/LanguageProvider/language.provider';
 
 
 export type MainStackParamList = {
     Main: {},
     Auth: {},
-    Registration: {}
+    Registration: {},
+    Personal: {}
   };
 
 
@@ -25,7 +28,7 @@ const Stack = createStackNavigator<MainStackParamList>()
 const MainStack = () => {
     const theme = useTheme()
     const [loggedIn, setLoggeIn] = useState(false)
-
+    const {language} = useLanguage()
 
 
     return (
@@ -55,7 +58,7 @@ const MainStack = () => {
                             color: theme.palette.text.grey,
                             marginLeft: 10
                         }}
-                        >Назад</Text>
+                        >{language.navigation.back}</Text>
                     </TouchableOpacity>
                 )
             },
@@ -86,6 +89,7 @@ const MainStack = () => {
             />
             <Stack.Screen name='Auth' component={AuthScreen}/>
             <Stack.Screen name='Registration' component={RegistrationScreen}/>
+            <Stack.Screen name='Personal' component={PersonalScreen}/>
         </Stack.Navigator>
     )
 }

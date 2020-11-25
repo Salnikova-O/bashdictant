@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 
 import {
@@ -17,11 +17,10 @@ interface InputProps {
     password?: boolean,
     onBlur?: (e: any) => void,
     maxLength?: number,
-    showEdit?: boolean,
-    toggleEdit?: () => void,
     edit?: boolean,
     showAdd?: boolean,
-    onAdd?: () => void
+    onAdd?: () => void,
+    onlyNumbers?: boolean
 }
 
 
@@ -35,10 +34,21 @@ const Input:React.FC<InputProps> = ({
     edit,
     onAdd,
     showAdd,
-    showEdit,
-    toggleEdit
+    onlyNumbers
 }) => {
     const theme = useTheme()
+    const [editable, setEditable] = useState(true)
+
+    const toggleEdit = () => {
+        setEditable(c => !c)
+    }
+
+    useEffect(() => {
+        if (edit) {
+            setEditable(false)
+        }
+    }, [])
+
 
     return (
         <InputContainer>
@@ -49,20 +59,29 @@ const Input:React.FC<InputProps> = ({
             onBlur={onBlur}
             secureTextEntry={password}
             value={value}
-            editable={edit}
+            editable={editable}
             placeholderTextColor={theme.palette.text.light}
+            keyboardType={onlyNumbers? 'numeric': 'default'}
             />
             {
                 showAdd&&onAdd?
-                <IconButton onPress={onAdd}>
+                <IconButton 
+                onPress={onAdd}
+                style={{
+                    right: 22.5
+                }}
+                >
                     <PlusSVG/>
                 </IconButton>
                 :null
             }
             {
-                showEdit&&toggleEdit?
+                edit?
                 <IconButton
                 onPress={toggleEdit}
+                style={{
+                    right: 0
+                }}
                 >
                     <EditSVG/>
                 </IconButton>

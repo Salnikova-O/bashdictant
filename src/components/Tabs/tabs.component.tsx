@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from 'react';
+import {Platform, UIManager, LayoutAnimation} from 'react-native';
+
 
 import {
     OptionText,
@@ -14,6 +16,15 @@ interface TabsProps {
     tabNames: string[]
 }
 
+
+if (Platform.OS === 'android') {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+
+
+
 const Tabs: React.FC<TabsProps> = ({children, defaultIndex, tabNames}) => {
     const [currentIndex, setCurrentIndex] = useState(defaultIndex? defaultIndex: 0)
 
@@ -27,7 +38,10 @@ const Tabs: React.FC<TabsProps> = ({children, defaultIndex, tabNames}) => {
                             return (
                                 <OptionWrapper
                                 key={index}
-                                onPress={() => setCurrentIndex(index)}
+                                onPress={() => {
+                                    // LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+                                    setCurrentIndex(index)
+                                }}
                                 active={currentIndex===index}
                                 >
                                     <OptionText
