@@ -15,18 +15,18 @@ margin-bottom: 17px;
 `
 
 export const IndexColumn = styled.View`
-flex-basis: 10%;
+width: 10%;
 `
 export const NameColumn = styled.View`
-flex-basis: 34%;
+width: 34%;
 `
 
 export const EmailColumn = styled.View`
-flex-basis: 44%;
+width: 44%;
 `
 
 export const IconColumn = styled.View`
-flex-basis: 6%;
+width: 6%;
 `
 export const TableText = styled(CustomText)`
 color: ${props => props.theme.palette.text.grey};

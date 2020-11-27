@@ -30,7 +30,7 @@ const ParticipationPopup: React.FC<PopupProps> = ({toggleOverlay,visible, user})
     const getTestFormat = (type: "offline" | "online" | "video") => {
         return language.participation.form.testFormat[type]
     }
-
+    
     return (
         <Overlay
         isVisible={visible}

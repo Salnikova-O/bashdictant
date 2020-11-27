@@ -13,6 +13,7 @@ declare module 'styled-components' {
             },
             background: {
                 main: string,
+                light: string
             },
             buttons: {
                 primary: string,

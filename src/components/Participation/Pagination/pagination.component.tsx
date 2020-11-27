@@ -35,20 +35,19 @@ const Pagination:React.FC<PaginationProps> = ({currentpage,perPage,totalAmount, 
             Array.from(Array(pages).keys()).forEach((pa, index) => {
                 p.push(index+1)
             } )
-            console.log(p)
             return p
         } else {
             const p = []
-            if (currentPage<4) {
+            if (currentPage<5) {
                 for (let i=1; i<currentPage+3;i++) {
                     p.push(i)
                 }
                 p.push('...')
                 p.push(pages)
-            } else if (currentPage>pages-3) {
+            } else if (currentPage>pages-4) {
                 p.push(1)
                 p.push('...')
-                for (let i=currentPage-2; i<pages+1;i++) {
+                for (let i=currentPage-3; i<pages+1;i++) {
                     p.push(i)
                 }
             } else {
@@ -69,12 +68,12 @@ const Pagination:React.FC<PaginationProps> = ({currentpage,perPage,totalAmount, 
     }
 
     const getLegendString = ():string => {
-        const showed = language.participation.pagination.showed
-        const from = ((currentpage-1)*perPage+1).toString()
+        const showed = perPage>1? language.participation.pagination.showed: language.participation.pagination.page
+        const from = perPage>1? ((currentpage-1)*perPage+1).toString()+ '-': ''
         const to = (currentpage)*perPage<totalAmount? (currentpage)*perPage: totalAmount
         const of  = language.participation.pagination.of
         const total = totalAmount
-        return showed + ' ' + from + '-' + to + ' ' + of + ' '+ total
+        return showed + ' ' + from  + to + ' ' + of + ' '+ total
     } 
     
     return (

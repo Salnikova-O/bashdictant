@@ -15,8 +15,13 @@ import NotCheckedSVG from '../../../assets/notchecked.svg';
 import PendingSVG from '../../../assets/pending.svg';
 import ReadySVG from '../../../assets/ready.svg';
 import WarningSVg from '../../../assets/warning.svg';
+import { useNavigation } from '@react-navigation/native';
 
-
+const currentUser = {
+    firstName: 'Олег',
+    middleName: 'Иванович',
+    type: 'expert'
+}
 
 
 interface ItemProps  {
@@ -27,7 +32,10 @@ interface ItemProps  {
 
 
 const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup}) => {
-    
+    const navigation = useNavigation()
+
+
+
     const getStatusIcon = (status: DictantStatus) => {
         switch (status) {
             case 'ready':
@@ -49,7 +57,9 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup}) => {
     }
     
     const openDictant = () => {
-
+        if ((user as IStudent).dictantStatus&&(user as IStudent).dictantStatus==='notChecked'&&currentUser.type==='expert') {
+            navigation.navigate('DictantCheck', {student: JSON.stringify(user)})
+        }
     }
 
 

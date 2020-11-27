@@ -68,6 +68,7 @@ const PersonalScreen: React.FC = () => {
                 return [
                     <ExpertProfile key={1}/>,
                     <Participation
+                    key={2}
                     experts={experts}
                     students={students}
                     />
@@ -76,6 +77,7 @@ const PersonalScreen: React.FC = () => {
                 return [
                     <OrganizerProfile key={1}/>,
                     <Participation
+                    key={2}
                     experts={experts}
                     students={students}
                     />

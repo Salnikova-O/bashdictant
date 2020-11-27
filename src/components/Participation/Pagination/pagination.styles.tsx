@@ -23,7 +23,7 @@ interface ActivePageProps {
 
 export const PageText = styled(CustomText)<ActivePageProps>`
 color: ${props => props.active? props.theme.palette.text.main: props.theme.palette.text.grey};
-font-size: 14px;
+font-size: 16px;
 `
 
 export const Page = styled.TouchableOpacity<ActivePageProps>`
@@ -32,6 +32,6 @@ border-bottom-width: 1px;
 border-color: ${props => props.active? props.theme.palette.buttons.primary: 'transparent'};
 `
 export const Legend = styled(CustomText)`
-font-size: 14px;
+font-size: 16px;
 color: ${props => props.theme.palette.text.grey};
 `

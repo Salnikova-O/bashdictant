@@ -109,9 +109,15 @@ export interface ILanguage {
         },
         pagination: {
             showed: string,
-            of: string
+            of: string,
+            page: string
         }
-    }
+    },
+    roles: {
+        student: string,
+        organizer: string
+        expert: string
+    },
 }
 
 

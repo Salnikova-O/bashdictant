@@ -10,7 +10,8 @@ export const themes: ThemesType = {
     'dark': {
         palette: {
             background: {
-                main: '#fff'
+                main: '#fff',
+                light: '#FBFBFB'
             },
             text: {
                 main: '#000',
@@ -36,7 +37,8 @@ export const themes: ThemesType = {
     'light': {
         palette: {
             background: {
-                main: '#fff'
+                main: '#fff',
+                light: '#FBFBFB'
             },
             text: {
                 main: '#000',

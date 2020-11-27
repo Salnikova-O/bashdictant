@@ -12,13 +12,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from 'react-native';
 import PersonalScreen from '../../screens/Personal/personal.screen';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
+import DictantCheck from '../../screens/DictantCheck/dictant-check.screen';
+import { IStudent } from '../../@types/common';
 
 
 export type MainStackParamList = {
     Main: {},
     Auth: {},
     Registration: {},
-    Personal: {}
+    Personal: {},
+    DictantCheck: {
+        student: IStudent
+    }
   };
 
 
@@ -90,6 +95,7 @@ const MainStack = () => {
             <Stack.Screen name='Auth' component={AuthScreen}/>
             <Stack.Screen name='Registration' component={RegistrationScreen}/>
             <Stack.Screen name='Personal' component={PersonalScreen}/>
+            <Stack.Screen name='DictantCheck' component={DictantCheck}/>
         </Stack.Navigator>
     )
 }

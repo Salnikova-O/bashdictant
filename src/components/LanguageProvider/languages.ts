@@ -119,9 +119,15 @@ export const languages:Languages = {
             student: '',
             pagination: {
                 showed: '',
-                of: ''
+                of: '',
+                page: 'Page'
             }
-        }
+        },
+        roles: {
+            student: 'Участник',
+            organizer: 'Организатор',
+            expert: 'Эксперт'
+        },
     },
     'Russian': {
         languageName: 'РУС',
@@ -234,9 +240,15 @@ export const languages:Languages = {
             student: 'Участники:',
             pagination: {
                 showed: 'Показано',
-                of: 'из'
+                of: 'из',
+                page: 'Страница'
             }
-        }
+        },
+        roles: {
+            student: 'Участник',
+            organizer: 'Организатор',
+            expert: 'Эксперт'
+        },
     },
     'bash': {
         languageName: 'БАШ'
