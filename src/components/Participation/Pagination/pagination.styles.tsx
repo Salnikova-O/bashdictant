@@ -7,7 +7,7 @@ width: 100%;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
-margin-bottom: 40px;
+margin-bottom: 30px;
 `
 
 export const PagesContainer = styled.View`

@@ -5,10 +5,13 @@ export const CustomTextInput = styled.TextInput`
 border: none;
 border-width: 0;
 width: 100%;
+padding: 0;
+padding-right: 8px;
+color: ${props => props.theme.palette.text.grey};
 `
 
 export const Text = styled(CustomText)`
-
+color: ${props => props.theme.palette.text.grey};
 `
 
 
@@ -25,9 +28,7 @@ height:20px;
 align-items: center;
 justify-content: center;
 position: absolute;
-background-color: red;
 top: -10px;
 right: -10px;
 z-index: 1;
-
 `

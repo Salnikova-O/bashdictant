@@ -1,13 +1,15 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { useTheme } from 'styled-components';
+import {Toast} from 'native-base';
 
-
-import { IStudent } from '../../@types/common';
+import { GradeTypes, IStudent } from '../../@types/common';
 import DictantView from '../../components/DictantView/dictant-view.components';
+import GradePicker from '../../components/GradePicker/grade-picker.component';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
 import { dummyDictant } from '../../dummyList';
 import { MainStackParamList } from '../../navigation/MainStack/main.stack';
+import Button from '../../UI/Button/Button.component';
 
 import {
     Container,
@@ -17,7 +19,6 @@ import {
     HeaderText,
     InnerContainer
 } from './dictant-check.styles';
-import { useTheme } from 'styled-components';
 
 
 
@@ -34,10 +35,10 @@ const DictantCheck: React.FC = () => {
     const student: IStudent = JSON.parse(route.params.student as any)
     const {language} = useLanguage()
     const [dictant, setDictant]= useState<{text:string, markers: {text:string, position:number}[]}>()
-    const [initial, setInitial] = useState<any>()
+    const [grade, setGrade] = useState<GradeTypes|undefined>()
     const theme = useTheme()
-    const [currentMarkerText, setCurrentMarkerText] = useState('')
-   
+
+
     useEffect(() => {
         setDictant(dummyDictant)
     }, [])
@@ -59,16 +60,28 @@ const DictantCheck: React.FC = () => {
 
 
     const saveMarker = (marker: {text:string, position: number}) => {
-
         const filteredMarkers = (dictant as any).markers.filter((mark:any) => mark.position!==marker.position)
         setDictant((d:any) => ({...d, markers: [...filteredMarkers, marker]}))
     }
 
-
-    const changeMarkerText = (text: string) => {
-        setCurrentMarkerText(text)
+    const changeGrade = (grade:GradeTypes) => {
+        setGrade(grade)
     }
 
+    const handleSendResults = () => {
+        if (!grade) {
+            Toast.show({
+                text: language.errors.noGrade,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+        }
+    }
 
     return (
         <Container
@@ -84,17 +97,25 @@ const DictantCheck: React.FC = () => {
                     <HeaderRight>
                         <HeaderText>{student?.lastName + ' ' + student?.firstName.slice(0,1) + '. ' + student?.middleName.slice(0,1) + '.'}</HeaderText>
                         <HeaderText>{student?.city}</HeaderText>
+                        <HeaderText>{student? language.dictant.level[student.level]: ''}</HeaderText>
                     </HeaderRight>
                 </Header>
                 <DictantView
                 dictant={dictant}
                 createMarker={createMarker}
-                changeMarkerText={changeMarkerText}
-                currentMarkerText={currentMarkerText}
                 deleteMarker={deleteMarker}
-                initial={initial}
                 saveMarker={saveMarker}
-            
+                />
+                <GradePicker
+                currentGrade={grade}
+                changeGrade={changeGrade}
+                />
+                <Button
+                text={language.dictant.sendResult}
+                height='50px'
+                bg={theme.palette.buttons.primary}
+                font={theme.palette.text.primary}
+                onPress={handleSendResults}
                 />
             </InnerContainer>
         </Container>

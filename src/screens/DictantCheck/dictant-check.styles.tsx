@@ -27,7 +27,7 @@ export const HeaderLeft = styled.View`
 `
 
 export const HeaderRight = styled.View`
-
+align-items: flex-end;
 `
 
 

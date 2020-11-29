@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Button from '../../UI/Button/Button.component';
 
 export const Container = styled.View`
 width: 100%;
@@ -64,6 +65,13 @@ padding:0;
 
 export const PopoverContainer = styled.View`
 width: 250px;
-min-height: 80px;
 background-color: ${props => props.theme.palette.background.light};
+justify-content: flex-start;
+align-items: flex-start;
+padding: 10px;
+border-radius: 8px;
+`
+
+export const PrevNextButtons = styled.View`
+width: 100%;
 `

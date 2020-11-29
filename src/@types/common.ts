@@ -118,6 +118,19 @@ export interface ILanguage {
         organizer: string
         expert: string
     },
+    dictant: {
+        previousPage: string,
+        nextPage: string,
+        sendResult: string,
+        level: {
+            start: string,
+            advanced: string,
+            dialect: string
+        }
+    },
+    errors: {
+        noGrade: string
+    }
 }
 
 
@@ -134,7 +147,8 @@ interface IUser {
 
 export interface IStudent extends IUser {
     dictantType: 'offline'|'online'|'video',
-    dictantStatus: 'ready'| 'pending'| 'warning'|'notChecked'
+    dictantStatus: 'ready'| 'pending'| 'warning'|'notChecked',
+    level: 'start'|'advanced'|'dialect'
 }
 
 
@@ -152,3 +166,6 @@ export interface IOrganizer extends IUser {
 
 
 export type DictantStatus = 'ready' | 'notChecked' | 'warning' | 'pending'
+
+
+export type GradeTypes = '1'|'2'|'3'| '4'| '5'

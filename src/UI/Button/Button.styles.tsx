@@ -5,7 +5,7 @@ export interface ButtonProps {
     border?: string,
     font: string,
     height: '50px'|'40px',
-    marginTop?: number
+    marginTop?: number,
 }
 
 
@@ -20,6 +20,7 @@ background-color: ${props => props.bg};
 border-color: ${props => props.border? props.border: 'transparent'};
 border-width: ${props => props.border? '1px': '0'};
 height: ${props => props.height};
+opacity: ${props => props.disabled? 0.5: 1};
 `
 
 

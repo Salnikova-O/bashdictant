@@ -26,11 +26,11 @@ export const themes: ThemesType = {
                 secondary: '#fff'
             },
             grades: {
-                1:  '#DF0000',
-                2: '#EC8224',
-                3: '#FFD600',
-                4: '#BFDE00',
-                5: '#4F871C'
+                '1':  '#DF0000',
+                '2': '#EC8224',
+                '3': '#FFD600',
+                '4': '#BFDE00',
+                '5': '#4F871C'
             }
         }
     },

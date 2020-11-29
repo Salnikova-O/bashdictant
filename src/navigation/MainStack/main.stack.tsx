@@ -94,7 +94,7 @@ const MainStack = () => {
             />
             <Stack.Screen name='Auth' component={AuthScreen}/>
             <Stack.Screen name='Registration' component={RegistrationScreen}/>
-            <Stack.Screen name='Personal' component={PersonalScreen}/>
+            <Stack.Screen name='Personal' component={PersonalScreen} />
             <Stack.Screen name='DictantCheck' component={DictantCheck}/>
         </Stack.Navigator>
     )

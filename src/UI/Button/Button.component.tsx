@@ -9,7 +9,8 @@ import {
 
 interface IButton {
     text: string,
-    onPress: () => void
+    onPress: () => void,
+    disabled?: boolean
 }
 
 
@@ -21,15 +22,17 @@ const Button: React.FC<IButton&ButtonProps> = ({
     marginTop,
     onPress,
     text,
+    disabled
 }) => {
     return (
         <ButtonContainer
-        onPress={onPress}
+        onPress={disabled? undefined: onPress}
         bg={bg}
         font={font}
         height={height}
         border={border}
         marginTop={marginTop}
+        disabled={disabled}
         >
             <ButtonText
             bg={bg}

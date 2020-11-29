@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import {useSelector} from 'react-redux';
-
+import {Root} from 'native-base';
 
 import Navigation from './src/navigation/navigation';
 import {themes} from './src/theme/theme';
@@ -16,18 +16,20 @@ const Layout: React.FC = () => {
 
 
     return (
-        <SafeAreaProvider>
-            <ThemeProvider
-            theme={themes[theme]}
-            >
-                <OrientationProvider>
-                    <LanguageProvider>
-                        <Header/>
-                        <Navigation/>
-                    </LanguageProvider>
-                </OrientationProvider>
-            </ThemeProvider>
-        </SafeAreaProvider>
+        <Root>
+            <SafeAreaProvider>
+                <ThemeProvider
+                theme={themes[theme]}
+                >
+                    <OrientationProvider>
+                        <LanguageProvider>
+                            <Header/>
+                            <Navigation/>
+                        </LanguageProvider>
+                    </OrientationProvider>
+                </ThemeProvider>
+            </SafeAreaProvider>
+        </Root>
     )
 } 
 

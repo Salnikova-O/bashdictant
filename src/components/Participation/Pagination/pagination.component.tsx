@@ -20,7 +20,6 @@ const Pagination:React.FC<PaginationProps> = ({currentpage,perPage,totalAmount, 
     const [pages, setPages] = useState<(string|number)[]>([])
     const {language}  = useLanguage();
 
-    console.log(pages)
 
     useEffect(() => {
         const newPages = getPagesForDisplay(currentpage, perPage, totalAmount)

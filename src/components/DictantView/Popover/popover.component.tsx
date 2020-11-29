@@ -6,13 +6,15 @@ import {
     InputContainer,
     Text
 } from './popover.styles';
-import CloseSVG from '../../../assets/close.svg';
+import CloseSVG from '../../../assets/times.svg';
+import TrashSVG from '../../../assets/trash.svg';
 
 interface PopoverProps {
     onDelete: (index:number) => void,
     text:string,
     index: number,
-    saveMarker: (marker: {text:string, position:number}) => void
+    saveMarker: (marker: {text:string, position:number}) => void,
+    onClose: () => void
 }
 
 const currentUser = {
@@ -23,7 +25,7 @@ const currentUser = {
 
 
 
-const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker}) => {
+const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker, onClose}) => {
     const [markerText, setMarkerText]= useState('')
     const ref = useRef<string>(text)
     const delRef = useRef(false)
@@ -31,7 +33,7 @@ const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker}) => {
     useEffect(() => {
         setMarkerText(text)
         return () => {
-            if(!delRef.current) {
+            if(!delRef.current&&currentUser.type==='expert') {
                 saveMarker({text: ref.current, position: index})
             }
         }
@@ -51,18 +53,28 @@ const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker}) => {
                     value={markerText}
                     onChangeText={handleChange}
                     multiline={true}
-                    numberOfLines={4}
                     />
                     <IconButton
                     onPress={() => {
-                        onDelete(index)
                         delRef.current=true
+                        onDelete(index)
+                        onClose()
                     }}
                     >
-                        <CloseSVG height={16} width={16}/>
+                        <TrashSVG height={16} width={16}/>
                     </IconButton>
                 </InputContainer>
-                : <Text>{text}</Text>
+                : 
+                <InputContainer>
+                    <Text>{text}</Text>
+                    <IconButton
+                    onPress={() => {
+                        onClose()
+                    }}
+                    >
+                        <CloseSVG height={20} width={20}/>
+                    </IconButton>
+                </InputContainer>
             }
         </Fragment>
     )

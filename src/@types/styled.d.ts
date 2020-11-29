@@ -1,4 +1,5 @@
 import 'styled-components';
+import { GradeTypes } from './common';
 
 declare module 'styled-components' {
     export interface DefaultTheme {
@@ -20,11 +21,11 @@ declare module 'styled-components' {
                 secondary: string
             },
             grades: {
-                1: string,
-                2: string,
-                3: string,
-                4: string,
-                5: string,
+                '1': string,
+                '2': string,
+                '3': string,
+                '4': string,
+                '5': string,
             }
 
         }

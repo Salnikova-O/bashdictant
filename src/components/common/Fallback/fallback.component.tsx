@@ -1,12 +1,15 @@
 import React, {useEffect, useRef} from 'react';
 import {View, Animated} from 'react-native';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import {Svg, Circle} from 'react-native-svg';
 import { useTheme } from 'styled-components';
 
 const Fallback: React.FC = () => {
     const theme = useTheme()
     const spinValue = useRef(new Animated.Value(0)).current
-    
+    const {width, height} = useSafeAreaFrame()
+
+
     const spin = spinValue.interpolate({
         inputRange: [0, 1],
         outputRange: ['0deg', '360deg']
@@ -24,11 +27,11 @@ const Fallback: React.FC = () => {
         <View
         style={{
             position: 'absolute',
-            top: 24,
-            left:24,
+            top: 0,
+            left: 0,
             zIndex: 1,
-            width:'100%',
-            height: '100%',
+            width: width-50,
+            height: height-50,
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: theme.palette.background.main

@@ -128,6 +128,19 @@ export const languages:Languages = {
             organizer: 'Организатор',
             expert: 'Эксперт'
         },
+        dictant: {
+            previousPage: 'Previous page',
+            nextPage: 'Next page',
+            sendResult: 'Send result',
+            level: {
+                start: '',
+                advanced: '',
+                dialect: ''
+            }
+        },
+        errors: {
+            noGrade: 'Grade is required'
+        }
     },
     'Russian': {
         languageName: 'РУС',
@@ -249,6 +262,19 @@ export const languages:Languages = {
             organizer: 'Организатор',
             expert: 'Эксперт'
         },
+        dictant: {
+            previousPage: 'Предыдущая страница',
+            nextPage: 'Следующая страница',
+            sendResult: 'Отправить результат',
+            level: {
+                start: 'Начальный уровень',
+                advanced: 'Продвинутый уровень',
+                dialect: 'Северо-западный диалект'
+            }
+        },
+        errors: {
+            noGrade: 'Необходимо проставить оценку'
+        }
     },
     'bash': {
         languageName: 'БАШ'

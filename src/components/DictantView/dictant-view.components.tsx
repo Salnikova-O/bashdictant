@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
-import {Text,TouchableOpacity,  View,NativeSyntheticEvent, TextLayoutEventData, TextLayoutLine, GestureResponderEvent, LayoutChangeEvent } from 'react-native';
+import React, {  useEffect, useState } from 'react';
+import {TouchableOpacity,  View,NativeSyntheticEvent, TextLayoutEventData,  GestureResponderEvent, LayoutChangeEvent } from 'react-native';
 
 import Fallback from '../common/Fallback/fallback.component';
 
@@ -12,11 +12,15 @@ import {
     MarkerContainer,
     DC,
     DRow,
-    PopoverContainer
+    PopoverContainer,
+    PrevNextButtons
 } from './dictant-view.styles';
 import PinSVg from '../../assets/pin.svg';
 import Popover from './Popover/popover.component';
 import PopUp from 'react-native-popover-view';
+import Button from '../../UI/Button/Button.component';
+import { useTheme } from 'styled-components';
+import { useLanguage } from '../LanguageProvider/language.provider';
 
 interface DictantProps {
     dictant: {
@@ -28,12 +32,8 @@ interface DictantProps {
     }|undefined,
     createMarker: (index:number) => void,
     saveMarker:any, 
-    changeMarkerText:any, 
-    currentMarkerText:string,
     deleteMarker: (index:number) => void,
-    initial: any,
 }
-
 const numberOfLines = 30
 
 
@@ -41,19 +41,18 @@ const numberOfLines = 30
 const DictantView:React.FC<DictantProps> = ({
     dictant, 
     createMarker,
-    changeMarkerText,
-    currentMarkerText,
     deleteMarker,
-    initial,
     saveMarker,
 }) => {
     const [lines, setPages] = useState<any>([])
     const [currentPage, setCurrentPage]= useState(1)
     const perPage = 1
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [markers, setMarkers] = useState<any>([])
     const [popover, setPopover] = useState<any>()
     const [markerRefs, setMarkerRefs] = useState<{[index:number]: React.RefObject<TouchableOpacity> }>({})
+    const theme = useTheme()
+    const {language}  = useLanguage()
 
 
     useEffect(() => {
@@ -103,7 +102,13 @@ const DictantView:React.FC<DictantProps> = ({
 
     const openPopover = (ref: React.RefObject<TouchableOpacity>, marker: {text:string, position: number} ) => {
         setPopover({ref,marker})
-        console.log(ref)
+    }
+
+
+    const handlePageLoaded = (event: LayoutChangeEvent) => {
+        if (event.nativeEvent.layout.height>15) {
+            setLoading(false)
+        }
     }
 
     return (
@@ -114,7 +119,9 @@ const DictantView:React.FC<DictantProps> = ({
                     <Fallback/>
                     :null
                 }
-                <DC>
+                <DC
+                onLayout={handlePageLoaded}
+                >
                     {
                     lines.slice((currentPage-1)*numberOfLines,currentPage*numberOfLines).map((line:{words:string[], wordCount: number}, i:number) => {
                         return (
@@ -165,12 +172,51 @@ const DictantView:React.FC<DictantProps> = ({
                 />
                 :null
             }
+            {
+                lines.length>0?
+                <PrevNextButtons>
+                    <Button
+                    bg={theme.palette.buttons.secondary}
+                    font={theme.palette.text.secondary}
+                    border={theme.palette.text.secondary}
+                    text={language.dictant.previousPage}
+                    disabled={currentPage===1}
+                    height='40px'
+                    onPress={() => setCurrentPage(c => c-1)}
+                    />
+                    <Button
+                    bg={theme.palette.buttons.secondary}
+                    font={theme.palette.text.secondary}
+                    border={theme.palette.text.secondary}
+                    text={language.dictant.nextPage}
+                    disabled={currentPage===Math.ceil(lines.length/numberOfLines)}
+                    height='40px'
+                    onPress={() => setCurrentPage(c => c+1)}
+                    />
+                </PrevNextButtons>
+                :null
+            }
             <PopUp
             from={popover?.ref}
             isVisible={popover? true: false}
             onRequestClose={closePopover}
+            backgroundStyle={{
+                backgroundColor: 'transparent'
+            }}
+            popoverStyle={{
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+
+                elevation: 9,
+            }}
             >
-                <PopoverContainer>
+                <PopoverContainer
+                >
                     {
                         popover?
                         <Popover
@@ -178,6 +224,7 @@ const DictantView:React.FC<DictantProps> = ({
                         onDelete={deleteMarker}
                         saveMarker={saveMarker}
                         text={popover.marker.text}
+                        onClose={closePopover}
                         />
                         :null
                     }

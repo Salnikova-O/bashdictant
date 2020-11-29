@@ -10,7 +10,9 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'ready'
+        dictantStatus: 'ready',
+        level: 'start'
+        
     },
     {
         id: '2',
@@ -21,7 +23,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'offline',
         type: 'student',
-        dictantStatus: 'pending'
+        dictantStatus: 'pending',
+        level: 'start'
     },
     {
         id: '3',
@@ -32,7 +35,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'video',
         type: 'student',
-        dictantStatus: 'warning'
+        dictantStatus: 'warning',
+        level: 'start'
     },
     {
         id: '4',
@@ -43,7 +47,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '5',
@@ -54,7 +59,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '6',
@@ -65,7 +71,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '7',
@@ -76,7 +83,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '8',
@@ -87,7 +95,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '9',
@@ -98,7 +107,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '10',
@@ -109,7 +119,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '11',
@@ -120,7 +131,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '12',
@@ -131,7 +143,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
     {
         id: '13',
@@ -142,7 +155,8 @@ export const students: IStudent[] = [
         city: 'moscow',
         dictantType: 'online',
         type: 'student',
-        dictantStatus: 'notChecked'
+        dictantStatus: 'notChecked',
+        level: 'start'
     },
 
 ]

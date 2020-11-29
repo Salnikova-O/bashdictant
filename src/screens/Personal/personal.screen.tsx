@@ -13,10 +13,10 @@ import {
 import StudentProfile from '../../components/ProfilePage/StudentProfile/student-profile.component';
 import ExpertProfile from '../../components/ProfilePage/ExpertProfile/expert-profile.component';
 import OrganizerProfile from '../../components/ProfilePage/OrganizerProfile/organizer-profile.component';
-import { Text } from 'react-native-svg';
 import {experts as currentExp, students as currentStu} from '../../dummyList';
 import Participation from '../../components/Participation/Participation/participation.component';
 import { IExpert, IStudent } from '../../@types/common';
+import Dictant from '../../components/Dictant/dictant.component';
 
 
 
@@ -39,7 +39,7 @@ const PersonalScreen: React.FC = () => {
     const user = {
         firstName: 'Олег',
         middleName: 'Иванович',
-        type: 'organizer'
+        type: 'student'
     }
 
 
@@ -62,7 +62,7 @@ const PersonalScreen: React.FC = () => {
             case 'student':
                 return [
                     <StudentProfile key={1}/>,
-                    <Text key={2}>2</Text>
+                    <Dictant  key={2}/>
             ]
             case 'expert':
                 return [
