@@ -1,12 +1,14 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 import DocumentPicker from 'react-native-document-picker';
+// import {Platform} from 'react-native';
 
 import Button from '../../../UI/Button/Button.component';
 import {
     FileUploadContainer
 } from './file-upload.styles';
-
+import { useLanguage } from '../../LanguageProvider/language.provider';
+import ClipSVG from '../../../assets/clip.svg';
 
 
 interface FileuploadProps {
@@ -15,12 +17,23 @@ interface FileuploadProps {
 }
 
 const FileUpload:React.FC<FileuploadProps> = ({changeFiles,files}) => {
-    console.log(files)
     const theme = useTheme()
+    const {language} = useLanguage()
+
 
     const handleFileUpload = () => {
-        DocumentPicker.pick({
-            type: ['.jpeg','.png','.pdf', '.jpg']
+        (DocumentPicker as any).pickMultiple({
+            type: DocumentPicker.types.allFiles
+        })
+        .then((res: any) => {
+            console.log(res)
+        })
+        .catch((err: any) => {
+            if (DocumentPicker.isCancel()) {
+
+            } else {
+                console.log(err)
+            }
         })
     }
 
@@ -31,12 +44,12 @@ const FileUpload:React.FC<FileuploadProps> = ({changeFiles,files}) => {
             bg={theme.palette.buttons.secondary}
             font={theme.palette.text.main}
             border={theme.palette.text.main}
-            text='Upload'
+            text={language.dictant.upload}
             onPress={handleFileUpload}
+            icon={<ClipSVG style={{marginRight: 5}}/>}
             />
         </FileUploadContainer>
     )
 }
-
 
 export default FileUpload;

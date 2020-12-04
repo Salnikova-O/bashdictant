@@ -25,7 +25,7 @@ export const AuthTitleWrapper = styled.View`
 border-bottom-width:1px;
 border-bottom-color: ${props => props.theme.palette.buttons.primary};
 padding-bottom: 5px; 
-margin-bottom: 10px;
+margin-bottom: 20px;
 `
 
 export const AuthTitle = styled(CustomText)`
@@ -37,4 +37,17 @@ export const Subtitle = styled(CustomText)`
 font-size: 16px;
 color: ${props => props.theme.palette.text.grey};
 margin-bottom: 15px;
+`
+
+
+export const ForgotPasswordContainer = styled.TouchableOpacity`
+border-bottom-width: 1px;
+border-color: ${props => props.theme.palette.text.grey};
+padding:2px;
+margin-top: 10px;
+`
+
+export const ForgotPasswordText = styled(CustomText)`
+color: ${props => props.theme.palette.text.light};
+font-size: 12px;
 `

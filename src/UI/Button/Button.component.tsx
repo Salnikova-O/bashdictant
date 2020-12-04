@@ -10,7 +10,8 @@ import {
 interface IButton {
     text: string,
     onPress: () => void,
-    disabled?: boolean
+    disabled?: boolean,
+    icon?: React.ReactElement
 }
 
 
@@ -22,7 +23,8 @@ const Button: React.FC<IButton&ButtonProps> = ({
     marginTop,
     onPress,
     text,
-    disabled
+    disabled,
+    icon
 }) => {
     return (
         <ButtonContainer
@@ -34,6 +36,9 @@ const Button: React.FC<IButton&ButtonProps> = ({
         marginTop={marginTop}
         disabled={disabled}
         >
+            {
+                icon? icon: null
+            }
             <ButtonText
             bg={bg}
             font={font}

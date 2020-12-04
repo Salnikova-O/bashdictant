@@ -14,6 +14,8 @@ import PersonalScreen from '../../screens/Personal/personal.screen';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
 import DictantCheck from '../../screens/DictantCheck/dictant-check.screen';
 import { IStudent } from '../../@types/common';
+import { useSelector } from 'react-redux';
+import { userSelectors } from '../../redux/user/user.selectors';
 
 
 export type MainStackParamList = {
@@ -32,13 +34,12 @@ const Stack = createStackNavigator<MainStackParamList>()
 
 const MainStack = () => {
     const theme = useTheme()
-    const [loggedIn, setLoggeIn] = useState(false)
     const {language} = useLanguage()
-
+    const currentUser = useSelector(userSelectors.currentUser)
 
     return (
         <Stack.Navigator 
-        initialRouteName={'Main'}
+        initialRouteName={currentUser?'Personal':'Main'}
         headerMode={'screen'}
         mode='card'
         screenOptions={(navigation) => ({
@@ -68,9 +69,9 @@ const MainStack = () => {
                 )
             },
             headerRight: () => {
-                console.log(loggedIn)
-                if (loggedIn) {
-                    return <Logout/>
+                console.log(currentUser)
+                if (currentUser) {
+                    return <Logout navigation={() =>  navigation.navigation.navigate('Main')}/>
                 } else {
                     return null
                 }
@@ -94,7 +95,7 @@ const MainStack = () => {
             />
             <Stack.Screen name='Auth' component={AuthScreen}/>
             <Stack.Screen name='Registration' component={RegistrationScreen}/>
-            <Stack.Screen name='Personal' component={PersonalScreen} />
+            <Stack.Screen name='Personal' component={PersonalScreen} options={{headerLeft: () => null}}/>
             <Stack.Screen name='DictantCheck' component={DictantCheck}/>
         </Stack.Navigator>
     )

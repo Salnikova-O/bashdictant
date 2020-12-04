@@ -50,6 +50,8 @@ border-radius: 8px;
 background-color: ${props => props.theme.palette.background.light};
 height: 80px;
 margin-top: 10px;
+border-width: 1px;
+border-color: #e5e5e5;
 `
 
 export const DictantInput = styled.TextInput`

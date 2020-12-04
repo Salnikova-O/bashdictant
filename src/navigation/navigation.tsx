@@ -15,7 +15,7 @@ const Navigation = () => {
           (isMountedRef as React.MutableRefObject<boolean>).current=true
         }}
         >
-          <MainStack />
+            <MainStack />
         </NavigationContainer>
     )
 }

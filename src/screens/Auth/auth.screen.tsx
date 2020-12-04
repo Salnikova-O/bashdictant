@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {View} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {Toast} from 'native-base';
 
 import {
     Container,
@@ -10,7 +12,9 @@ import {
     AuthContainer,
     AuthTitle,
     AuthTitleWrapper,
-    Subtitle
+    Subtitle,
+    ForgotPasswordContainer,
+    ForgotPasswordText
 } from './auth.styles';
 import { useOrientation } from '../../components/OrientationProvider/orientation.provider';
 import SocialAuth from '../../components/SocialAuth/social-auth.component';
@@ -19,6 +23,11 @@ import Input from '../../UI/Input/Input.component';
 import {Error} from '../../components/common/Error/error.styles';
 import Alert from '../../components/Alert/alert.component';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
+import {loginUser, clearError} from '../../redux/user/user.actions';
+import { userSelectors } from '../../redux/user/user.selectors';
+import { useNavigation } from '@react-navigation/native';
+import ForgotPassOverlay from '../../components/ForgotPassOverlay/forgot-password-overlay.component';
+
 
 
 const validationSchema = yup.object().shape({
@@ -32,22 +41,60 @@ const validationSchema = yup.object().shape({
 
 
 
+
 const AuthScreen: React.FC = () => {
     const {orientation} = useOrientation()
+    const [showResetpassword, setShowResetPassword] = useState(false)
     const theme = useTheme()
     const [error, setError] = useState<{text:string,type:'success'|'error'}>({text: '', type: 'error'})
     const {language} = useLanguage()
-
-
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const currentUser = useSelector(userSelectors.currentUser)
+    const loginError = useSelector(userSelectors.error)
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
 
     const closeError = () => {
         setError({text: '', type: 'error'})
     }
 
     const handleSignIn = ({email, password}: {email: string, password: string}) => {
-        setError({text: 'Неверный логин или пароль', type: 'error'})
+        if(!isSubmitting) {
+            setIsSubmitting(true)
+            dispatch(loginUser({
+                email, password
+            }))
+        }
     }
 
+    useEffect(() => {
+        if (currentUser) {
+            setIsSubmitting(false)
+            navigation.navigate('Personal')
+        }
+    }, [currentUser])
+
+    useEffect(() => {
+        if (loginError) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: loginError,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [loginError])
+
+
+    const toggleResetPassword = () => {
+        setShowResetPassword(c => !c)
+    }
 
     return (
         <Formik
@@ -58,13 +105,13 @@ const AuthScreen: React.FC = () => {
         onSubmit={values => handleSignIn(values)}
         validationSchema={validationSchema}
         validateOnChange={false}
-    
+        validateOnBlur={false}
         >
             {
             ({handleSubmit, handleChange, values, errors, handleBlur}) => (
                 <Container
                 orientation={orientation}
-                edges={[ 'bottom']}
+                edges={[ 'bottom', 'left','right']}
                 >
                     <FormContainer
                     behavior='padding'
@@ -120,12 +167,23 @@ const AuthScreen: React.FC = () => {
                             <Error>{errors.password}</Error>
                         </AuthContainer>
                     </FormContainer>
+
                     <Button
                     text={language.auth.enter}
                     bg={theme.palette.buttons.primary}
                     font={theme.palette.text.primary}
                     height='50px'
                     onPress={handleSubmit}
+                    />
+                    <ForgotPasswordContainer
+                    onPress={toggleResetPassword}
+                    >
+                        <ForgotPasswordText>{language.auth.forgotPass}</ForgotPasswordText>
+                    </ForgotPasswordContainer>
+                    <ForgotPassOverlay
+                    isVisible={showResetpassword}
+                    onBackdropPress={toggleResetPassword}
+
                     />
             </Container>
                 )

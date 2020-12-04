@@ -1,9 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
 import {CheckBox} from 'react-native-elements'
 import {TouchableOpacity, View, Platform, UIManager, LayoutAnimation} from 'react-native';
+import {Toast} from 'native-base';
 
+import { userSelectors } from '../../../redux/user/user.selectors';
+import {changeUser, clearError} from '../../../redux/user/user.actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
     RegistrationForm,
@@ -67,6 +71,11 @@ const OrganizerProfile: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const theme = useTheme()
     const {language} = useLanguage()
+    const currentUser = useSelector(userSelectors.currentUser)
+    const changeSuccess = useSelector(userSelectors.changeSuccess)
+    const jwt = useSelector(userSelectors.jwt)
+    const changeError = useSelector(userSelectors.error)
+    const dispatch = useDispatch()
     const [initialValues, setInitialValues] = useState({
         email: '', 
         password: '', 
@@ -85,6 +94,39 @@ const OrganizerProfile: React.FC = () => {
     })
 
 
+    useEffect(() => {
+        if (changeError) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: language.errors.changeFailed,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [changeError])
+
+    useEffect(() => {
+        if(changeSuccess) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: language.messages.changeSuccess,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'success',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#a2cf6e',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [changeSuccess])
 
     const handleSubmitForm = (values: {
         email: string;
@@ -102,7 +144,14 @@ const OrganizerProfile: React.FC = () => {
         extraEmails: string[],
         extraPhones: string[]
     }) => {
-        console.log(values)
+        if(!isSubmitting&&jwt) {
+            setIsSubmitting(true)
+            dispatch(changeUser({
+                ...values,
+                token: jwt,
+                role: 'organizer'
+            }))
+        }
     }
 
 

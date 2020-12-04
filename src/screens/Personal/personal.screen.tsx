@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 
 
 import { ScreenContainer } from '../../components/common/ScreenContainer/screen-container.styles';
@@ -13,10 +14,11 @@ import {
 import StudentProfile from '../../components/ProfilePage/StudentProfile/student-profile.component';
 import ExpertProfile from '../../components/ProfilePage/ExpertProfile/expert-profile.component';
 import OrganizerProfile from '../../components/ProfilePage/OrganizerProfile/organizer-profile.component';
-import {experts as currentExp, students as currentStu} from '../../dummyList';
+
 import Participation from '../../components/Participation/Participation/participation.component';
 import { IExpert, IStudent } from '../../@types/common';
 import Dictant from '../../components/Dictant/dictant.component';
+import { userSelectors } from '../../redux/user/user.selectors';
 
 
 
@@ -24,30 +26,15 @@ import Dictant from '../../components/Dictant/dictant.component';
 
 const PersonalScreen: React.FC = () => {
     const {language} = useLanguage()
-    const [experts, setExperts] = useState<IExpert[]>([])
-    const [students, setStudents] = useState<IStudent[]>([])
+    const currentUser = useSelector(userSelectors.currentUser)
 
-
-    useEffect(() => {
-        setExperts(currentExp)
-        setStudents(currentStu)
-    }, [])
-    
-    console.log(experts, students)
-
-
-    const user = {
-        firstName: 'Олег',
-        middleName: 'Иванович',
-        type: 'student'
-    }
-
+    console.log(currentUser)
 
     const getTabNames = (type: string) => {
         switch (type) {
             case 'student':
                 return [language.profile.tabs.first, language.profile.tabs.second.student]
-            case 'expert':
+            case 'teacher':
                 return [language.profile.tabs.first, language.profile.tabs.second.expert]
             case 'organizer':
                 return [language.profile.tabs.first, language.profile.tabs.second.organizer]
@@ -64,13 +51,11 @@ const PersonalScreen: React.FC = () => {
                     <StudentProfile key={1}/>,
                     <Dictant  key={2}/>
             ]
-            case 'expert':
+            case 'teacher':
                 return [
                     <ExpertProfile key={1}/>,
                     <Participation
                     key={2}
-                    experts={experts}
-                    students={students}
                     />
             ]
             case 'organizer':
@@ -78,8 +63,6 @@ const PersonalScreen: React.FC = () => {
                     <OrganizerProfile key={1}/>,
                     <Participation
                     key={2}
-                    experts={experts}
-                    students={students}
                     />
             ]
             default:
@@ -91,23 +74,27 @@ const PersonalScreen: React.FC = () => {
         <ScreenContainer
         edges={[ 'bottom']}
         >
-            <ScrollView
-            style={{flex: 1, width: '100%'}}
-            contentContainerStyle={{
-                alignItems: 'center'
-            }}
-            showsVerticalScrollIndicator={false}
-            >
-                <ScreenHeader>
-                    <Title>{(language.profile.header as any)[user.type]}</Title>
-                    <Subtitle>{language.profile.greeting} {user.firstName + ' '+ user.middleName}!</Subtitle>
-                </ScreenHeader>
-                <Tabs
-                tabNames={getTabNames(user.type)}
+            {
+                currentUser?
+                <ScrollView
+                style={{flex: 1, width: '100%'}}
+                contentContainerStyle={{
+                    alignItems: 'center'
+                }}
+                showsVerticalScrollIndicator={false}
                 >
-                    {getTabs(user.type)}
-                </Tabs>
-            </ScrollView>
+                    <ScreenHeader>
+                        <Title>{(language.profile.header as any)[currentUser.role]}</Title>
+                        <Subtitle>{language.profile.greeting} {currentUser.first_name+ ' '+ currentUser.middle_name}!</Subtitle>
+                    </ScreenHeader>
+                    <Tabs
+                    tabNames={getTabNames(currentUser.role)}
+                    >
+                        {getTabs(currentUser.role)}
+                    </Tabs>
+                </ScrollView>
+                :null
+            }
         </ScreenContainer>
     )
 }

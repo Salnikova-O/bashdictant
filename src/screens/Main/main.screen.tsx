@@ -1,13 +1,16 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
-import YouTube from 'react-native-youtube';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
+import {PixelRatio} from 'react-native';
 
 import {
     ButtonsContainer,
     Title,
     Container,
-    VideoContainer
+    VideoContainer,
+    VideoInnerContainer
 } from './main.styles';
 
 import Button from '../../UI/Button/Button.component';
@@ -20,13 +23,13 @@ const MainScreen:React.FC = () => {
     const navigation = useNavigation()
     const {orientation} = useOrientation()
     const {language, currentLanguage} = useLanguage()
+    const {width, height} = useSafeAreaFrame()
+    const videoId = "5qap5aO4i9A"
 
     const handleNavigation = (route: string) => {
         navigation.navigate(route)
     }
 
-
-    console.log(language, currentLanguage)
 
     return(
         <Container
@@ -39,13 +42,13 @@ const MainScreen:React.FC = () => {
                 :null
             }
             <VideoContainer>
-                <YouTube
-                videoId='o-qafF8IAE0'
-                play={false}
-                fullscreen={false}
-                style={{width: '100%', height: 300, borderRadius: 6}}
-                apiKey=''
-                />
+                <VideoInnerContainer>
+                    <YoutubePlayer
+                        height={PixelRatio.roundToNearestPixel(((width>500? 500: width)-40)*9/16)}
+                        play={false}
+                        videoId={videoId}
+                    />
+                </VideoInnerContainer>
             </VideoContainer>
             <ButtonsContainer orientation={orientation}>
                 {

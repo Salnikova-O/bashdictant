@@ -17,7 +17,8 @@ export interface ILanguage {
         email: string,
         password: string,
         rememberMe: string,
-        enter: string
+        enter: string,
+        forgotPass: string
     },
     registration: {
         social: {
@@ -67,9 +68,17 @@ export interface ILanguage {
                 firstName: string,
                 middleName: string,
                 city: string,
-                send: string
+                send: string,
+                level: {
+                    choose: string,
+                    start: string,
+                    advanced: string,
+                    dialect: string
+                }
             }
-        }
+        },
+        successMessage: string,
+        code: string
     },
     profile: {
         header: {
@@ -126,11 +135,29 @@ export interface ILanguage {
             start: string,
             advanced: string,
             dialect: string
-        }
+        },
+        upload: string,
     },
     errors: {
-        noGrade: string
-    }
+        noGrade: string,
+        noDictant: string,
+        fileSize: string,
+        email: string,
+        required: string,
+        code: string,
+        incorrectCode: string,
+        changeFailed: string
+    },
+    messages: {
+        successRegister: string,
+        changeSuccess: string
+    },
+    continue: string,
+    reset: {
+        passReset: string,
+        success: string
+    },
+    
 }
 
 
@@ -138,22 +165,22 @@ export interface ILanguage {
 interface IUser {
     id: string,
     email: string,
-    firstName: string,
-    lastName: string,
-    middleName: string,
-    city: string,
-    type: 'organizer'|'expert'| 'student'
+    first_name: string,
+    last_name: string,
+    middle_name: string,
+    address: string,
+    role: 'organizer'|'teacher'| 'student'
 }
 
 export interface IStudent extends IUser {
-    dictantType: 'offline'|'online'|'video',
+    format_dictation: 'offline'|'online'|'video',
     dictantStatus: 'ready'| 'pending'| 'warning'|'notChecked',
     level: 'start'|'advanced'|'dialect'
 }
 
 
 export interface IExpert extends IUser {
-    jobTitle: string
+    info: string
 }
 
 export interface IOrganizer extends IUser {

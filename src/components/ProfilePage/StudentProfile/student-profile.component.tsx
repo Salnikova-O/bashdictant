@@ -1,7 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import {Formik, FieldArray, Field} from 'formik';
+import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
-import {LayoutAnimation, Platform, UIManager} from 'react-native';
+import {Platform, UIManager} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Toast} from 'native-base';
+
+import { userSelectors } from '../../../redux/user/user.selectors';
+import {changeUser, clearError} from '../../../redux/user/user.actions';
+
 
 import {
     ProfileForm
@@ -12,6 +18,7 @@ import Button from '../../../UI/Button/Button.component';
 import { Error } from '../../common/Error/error.styles';
 import Input from '../../../UI/Input/Input.component';
 import { useLanguage } from '../../LanguageProvider/language.provider';
+
 
 
 const validationSchema = yup.object().shape({
@@ -51,6 +58,11 @@ const StudentProfile: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const theme = useTheme()
     const {language} = useLanguage()
+    const currentUser = useSelector(userSelectors.currentUser)
+    const changeSuccess = useSelector(userSelectors.changeSuccess)
+    const jwt = useSelector(userSelectors.jwt)
+    const changeError = useSelector(userSelectors.error)
+    const dispatch = useDispatch()
     const [initialValues, setInitialValues] = useState({
         email: '', 
         password: '', 
@@ -62,6 +74,55 @@ const StudentProfile: React.FC = () => {
         extraEmails: []
     })
 
+    useEffect(() => {
+        if (currentUser) {
+            setInitialValues({
+                email: currentUser.email,
+                city: currentUser.address,
+                lastName: currentUser.last_name,
+                firstName: currentUser.first_name,
+                middleName: currentUser.middle_name,
+                extraEmails: [],
+                password: '',
+                newPassword: ''
+            })
+        }
+    }, [currentUser])
+
+
+    useEffect(() => {
+        if (changeError) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: changeError,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [changeError])
+
+    useEffect(() => {
+        if(changeSuccess) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: language.messages.changeSuccess,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'success',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#a2cf6e',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [changeSuccess])
 
     const handleSubmitForm = (values: {
         email: string;
@@ -73,7 +134,14 @@ const StudentProfile: React.FC = () => {
         city: string;
         extraEmails: string[]
     }) => {
-        console.log(values)
+        if(!isSubmitting&&jwt) {
+            setIsSubmitting(true)
+            dispatch(changeUser({
+                ...values,
+                token: jwt,
+                role: 'student'
+            }))
+        }
     }
 
 
@@ -98,8 +166,8 @@ const StudentProfile: React.FC = () => {
                             value={values.email}
                             placeholder={language.registration.tabs.student.email}
                             edit={true}
-                            showAdd={true}
-                            onAdd={() =>helpers.push({[`extraEmails${values.extraEmails.length}`]:''})}
+                            // showAdd={true}
+                            // onAdd={() =>helpers.push({[`extraEmails${values.extraEmails.length}`]:''})}
                             />
                             <Error>{errors.email}</Error>
                             {

@@ -31,5 +31,9 @@ width: ${props => props.orientation==='PORTRAIT'? '100%': '50%'};
 padding-right: ${props => props.orientation==='PORTRAIT'? '0px': '10px'};
 height: ${props => props.orientation==='PORTRAIT'? 'auto': '100%'};
 `
-
+export const VideoInnerContainer = styled.View`
+width:100%;
+border-radius: 8px;
+overflow: hidden;
+`
 

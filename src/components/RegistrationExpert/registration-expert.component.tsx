@@ -1,16 +1,21 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {useSelector, useDispatch} from 'react-redux';
+import {Toast} from 'native-base';
 
 
+
+import {clearError, registerUser} from '../../redux/user/user.actions';
 import Input from '../../UI/Input/Input.component';
 import {RegistrationForm} from './registration-expert.styles';
-import { min } from 'react-native-reanimated';
 import { Error } from '../common/Error/error.styles';
 import Button from '../../UI/Button/Button.component';
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../LanguageProvider/language.provider';
+import { RegistrationProps } from '../../screens/Registration/registration.screen';
+import { userSelectors } from '../../redux/user/user.selectors';
 
 const validationSchema = yup.object().shape({
     email: yup.string()
@@ -39,13 +44,15 @@ const validationSchema = yup.object().shape({
 
 
 
-const RegistrationExpert: React.FC = () => {
+const RegistrationExpert: React.FC<RegistrationProps> = ({toggleSuccessWindow}) => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const theme = useTheme()
     const navigation = useNavigation()
     const {language} = useLanguage()
-
-
+    const dispatch = useDispatch()
+    const registrationSuccess = useSelector(userSelectors.registerSuccess)
+    const registrationError = useSelector(userSelectors.error)
+    const emailRef = useRef('')
 
     const handleSubmitForm = (values: {
         email: string;
@@ -55,10 +62,44 @@ const RegistrationExpert: React.FC = () => {
         firstName: string;
         middleName: string;
         city: string;
+        jobTitle: string
     }) => {
-        navigation.navigate('Personal')
+        if(!isSubmitting) {
+            emailRef.current=values.email
+            setIsSubmitting(true)
+            dispatch(registerUser({
+                ...values,
+                role: 'teacher'
+            }))
+        }
     }
 
+    useEffect(()=> {
+        if(registrationSuccess) {
+            setIsSubmitting(false)
+            toggleSuccessWindow(emailRef.current)
+            emailRef.current=''
+            dispatch(clearError())
+        }
+    }, [registrationSuccess])
+
+    useEffect(() => {
+        if (registrationError) {
+            emailRef.current=''
+            setIsSubmitting(false)
+            Toast.show({
+                text: registrationError,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [registrationError])
 
     return (
         <RegistrationForm>

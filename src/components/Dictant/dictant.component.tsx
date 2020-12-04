@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import {Toast} from 'native-base';
 
 import { useLanguage } from '../LanguageProvider/language.provider';
 import { IStudent } from '../../@types/common';
@@ -19,6 +19,9 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { PixelRatio } from 'react-native';
 import Chat from './Chat/chat.component';
 import FileUpload from './FileUpload/file-upload.component';
+import { DocumentPickerResponse } from 'react-native-document-picker';
+import Button from '../../UI/Button/Button.component';
+import { useTheme } from 'styled-components';
  
 const user:IStudent = {
     id: '2',
@@ -43,6 +46,9 @@ const Dictant: React.FC = () => {
     const {width} = useSafeAreaFrame()
     const [dictant, setDictant] = useState('')
     const videoId = "5qap5aO4i9A"
+    const [files, setFiles] = useState<DocumentPickerResponse[]>([])
+    const theme = useTheme()
+
 
     useEffect(() => {
         fetch('https://youtube.googleapis.com/youtube/v3/liveBroadcasts?key=AIzaSyAHUF4raQezDkcfyl1sMMMZ1s5qj2qBkWM',{
@@ -57,11 +63,51 @@ const Dictant: React.FC = () => {
         setDictant(text)
     }
 
+    const handleFileChange = (newFiles: DocumentPickerResponse[]) => {
+        let filesForUpload = [...files]
+        let fileSize = 0
+        filesForUpload.forEach((f) => {
+            fileSize = f.size + fileSize
+        })
+        for (let file of newFiles) {
+            if (!filesForUpload.includes(file)) {
+                fileSize = file.size + fileSize
+                if ( fileSize > 10000 ) {
+                    
+                    break;
+                } else {
+                    filesForUpload.push(file)
+                }
+            }
+        }
+        setFiles(filesForUpload)
+    }
+
+    const deleteFile = (fileName: string) => {
+        const newFiles = files.filter((file) => file.name!==fileName)
+        setFiles(newFiles)
+    }
+
+    const handleSendDictant = () => {
+        if (files.length===0&&!dictant) {
+            Toast.show({
+                text: language.errors.noDictant,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+        }
+    }
 
     return (
-        <Container>
+        <Container
+        edges={['bottom']}
+        >
             <InnerContainer
-            
             >
                 <Header>
                 <HeaderLeft/>
@@ -90,6 +136,13 @@ const Dictant: React.FC = () => {
                 <FileUpload
                 files={[]}
                 changeFiles={() => console.log('')}
+                />
+                <Button
+                text={language.dictant.sendResult}
+                bg={theme.palette.buttons.primary}
+                font={theme.palette.text.primary}
+                onPress={handleSendDictant}
+                height='50px'
                 />
             </InnerContainer>
         </Container>

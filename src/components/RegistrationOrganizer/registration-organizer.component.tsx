@@ -14,6 +14,7 @@ import { Error } from '../common/Error/error.styles';
 import Button from '../../UI/Button/Button.component';
 import { useTheme } from 'styled-components';
 import { useLanguage } from '../LanguageProvider/language.provider';
+import { RegistrationProps } from '../../screens/Registration/registration.screen';
 
 
 
@@ -57,7 +58,7 @@ const validationSchema = yup.object().shape({
 
 
 
-const RegistrationOrganizer: React.FC = () => {
+const RegistrationOrganizer: React.FC<RegistrationProps> = ({toggleSuccessWindow}) => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const theme = useTheme()
     const {language} = useLanguage()

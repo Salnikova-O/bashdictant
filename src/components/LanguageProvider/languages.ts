@@ -21,7 +21,8 @@ export const languages:Languages = {
             email: 'Email',
             password: 'Password',
             rememberMe: 'Remember me',
-            enter: 'Login'
+            enter: 'Login',
+            forgotPass: 'Забыл(а) пароль'
         },
         main: {
             welcome: 'Welcome to the dictantion registration page',
@@ -77,9 +78,18 @@ export const languages:Languages = {
                     firstName: '',
                     middleName: '',
                     city: '',
-                    send: 'send'
+                    send: 'send',
+                    level: {
+                        advanced: 'Продвинутый уровень',
+                        choose: 'Выберите свой  уровень',
+                        dialect: 'Северо-западный диалект',
+                        start: 'Начальный уровень'
+                    }
                 }
-            }
+            },
+            successMessage: 'Please enter the code sent to the registered email',
+            code: 'Confirmation code'
+
         },
         profile: {
             greeting: 'Hello,',
@@ -136,10 +146,28 @@ export const languages:Languages = {
                 start: '',
                 advanced: '',
                 dialect: ''
-            }
+            },
+            upload: 'Upload'
         },
         errors: {
-            noGrade: 'Grade is required'
+            noGrade: 'Grade is required',
+            noDictant: 'Ни одна форма диктанта не обнаружена',
+            fileSize: '',
+            email: 'Provide correct email',
+            required: 'This field is required',
+            code: 'Plese enter the code',
+            incorrectCode: 'Invalid code',
+            changeFailed: 'При изменении данных произошла ошибка'
+        },
+        messages: {
+            successRegister: 'Вы успешно зарегистрированы',
+            changeSuccess: 'Данные успешно изменены'
+
+        },
+        continue: 'Continue',
+        reset: {
+            passReset: 'Укажите ваш email для восстановления пароля',
+            success: 'На ваш email отправлено письмо с ссылкой для восстановления доступа.'
         }
     },
     'Russian': {
@@ -161,13 +189,16 @@ export const languages:Languages = {
             email: 'Адрес электронной почты',
             password: 'Пароль',
             rememberMe: 'Запомнить меня',
-            enter: 'Войти'
+            enter: 'Войти',
+            forgotPass: 'Забыл(а) пароль'
         },
         registration: {
             social: {
                 social: 'Регистрация через соц.сеть',
                 or: 'Или:',
             },
+            successMessage: 'Ввведите код подтверждения отправленный на указанный email',
+            code: 'Код подтверждения',
             tabs: {
                 header: {
                     student: 'Участник',
@@ -211,7 +242,13 @@ export const languages:Languages = {
                     firstName: 'Имя',
                     middleName: 'Отчество',
                     city: 'Город или населенный пункт написания диктанта',
-                    send: 'Отправить'
+                    send: 'Отправить',
+                    level: {
+                        advanced: 'Продвинутый уровень',
+                        choose: 'Выберите свой  уровень',
+                        dialect: 'Северо-западный диалект',
+                        start: 'Начальный уровень'
+                    }
                 }
             }
         },
@@ -270,10 +307,28 @@ export const languages:Languages = {
                 start: 'Начальный уровень',
                 advanced: 'Продвинутый уровень',
                 dialect: 'Северо-западный диалект'
-            }
+            },
+            upload: 'Загрузить работу'
         },
         errors: {
-            noGrade: 'Необходимо проставить оценку'
+            noGrade: 'Необходимо проставить оценку',
+            noDictant: 'Ни одна форма диктанта не обнаружена',
+            fileSize: 'Общий размер файлов не должен превышать 10мб',
+            email: 'Введите корректный email',
+            required: 'Обязательное поле',
+            code: 'Введите код',
+            incorrectCode: 'Введен неверный код',
+            changeFailed: 'При изменении данных произошла ошибка'
+        },
+        messages: {
+            successRegister: 'Вы успешно зарегистрированы',
+            changeSuccess: 'Данные успешно изменены'
+
+        },
+        continue: 'Продолжить',
+        reset: {
+            passReset: 'Укажите ваш email для восстановления пароля',
+            success: 'На ваш email отправлено письмо с ссылкой для восстановления доступа.'
         }
     },
     'bash': {

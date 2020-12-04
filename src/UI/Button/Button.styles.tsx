@@ -21,6 +21,7 @@ border-color: ${props => props.border? props.border: 'transparent'};
 border-width: ${props => props.border? '1px': '0'};
 height: ${props => props.height};
 opacity: ${props => props.disabled? 0.5: 1};
+flex-direction: row;
 `
 
 

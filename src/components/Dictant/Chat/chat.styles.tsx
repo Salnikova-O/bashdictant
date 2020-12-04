@@ -34,4 +34,6 @@ height: 100px;
 padding: 8px 12px;
 border-radius: 8px;
 background-color: ${props => props.theme.palette.background.light};
+border-width: 1px;
+border-color: #e5e5e5;
 `

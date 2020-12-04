@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from 'react';
-import {Formik, FieldArray, Field} from 'formik';
+import React, { Fragment, useEffect, useState } from 'react';
+import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
 import {LayoutAnimation, Platform, UIManager} from 'react-native';
-
 import { useTheme } from 'styled-components';
+import {Toast} from 'native-base';
+
 import { useLanguage } from '../../LanguageProvider/language.provider';
 import {
     ProfileForm
@@ -11,6 +12,12 @@ import {
 import Button from '../../../UI/Button/Button.component';
 import { Error } from '../../common/Error/error.styles';
 import Input from '../../../UI/Input/Input.component';
+
+import { userSelectors } from '../../../redux/user/user.selectors';
+import {changeUser, clearError} from '../../../redux/user/user.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { IExpert } from '../../../@types/common';
+
 
 const validationSchema = yup.object().shape({
     email: yup.string()
@@ -51,6 +58,11 @@ const ExpertProfile: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const theme = useTheme()
     const {language} = useLanguage()
+    const currentUser= useSelector(userSelectors.currentUser) as IExpert|undefined 
+    const changeSuccess = useSelector(userSelectors.changeSuccess)
+    const jwt = useSelector(userSelectors.jwt)
+    const changeError = useSelector(userSelectors.error)
+    const dispatch = useDispatch()
     const [initialValues, setInitialValues] = useState({
         email: '', 
         password: '', 
@@ -63,6 +75,56 @@ const ExpertProfile: React.FC = () => {
         extraEmails: []
     })
 
+    useEffect(() => {
+        if(currentUser) {
+            setInitialValues({
+                email: currentUser.email,
+                city: currentUser.address,
+                extraEmails: [],
+                firstName: currentUser.first_name,
+                jobTitle: currentUser.info,
+                lastName: currentUser.last_name,
+                middleName: currentUser.middle_name,
+                newPassword: '',
+                password: ''
+            })
+        }
+    }, [currentUser])
+
+
+    useEffect(() => {
+        if (changeError) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: language.errors.changeFailed,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'warning',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#ff7961',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [changeError])
+
+    useEffect(() => {
+        if(changeSuccess) {
+            setIsSubmitting(false)
+            Toast.show({
+                text: language.messages.changeSuccess,
+                buttonText: 'OK',
+                duration: 2000,
+                type: 'success',
+                position: 'bottom',
+                style: {
+                    backgroundColor: '#a2cf6e',
+                }
+            })
+            dispatch(clearError())
+        }
+    }, [changeSuccess])
 
     const handleSubmitForm = (values: {
         email: string;
@@ -75,7 +137,14 @@ const ExpertProfile: React.FC = () => {
         jobTitle: string;
         extraEmails: string[]
     }) => {
-        console.log(values)
+        if(!isSubmitting&&jwt) {
+            setIsSubmitting(true)
+            dispatch(changeUser({
+                ...values,
+                token: jwt,
+                role: 'teacher'
+            }))
+        }
     }
 
 
@@ -100,11 +169,11 @@ const ExpertProfile: React.FC = () => {
                             value={values.email}
                             placeholder={language.registration.tabs.expert.email}
                             edit={true}
-                            showAdd={true}
-                            onAdd={() =>{
-                                LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-                                helpers.push({[`extraEmails${values.extraEmails.length}`]:''})
-                            }}
+                            // showAdd={true}
+                            // onAdd={() =>{
+                            //     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+                            //     helpers.push({[`extraEmails${values.extraEmails.length}`]:''})
+                            // }}
                             />
                             <Error>{errors.email}</Error>
                             {
