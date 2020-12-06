@@ -147,7 +147,8 @@ export const languages:Languages = {
                 advanced: '',
                 dialect: ''
             },
-            upload: 'Upload'
+            upload: 'Upload',
+            uploadTitle: ''
         },
         errors: {
             noGrade: 'Grade is required',
@@ -157,7 +158,8 @@ export const languages:Languages = {
             required: 'This field is required',
             code: 'Plese enter the code',
             incorrectCode: 'Invalid code',
-            changeFailed: 'При изменении данных произошла ошибка'
+            changeFailed: 'При изменении данных произошла ошибка',
+            connect: 'There was an error'
         },
         messages: {
             successRegister: 'Вы успешно зарегистрированы',
@@ -168,6 +170,11 @@ export const languages:Languages = {
         reset: {
             passReset: 'Укажите ваш email для восстановления пароля',
             success: 'На ваш email отправлено письмо с ссылкой для восстановления доступа.'
+        },
+        timer: {
+            connect: 'Connect',
+            title: 'Dictation starts in:',
+            longTitle: ''
         }
     },
     'Russian': {
@@ -308,7 +315,8 @@ export const languages:Languages = {
                 advanced: 'Продвинутый уровень',
                 dialect: 'Северо-западный диалект'
             },
-            upload: 'Загрузить работу'
+            upload: 'Загрузить работу',
+            uploadTitle: 'Файлы загруженные на проверку'
         },
         errors: {
             noGrade: 'Необходимо проставить оценку',
@@ -318,7 +326,8 @@ export const languages:Languages = {
             required: 'Обязательное поле',
             code: 'Введите код',
             incorrectCode: 'Введен неверный код',
-            changeFailed: 'При изменении данных произошла ошибка'
+            changeFailed: 'При изменении данных произошла ошибка',
+            connect: 'При подключении произошла ошибка, попробуйте позднее'
         },
         messages: {
             successRegister: 'Вы успешно зарегистрированы',
@@ -329,6 +338,11 @@ export const languages:Languages = {
         reset: {
             passReset: 'Укажите ваш email для восстановления пароля',
             success: 'На ваш email отправлено письмо с ссылкой для восстановления доступа.'
+        },
+        timer: {
+            connect: 'Подключиться',
+            title: 'Начало диктанта через:',
+            longTitle: 'Диктант начнется:'
         }
     },
     'bash': {

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {Platform, UIManager, LayoutAnimation} from 'react-native';
 
 
@@ -13,7 +13,9 @@ import {
 interface TabsProps {
     children: React.ReactNode[],
     defaultIndex?: number,
-    tabNames: string[]
+    tabNames: string[],
+    onTabChange?: (tab:number) => void
+
 }
 
 
@@ -25,9 +27,12 @@ if (Platform.OS === 'android') {
 
 
 
-const Tabs: React.FC<TabsProps> = ({children, defaultIndex, tabNames}) => {
+const Tabs: React.FC<TabsProps> = ({children, defaultIndex, tabNames, onTabChange}) => {
     const [currentIndex, setCurrentIndex] = useState(defaultIndex? defaultIndex: 0)
 
+    useEffect(() => {
+        onTabChange? onTabChange(currentIndex): null
+    }, [currentIndex])
 
     return (
         <Fragment>

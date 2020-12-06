@@ -1,4 +1,6 @@
 import React from 'react';
+// import * as WebBrowser from 'expo-web-browser';
+
 
 import {
     SocialAuthContainer,
@@ -9,17 +11,34 @@ import {
 import OKSVG from '../../assets/ok.svg';
 import VKSVG from '../../assets/vk.svg';
 import FacebookSVG from '../../assets/facebook.svg';
+// import {OK_AUTH_URL_STUDENT,VK_AUTH_URL_STUDENT,OK_AUTH_URL_TEACHER,VK_AUTH_URL_TEACHER} from '../../config';
+
 
 
 interface SocialAuthProps {
     title: string,
-    size?: 'lg' 
+    size?: 'lg',
+    currentTab: number 
 }
 
-const SocialAuth: React.FC<SocialAuthProps> = ({title, size}) =>{
+
+// WebBrowser.maybeCompleteAuthSession()
+
+
+
+// export const VK_AUTH_URL_STUDENT = 'https://oauth.vk.com/authorize?client_id=7687118&display=page&redirect_uri=http://bashdikt.lilekov-studio.com/api/vk/callback&scope=email&response_type=code&v=5.126'
+
+const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
     const handleVKAuth = () => {
-
+        // WebBrowser.openAuthSessionAsync(currentTab===1? VK_AUTH_URL_STUDENT: VK_AUTH_URL_TEACHER)
+        // .then(res => {
+        //     console.log(res)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
+        
     }
 
     const handleOKAuth = () =>{

@@ -30,7 +30,7 @@ const RegistrationScreen: React.FC = () => {
     const theme = useTheme()
     const navigation = useNavigation()
     const [email, setEmail] =  useState('')
-
+    const [currentOpenTab, setCurrentOpenTab] = useState(1)
 
     const toggleSuccessWindow = (email?:string) => {
         if (email) {
@@ -46,6 +46,12 @@ const RegistrationScreen: React.FC = () => {
         toggleSuccessWindow()
     }
 
+    const changeCurrentTab = (tab: number) => {
+        setCurrentOpenTab(tab)
+    } 
+
+    console.log('current',currentOpenTab)
+
     return (
         <ScreenContainer
         edges={[ 'bottom']}
@@ -57,14 +63,16 @@ const RegistrationScreen: React.FC = () => {
             }}
             showsVerticalScrollIndicator={false}
             >
-                <SocialAuth title={language.registration.social.social} size='lg'/>
+                <SocialAuth title={language.registration.social.social} size='lg' currentTab={currentOpenTab}/>
                 <Subtitle>{language.registration.social.or}</Subtitle>
                 <Tabs
+                onTabChange={changeCurrentTab}
                 tabNames={[
                     // language.registration.tabs.header.organizer,
                     language.registration.tabs.header.expert, 
                     language.registration.tabs.header.student
                 ]}
+                defaultIndex={1}
                 >
                     {/* <RegistrationOrganizer toggleSuccessWindow={toggleSuccessWindow}/> */}
                     <RegistrationExpert toggleSuccessWindow={toggleSuccessWindow}/>

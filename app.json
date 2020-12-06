@@ -1,4 +1,7 @@
 {
   "name": "bashdictant",
-  "displayName": "Башкирский диктант"
+  "displayName": "Башкирский диктант",
+  "expo": {
+    "scheme": "bashdikt"
+  }
 }

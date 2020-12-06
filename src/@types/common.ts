@@ -137,6 +137,7 @@ export interface ILanguage {
             dialect: string
         },
         upload: string,
+        uploadTitle:string
     },
     errors: {
         noGrade: string,
@@ -146,7 +147,8 @@ export interface ILanguage {
         required: string,
         code: string,
         incorrectCode: string,
-        changeFailed: string
+        changeFailed: string,
+        connect: string
     },
     messages: {
         successRegister: string,
@@ -157,6 +159,11 @@ export interface ILanguage {
         passReset: string,
         success: string
     },
+    timer: {
+        title: string,
+        connect: string,
+        longTitle: string
+    }
     
 }
 
