@@ -8,6 +8,8 @@ import { CustomText } from '../common/Text/text.styles';
 export const Container = styled(ScreenContainer)`
 width:100%;
 padding: 0;
+flex:1;
+
 `
 
 export const InnerContainer = styled.ScrollView`
@@ -60,4 +62,19 @@ width:100%;
 color: ${props => props.theme.palette.text.grey};
 font-size: 14px;
 padding:0;
+`
+export const InfoContainer = styled.View`
+flex:1;
+width: 100%;
+height: 100%;
+justify-content: center;
+align-items: center;
+`
+
+
+export const InfoText = styled(CustomText)`
+color: ${props => props.theme.palette.text.main};
+font-size: 16px;
+text-align: center;
+margin-bottom: 30px;
 `

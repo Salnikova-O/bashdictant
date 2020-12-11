@@ -4,6 +4,7 @@ import Button from '../../UI/Button/Button.component';
 export const Container = styled.View`
 width: 100%;
 margin-top: 30px;
+flex:1;
 `
 
 
@@ -15,6 +16,7 @@ padding:24px;
 position: relative;
 overflow: hidden;
 height: 574px;
+
 `
 
 
@@ -74,4 +76,5 @@ border-radius: 8px;
 
 export const PrevNextButtons = styled.View`
 width: 100%;
+align-items: center;
 `

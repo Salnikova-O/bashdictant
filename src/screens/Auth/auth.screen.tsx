@@ -36,7 +36,7 @@ const validationSchema = yup.object().shape({
        .required('Введите email'),
     password: yup.string()
        .required('Введите пароль')
-       .min(6, 'Пароль должен содержать минимум 6 символов')
+       .min(4, 'Пароль должен содержать минимум 4 символа')
  })
 
 
@@ -70,7 +70,10 @@ const AuthScreen: React.FC = () => {
     useEffect(() => {
         if (currentUser) {
             setIsSubmitting(false)
-            navigation.navigate('Personal')
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Personal' }],
+              });
         }
     }, [currentUser])
 
@@ -114,7 +117,6 @@ const AuthScreen: React.FC = () => {
                 edges={[ 'bottom', 'left','right']}
                 >
                     <FormContainer
-                    behavior='padding'
                     orientation={orientation}
                     >
 
@@ -135,6 +137,7 @@ const AuthScreen: React.FC = () => {
                             <SocialAuth
                             title={language.auth.social}
                             size='lg'
+
                             />
                         </View>
                         <AuthContainer

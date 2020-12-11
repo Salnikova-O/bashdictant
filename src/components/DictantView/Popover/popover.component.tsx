@@ -8,20 +8,19 @@ import {
 } from './popover.styles';
 import CloseSVG from '../../../assets/times.svg';
 import TrashSVG from '../../../assets/trash.svg';
+import { useSelector } from 'react-redux';
+import { userSelectors } from '../../../redux/user/user.selectors';
+import { useLanguage } from '../../LanguageProvider/language.provider';
 
 interface PopoverProps {
-    onDelete: (index:number) => void,
+    onDelete?: (index:number) => void,
     text:string,
     index: number,
     saveMarker: (marker: {text:string, position:number}) => void,
     onClose: () => void
 }
 
-const currentUser = {
-    firstName: 'Олег',
-    middleName: 'Иванович',
-    type: 'expert'
-}
+
 
 
 
@@ -29,11 +28,14 @@ const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker, onClo
     const [markerText, setMarkerText]= useState('')
     const ref = useRef<string>(text)
     const delRef = useRef(false)
+    const currentUser = useSelector(userSelectors.currentUser)
+    const {language} = useLanguage()
+
 
     useEffect(() => {
         setMarkerText(text)
         return () => {
-            if(!delRef.current&&currentUser.type==='expert') {
+            if(!delRef.current&&currentUser?.role==='teacher') {
                 saveMarker({text: ref.current, position: index})
             }
         }
@@ -47,17 +49,18 @@ const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker, onClo
     return (
         <Fragment>
             {
-                currentUser.type==='expert'?
+                currentUser?.role==='teacher'?
                 <InputContainer>
                     <CustomTextInput
                     value={markerText}
                     onChangeText={handleChange}
                     multiline={true}
+                    placeholder={language.comment}
                     />
                     <IconButton
                     onPress={() => {
                         delRef.current=true
-                        onDelete(index)
+                        onDelete? onDelete(index) :null
                         onClose()
                     }}
                     >

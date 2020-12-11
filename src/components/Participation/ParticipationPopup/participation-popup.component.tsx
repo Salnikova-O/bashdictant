@@ -47,7 +47,7 @@ const ParticipationPopup: React.FC<PopupProps> = ({toggleOverlay,visible, user})
                 </IconButton>
                 <InfoContainer>
                     <InfoHeader>
-                        {user?.type==='expert'? language.participation.form.headerExpert: language.participation.form.headerExpert}
+                        {user?.role==='teacher'? language.participation.form.headerExpert: language.participation.form.headerStudent}
                     </InfoHeader>
                     <InfoField>
                         <InfoText>
@@ -56,25 +56,25 @@ const ParticipationPopup: React.FC<PopupProps> = ({toggleOverlay,visible, user})
                     </InfoField>
                     <InfoField>
                         <InfoText>
-                            {user?.lastName}
+                            {user?.last_name}
                         </InfoText>
                     </InfoField>
                     <InfoField>
                         <InfoText>
-                            {user?.firstName}
+                            {user?.first_name}
                         </InfoText>
                     </InfoField>
                     <InfoField>
                         <InfoText>
-                            {user?.middleName}
+                            {user?.middle_name}
                         </InfoText>
                     </InfoField>
                     <InfoField>
                         <InfoText>
-                            {user?.city}
+                            {user?.address}
                         </InfoText>
                     </InfoField>
-                    {
+                    {/* {
                         user?.type==='student'?
                         <Fragment>
                             <SubTitle>
@@ -85,7 +85,7 @@ const ParticipationPopup: React.FC<PopupProps> = ({toggleOverlay,visible, user})
                             </InfoText>
                         </Fragment>
                         :null
-                    }
+                    } */}
 
                 </InfoContainer>
             </Fragment>

@@ -9,7 +9,8 @@ import {
     UploadTitle,
     FileName,
     IconButton,
-    ItemContainer
+    ItemContainer,
+    Size
 } from './file-upload.styles';
 import { useLanguage } from '../../LanguageProvider/language.provider';
 import ClipSVG from '../../../assets/clip.svg';
@@ -46,10 +47,11 @@ const FileUpload:React.FC<FileuploadProps> = ({changeFiles,files, deleteFile}) =
         }
     }
 
-    const FileItem = ({filename}: {filename:string}) => {
+    const FileItem = ({filename, size}: {filename:string, size:number}) => {
         return (
             <ItemContainer>
                 <FileName>{filename}</FileName>
+                <Size>{size>1000000? Math.round(size/100000)/10 + 'Mb': Math.round(size/100)/10 + 'Kb'}</Size>
                 <IconButton
                 onPress={()=> deleteFile(filename)}
                 >
@@ -70,7 +72,7 @@ const FileUpload:React.FC<FileuploadProps> = ({changeFiles,files, deleteFile}) =
             {
                 files.map((file, index) => {
                     return (
-                        <FileItem key={index} filename={file.name}/>
+                        <FileItem key={index} filename={file.name} size={file.size}/>
                     )
                 })
             }

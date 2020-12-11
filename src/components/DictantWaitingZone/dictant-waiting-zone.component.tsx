@@ -14,7 +14,7 @@ interface WaitingProps {
 const DictantWaitingZone: React.FC<WaitingProps> = ({showDictant, startingDate}) => {
     const {language} = useLanguage()
     const theme = useTheme()
-    const [timeLeft, setTimeLeft] = useState<number>(moment(startingDate).isAfter(moment())? moment(startingDate).diff(moment()): 0)
+    const [timeLeft, setTimeLeft] = useState<number>(moment(startingDate).utc().isAfter(moment().utc())? moment(startingDate).utc().diff(moment()): 0)
     
 
 
@@ -32,13 +32,12 @@ const DictantWaitingZone: React.FC<WaitingProps> = ({showDictant, startingDate})
         return () => clearInterval(interval)
     }, [])
 
-    console.log(timeLeft)
 
 
     return (
         <ZoneContainer>
             <TimerTitle>{timeLeft<86400001?language.timer.title: language.timer.longTitle}</TimerTitle>
-            <Time>{timeLeft<86400001? moment(timeLeft).format('HH:mm:ss'): moment(startingDate).format('DD/MM/YYYY HH:mm')}</Time>
+            <Time>{timeLeft<86400001? moment(timeLeft).utc().format('HH:mm:ss'): moment(startingDate).format('DD/MM/YYYY HH:mm')}</Time>
             <Button
             text={language.timer.connect}
             bg={theme.palette.buttons.primary}

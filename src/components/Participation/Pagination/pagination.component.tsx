@@ -38,14 +38,18 @@ const Pagination:React.FC<PaginationProps> = ({currentpage,perPage,totalAmount, 
         } else {
             const p = []
             if (currentPage<5) {
-                for (let i=1; i<currentPage+3;i++) {
+                for (let i=1; i<currentPage+2;i++) {
                     p.push(i)
                 }
-                p.push('...')
+                if (p.length<(pages-1)) {
+                    p.push('...')
+                }
                 p.push(pages)
             } else if (currentPage>pages-4) {
                 p.push(1)
-                p.push('...')
+                if (currentPage!==5) {
+                    p.push('...')
+                }
                 for (let i=currentPage-3; i<pages+1;i++) {
                     p.push(i)
                 }

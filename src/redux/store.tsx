@@ -14,7 +14,7 @@ const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
     stateReconciler: autoMergeLevel1,
-    blacklist: [''],
+    blacklist: ['modals','redirect'],
   }
   
 const persistedReducer = persistReducer<RootState, RootAction>(persistConfig, rootReducer)

@@ -16,7 +16,7 @@ export interface UserFieldTypes {
     level?:string,
     format?:string,
     jobTitle?:string,
-    studentCount?:string,
+    studentCount?:number,
     social?:string,
     phone?:string,
     extraPhones?: string[],

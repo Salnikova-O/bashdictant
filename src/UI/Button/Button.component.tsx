@@ -24,7 +24,8 @@ const Button: React.FC<IButton&ButtonProps> = ({
     onPress,
     text,
     disabled,
-    icon
+    icon,
+    marginBottom
 }) => {
     return (
         <ButtonContainer
@@ -35,6 +36,7 @@ const Button: React.FC<IButton&ButtonProps> = ({
         border={border}
         marginTop={marginTop}
         disabled={disabled}
+        marginBottom={marginBottom}
         >
             {
                 icon? icon: null

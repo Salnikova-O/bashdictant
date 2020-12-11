@@ -6,6 +6,7 @@ export interface ButtonProps {
     font: string,
     height: '50px'|'40px',
     marginTop?: number,
+    marginBottom?:number
 }
 
 
@@ -22,6 +23,7 @@ border-width: ${props => props.border? '1px': '0'};
 height: ${props => props.height};
 opacity: ${props => props.disabled? 0.5: 1};
 flex-direction: row;
+margin-bottom: ${props => props.marginBottom? props.marginBottom : 0}px;
 `
 
 

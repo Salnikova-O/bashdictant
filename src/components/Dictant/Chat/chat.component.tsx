@@ -77,6 +77,7 @@ const Chat: React.FC = () => {
             showsVerticalScrollIndicator={false}
             ref={chatRef}
             onContentSizeChange={handleScroll}
+            nestedScrollEnabled={true}
             >
                 {
                     messages.map((message, index) => {

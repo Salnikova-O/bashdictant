@@ -15,7 +15,7 @@ align-items: center;
 flex-direction: ${props => props.orientation==='PORTRAIT'? 'column': 'row'};
 `
 
-export const AuthContainer = styled.View<OrientationProps>`
+export const AuthContainer = styled.KeyboardAvoidingView<OrientationProps>`
 width: ${props => props.orientation==='PORTRAIT'? '100%': '50%'};
 margin-top: ${props => props.orientation==='PORTRAIT'? '40px': '0px'};
 align-items: center;

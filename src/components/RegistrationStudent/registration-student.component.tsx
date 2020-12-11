@@ -17,6 +17,7 @@ import { useLanguage } from '../LanguageProvider/language.provider';
 import ArrowDownSVG from '../../assets/arrowDown.svg';
 import { userSelectors } from '../../redux/user/user.selectors';
 import { RegistrationProps } from '../../screens/Registration/registration.screen';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
 
 
@@ -58,6 +59,8 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
     const registrationSuccess = useSelector(userSelectors.registerSuccess)
     const dispatch = useDispatch()
     const emailRef = useRef('')
+    const {width} = useSafeAreaFrame()
+
 
     const handleSubmitForm = (values: {
         email: string;
@@ -186,7 +189,7 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
                             { label:language.registration.tabs.student.level.dialect, value:'dialect' },
                         ]}
                         Icon={ArrowDownSVG}
-                        style={pickerSelectStyles}
+                        style={pickerSelectStyles(width)}
                         useNativeAndroidPickerStyle={false}
                         />
                         <Error>{errors.level}</Error>
@@ -205,7 +208,7 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
     )   
 }
 
-const pickerSelectStyles = StyleSheet.create({
+const pickerSelectStyles = (width:number) => StyleSheet.create({
     inputIOS: {
       fontSize: 14,
       paddingVertical: 8,
@@ -233,7 +236,8 @@ const pickerSelectStyles = StyleSheet.create({
     viewContainer: {
         width:'100%',
         alignSelf: 'center',
-        maxWidth: 440
+        maxWidth: 440,
+
 
     },
     iconContainer: {
@@ -243,7 +247,12 @@ const pickerSelectStyles = StyleSheet.create({
     },
     inputIOSContainer: {
         width: '100%'
-    }
+    },
+    inputAndroidContainer: {
+        width: width-40,
+        maxWidth: 440
+    },
+
   });
 
 

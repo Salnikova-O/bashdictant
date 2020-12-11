@@ -84,7 +84,7 @@ export interface ILanguage {
         header: {
             title: string,
             student: string,
-            expert: string,
+            teacher: string,
             organizer: string
         },
         greeting: string,
@@ -109,6 +109,8 @@ export interface ILanguage {
         form: {
             headerExpert: string,
             headerStudent: string,
+            headerRegistered:string,
+            headerPinned:string,
             subheader: string
             testFormat: {
                     online: string
@@ -137,7 +139,8 @@ export interface ILanguage {
             dialect: string
         },
         upload: string,
-        uploadTitle:string
+        uploadTitle:string,
+        backToStudents:string
     },
     errors: {
         noGrade: string,
@@ -148,11 +151,20 @@ export interface ILanguage {
         code: string,
         incorrectCode: string,
         changeFailed: string,
-        connect: string
+        connect: string,
+        chooseType: string,
+        serverError: string,
+        fileDownload: string,
+        noDictantLevel:string,
+        noEmailSocial: string
     },
     messages: {
         successRegister: string,
-        changeSuccess: string
+        changeSuccess: string,
+        dictantSuccess:  string,
+        dictantCheckSuccess: string,
+        downloadSuccess: string,
+        downloadSuccessAndroid: string
     },
     continue: string,
     reset: {
@@ -163,6 +175,19 @@ export interface ILanguage {
         title: string,
         connect: string,
         longTitle: string
+    },
+    upload: string,
+    gradeText: {
+        title:string,
+        noGrade: string
+    },
+    getCertificate: string,
+    comment: string,
+    certificate: {
+        mainInfo: string,
+        check:string,
+        confirm: string,
+        success: string
     }
     
 }
@@ -181,7 +206,7 @@ interface IUser {
 
 export interface IStudent extends IUser {
     format_dictation: 'offline'|'online'|'video',
-    dictantStatus: 'ready'| 'pending'| 'warning'|'notChecked',
+    status: DictantStatus
     level: 'start'|'advanced'|'dialect'
 }
 
@@ -191,15 +216,16 @@ export interface IExpert extends IUser {
 }
 
 export interface IOrganizer extends IUser {
-    dictantType: 'offline'|'online'|'video',
     phone: string,
-    social:  string,
-    studentNumber: number
+    add_phone: string[],
+    add_email:string[],
+    soc_url:  string,
+    count_students: number,
 }
 
 
 
-export type DictantStatus = 'ready' | 'notChecked' | 'warning' | 'pending'
+export type DictantStatus = 'Проверен'| 'Проверяется'| 'warning'|'Не проверен'
 
 
 export type GradeTypes = '1'|'2'|'3'| '4'| '5'

@@ -12,17 +12,19 @@ align-items: center;
 border-bottom-width: 1px;
 border-color: ${props => props.theme.palette.text.grey};
 margin-bottom: 17px;
+opacity:1;
 `
 
 export const IndexColumn = styled.View`
 width: 10%;
 `
-export const NameColumn = styled.View`
+export const NameColumn = styled.TouchableOpacity`
 width: 34%;
 `
 
-export const EmailColumn = styled.View`
+export const EmailColumn = styled.TouchableOpacity`
 width: 44%;
+opacity:1;
 `
 
 export const IconColumn = styled.View`

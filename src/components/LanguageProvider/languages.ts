@@ -95,7 +95,7 @@ export const languages:Languages = {
             greeting: 'Hello,',
             header: {
                 title: '',
-                expert: '',
+                teacher: '',
                 student: '',
                 organizer: ''
             },
@@ -119,6 +119,8 @@ export const languages:Languages = {
             form:{
                 headerExpert: '',
                 headerStudent: '',
+                headerRegistered: 'Зарегистрированные участники',
+                headerPinned: 'Прикрепленные участники',
                 subheader: '',
                 testFormat: {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
@@ -148,7 +150,8 @@ export const languages:Languages = {
                 dialect: ''
             },
             upload: 'Upload',
-            uploadTitle: ''
+            uploadTitle: '',
+            backToStudents: 'Back to students page'
         },
         errors: {
             noGrade: 'Grade is required',
@@ -159,11 +162,20 @@ export const languages:Languages = {
             code: 'Plese enter the code',
             incorrectCode: 'Invalid code',
             changeFailed: 'При изменении данных произошла ошибка',
-            connect: 'There was an error'
+            connect: 'There was an error',
+            chooseType: 'Нельзя отправить загруженные файлы и текст. Выберите один вариант',
+            serverError: 'Произошла непредвиденная ошибка',
+            fileDownload: 'При загрузке файла произошла ошибка',
+            noDictantLevel: '',
+            noEmailSocial: ''
         },
         messages: {
             successRegister: 'Вы успешно зарегистрированы',
-            changeSuccess: 'Данные успешно изменены'
+            changeSuccess: 'Данные успешно изменены',
+            dictantSuccess: 'Работа успешно отправлена',
+            dictantCheckSuccess: 'Dictant is successfully checked',
+            downloadSuccess: '',
+            downloadSuccessAndroid: ''
 
         },
         continue: 'Continue',
@@ -175,6 +187,19 @@ export const languages:Languages = {
             connect: 'Connect',
             title: 'Dictation starts in:',
             longTitle: ''
+        },
+        upload: 'Идет загрузка файлов...',
+        gradeText: {
+            title: 'Ваша оценка',
+            noGrade: 'Диктант проверяется'
+        },
+        getCertificate: 'Получить сертификат',
+        comment: 'Комментарий',
+        certificate: {
+            mainInfo: 'Сертификат можно получить только один раз, пожалуйста проверьте, что у вас корректно заполнены личные данные',
+            check:'Проверить',
+            confirm: 'Подтвердить',
+            success: 'Сертификат отправлен на указанный Вами email'
         }
     },
     'Russian': {
@@ -263,7 +288,7 @@ export const languages:Languages = {
             greeting: 'Здравствуйте,',
             header: {
                 title: '',
-                expert: 'Личный кабинет эксперта',
+                teacher: 'Личный кабинет эксперта',
                 student: 'Личный кабинет участника',
                 organizer: 'Личный кабинет организатора'
             },
@@ -287,6 +312,8 @@ export const languages:Languages = {
             form:{
                 headerExpert: 'Данные эксперта',
                 headerStudent: 'Данные участника',
+                headerRegistered: 'Зарегистрированные участники',
+                headerPinned: 'Прикрепленные участники',
                 subheader: 'Формат диктанта:',
                 testFormat: {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
@@ -316,33 +343,56 @@ export const languages:Languages = {
                 dialect: 'Северо-западный диалект'
             },
             upload: 'Загрузить работу',
-            uploadTitle: 'Файлы загруженные на проверку'
+            uploadTitle: 'Файлы загруженные на проверку',
+            backToStudents: 'Назад к списку участников'
         },
         errors: {
             noGrade: 'Необходимо проставить оценку',
             noDictant: 'Ни одна форма диктанта не обнаружена',
-            fileSize: 'Общий размер файлов не должен превышать 10мб',
+            fileSize: 'Общий размер файлов не должен превышать 30мб',
             email: 'Введите корректный email',
             required: 'Обязательное поле',
             code: 'Введите код',
             incorrectCode: 'Введен неверный код',
             changeFailed: 'При изменении данных произошла ошибка',
-            connect: 'При подключении произошла ошибка, попробуйте позднее'
+            connect: 'При подключении произошла ошибка, попробуйте позднее',
+            chooseType: 'Нельзя отправить загруженные файлы и текст. Выберите один вариант',
+            serverError: 'Произошла непредвиденная ошибка',
+            fileDownload: 'При загрузке файла произошла ошибка',
+            noDictantLevel: 'Пожалуйста укажите уровень диктанта',
+            noEmailSocial: 'Нам не удалось получить email от соц. сети, возпользуйтесь другим способом регистрации'
         },
         messages: {
             successRegister: 'Вы успешно зарегистрированы',
-            changeSuccess: 'Данные успешно изменены'
+            changeSuccess: 'Данные успешно изменены',
+            dictantSuccess: 'Работа успешно отправлена',
+            dictantCheckSuccess: 'Работа успешно проверена',
+            downloadSuccess: 'Файл успешно загружен в:',
+            downloadSuccessAndroid: 'Файл успешно загружен'
 
         },
         continue: 'Продолжить',
         reset: {
             passReset: 'Укажите ваш email для восстановления пароля',
-            success: 'На ваш email отправлено письмо с ссылкой для восстановления доступа.'
+            success: 'На ваш email отправлено письмо с временным паролем.'
         },
         timer: {
             connect: 'Подключиться',
             title: 'Начало диктанта через:',
             longTitle: 'Диктант начнется:'
+        },
+        upload: 'Идет загрузка файлов...',
+        gradeText: {
+            title: 'Ваша оценка',
+            noGrade: 'Диктант проверяется'
+        },
+        getCertificate: 'Получить сертификат',
+        comment: 'Комментарий',
+        certificate: {
+            mainInfo: 'Сертификат можно получить только один раз, пожалуйста проверьте, что у вас корректно заполнены личные данные',
+            check:'Проверить',
+            confirm: 'Подтвердить',
+            success: 'Сертификат отправлен на указанный Вами email'
         }
     },
     'bash': {

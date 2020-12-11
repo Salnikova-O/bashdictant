@@ -9,6 +9,7 @@ position: relative;
 justify-content: center;
 align-items: flex-start;
 overflow: hidden;
+
 `
 export const ResetPassContainer = styled(Animated.View)`
 width: 200%;
@@ -18,6 +19,10 @@ align-items: flex-start;
 
 export const ResetPassSlide = styled.View`
 width: 50%;
+/* background-color: red; */
+height:100%;
+align-items: center;
+justify-content:center;
 `
 
 export const SuccessMessage = styled(CustomText)`

@@ -27,6 +27,7 @@ align-items:center;
 export const FileName = styled(CustomText)`
 font-size: 16px;
 color: ${props => props.theme.palette.text.main};
+width:70%;
 `
 
 
@@ -38,4 +39,13 @@ align-items: center;
 border-width:1.5px;
 border-color: ${props => props.theme.palette.text.main};
 border-radius: 9px;
+`
+
+export const Size = styled(CustomText)`
+flex:1;
+text-align: right;
+padding: 0px 5px;
+font-size: 12px;
+color: ${props => props.theme.palette.text.grey};
+
 `

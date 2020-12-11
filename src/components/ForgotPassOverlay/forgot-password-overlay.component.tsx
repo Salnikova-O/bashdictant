@@ -4,6 +4,8 @@ import Input from '../../UI/Input/Input.component';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {Animated} from 'react-native';
+import axios from 'axios';
+import {API_URL} from '../../config';
 
 import {
     IconButton,
@@ -32,6 +34,8 @@ const ForgotPassOverlay: React.FC<ForgotPassProps> = ({isVisible,onBackdropPress
     const translate = useRef(new Animated.Value(0)).current
     const {width} = useSafeAreaFrame()
     const {left,right} = useSafeAreaInsets()
+    
+
     const interTranslate = translate.interpolate({
         inputRange: [0,1],
         outputRange: [0, width<500?-(width*0.9-25):-((500)-25)]
@@ -58,6 +62,15 @@ const ForgotPassOverlay: React.FC<ForgotPassProps> = ({isVisible,onBackdropPress
             duration: 300,
             toValue: 1
         }).start()
+        axios.post(`${API_URL}/recoverpassword`, {
+            email:email
+        })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     const handleClose = () => {
@@ -85,6 +98,7 @@ const ForgotPassOverlay: React.FC<ForgotPassProps> = ({isVisible,onBackdropPress
                 initialValues={{email: ''}}
                 validationSchema={getValidationSchema}
                 onSubmit={values => handleSubmit(values)}
+                validateOnChange={false}
                 >
                 {({values, handleSubmit,errors, handleChange})=> (
                     <ResetPassContainer
@@ -96,19 +110,19 @@ const ForgotPassOverlay: React.FC<ForgotPassProps> = ({isVisible,onBackdropPress
                         style={{marginRight: 25}}
                         >
                             <SuccessMessage>{language.reset.passReset}</SuccessMessage>
-                                <Input
-                                onChangeText={handleChange('email')}
-                                value={values.email}
-                                placeholder={language.auth.email}
-                                />
-                                <Error>{errors.email}</Error>
-                                <Button
-                                text={language.continue}
-                                onPress={handleSubmit}
-                                bg={theme.palette.buttons.primary}
-                                font={theme.palette.text.primary}
-                                height='50px'
-                                />
+                            <Input
+                            onChangeText={handleChange('email')}
+                            value={values.email}
+                            placeholder={language.auth.email}
+                            />
+                            <Error>{errors.email}</Error>
+                            <Button
+                            text={language.continue}
+                            onPress={handleSubmit}
+                            bg={theme.palette.buttons.primary}
+                            font={theme.palette.text.primary}
+                            height='50px'
+                            />
                         </ResetPassSlide>
                         <ResetPassSlide>
                             <SuccessMessage>{language.reset.success}</SuccessMessage>

@@ -42,7 +42,10 @@ const RegistrationScreen: React.FC = () => {
     }
 
     const handleNavigation = () => {
-        navigation.navigate('Personal')
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Personal' }],
+          });
         toggleSuccessWindow()
     }
 

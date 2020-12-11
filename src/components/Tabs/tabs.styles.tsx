@@ -31,4 +31,5 @@ export const TabsContainer = styled.View`
 width:100%;
 max-width: 500px;
 align-items:center;
+flex:1;
 `

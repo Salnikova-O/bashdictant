@@ -28,7 +28,6 @@ const PersonalScreen: React.FC = () => {
     const {language} = useLanguage()
     const currentUser = useSelector(userSelectors.currentUser)
 
-    console.log(currentUser)
 
     const getTabNames = (type: string) => {
         switch (type) {
@@ -72,12 +71,15 @@ const PersonalScreen: React.FC = () => {
 
     return (
         <ScreenContainer
+        style={{
+            paddingTop: 0
+        }}
         edges={[ 'bottom']}
         >
             {
                 currentUser?
                 <ScrollView
-                style={{flex: 1, width: '100%'}}
+                style={{width: '100%',flex:1}}
                 contentContainerStyle={{
                     alignItems: 'center'
                 }}

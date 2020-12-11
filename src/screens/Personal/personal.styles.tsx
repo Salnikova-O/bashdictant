@@ -6,7 +6,7 @@ import { CustomText } from '../../components/common/Text/text.styles';
 export const ScreenHeader = styled.View`
 width:100%;
 align-items: flex-start;
-margin: 35px 0px;
+margin: 15px 0px 35px 0px;
 max-width: 500px;
 `
 

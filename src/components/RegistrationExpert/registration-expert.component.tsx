@@ -116,8 +116,8 @@ const RegistrationExpert: React.FC<RegistrationProps> = ({toggleSuccessWindow}) 
                 jobTitle: ''
             }}
             onSubmit={(values) => handleSubmitForm(values) }
-            // validationSchema={validationSchema}
-            // validateOnChange={false}
+            validationSchema={validationSchema}
+            validateOnChange={false}
             
             >
                 {({ handleChange, handleSubmit, values, errors }) => (

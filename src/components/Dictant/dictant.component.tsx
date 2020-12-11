@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import {Toast} from 'native-base';
+import {Overlay} from 'react-native-elements';
+import moment from 'moment';
+
 
 import { useLanguage } from '../LanguageProvider/language.provider';
 import { IStudent } from '../../@types/common';
 import {
     Container,
-    // Header,
-    // HeaderLeft,
-    // HeaderRight,
-    // HeaderText,
     InnerContainer,
     VideoContainer,
     DictantInput,
-    DictantInputContainer
+    DictantInputContainer,
+    InfoContainer,
+    InfoText
 } from './dictant.styles';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { PixelRatio, Platform, UIManager, LayoutAnimation } from 'react-native';
+import { useTheme } from 'styled-components';
+import axios from 'axios';
+import {API_URL} from '../../config';
+import RNFetchBlob from 'rn-fetch-blob';
+
 import Chat from './Chat/chat.component';
 import FileUpload from './FileUpload/file-upload.component';
 import { DocumentPickerResponse } from 'react-native-document-picker';
 import Button from '../../UI/Button/Button.component';
-import { useTheme } from 'styled-components';
 import DictantWaitingZone from '../DictantWaitingZone/dictant-waiting-zone.component';
- 
+import UploadProgress from './FileUpload/UploadProgress/upload-progress.component';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeProgressModal, openProgressModal, setProgressModal } from '../../redux/modals/modals.actions';
+import { userSelectors } from '../../redux/user/user.selectors';
+import DictantRead from '../DictantRead/dictant-read.component';
+import Fallback from '../Fallback/fallback.component';
+
+
 const user:IStudent = {
     id: '2',
     first_name: 'Иван',
@@ -33,7 +45,7 @@ const user:IStudent = {
     address: 'moscow',
     format_dictation: 'offline',
     role: 'student',
-    dictantStatus: 'pending',
+    status: 'Проверяется',
     level: 'start'
 }
 
@@ -43,27 +55,59 @@ if (Platform.OS === 'android') {
     }
   }
 
-
-
-
-const Dictant: React.FC = () => {
-    const currentUser = user
-    const {language} = useLanguage()
-    const {width} = useSafeAreaFrame()
-    const [dictant, setDictant] = useState('')
-    const videoId = "5qap5aO4i9A"
-    const [files, setFiles] = useState<DocumentPickerResponse[]>([])
-    const theme = useTheme()
-    const [elementShown, setElementShown] = useState<'timer'|'write'|'read'>('timer')
-
-    useEffect(() => {
-        fetch('https://youtube.googleapis.com/youtube/v3/liveBroadcasts?key=AIzaSyAHUF4raQezDkcfyl1sMMMZ1s5qj2qBkWM',{
+  
+  
+  const Dictant: React.FC = () => {
+      const [dictant, setDictant] = useState('')
+      const [dictantDate, setDictantDate] = useState<Date|undefined>(undefined)
+      const jwt = useSelector(userSelectors.jwt)
+      const currentUser = useSelector(userSelectors.currentUser) as IStudent
+      const {language} = useLanguage()
+      const {width} = useSafeAreaFrame()
+      const [videoId, setVideoId] = useState<string|undefined>(undefined)
+      const [files, setFiles] = useState<DocumentPickerResponse[]>([])
+      const theme = useTheme()
+      const [elementShown, setElementShown] = useState<'timer'|'write'|'read'|undefined>(undefined)
+      const [isSubmiting, setIsSubmiting] = useState(false)
+      const dispatch = useDispatch()
+      const [showSuccess, setShowSuccess] = useState(false)
+      
+      
+      
+      useEffect(() => {
+        axios.get(`${API_URL}/cabinet/student/info`,{
+            headers: {
+                "X-api-token": `${jwt}`
+            }
         })
-        .then(res => {
-            console.log(res)
+        .then((response) => {
+            if (response.data.status==='Не написан') {
+                axios.get(`${API_URL}/timedictation?level=${currentUser.level}`)
+                .then((response) => {
+                    setVideoId(parseYoutubeURL(response.data.url))
+                    if (moment().isAfter(moment(response.data.time))) {
+                        showDictant()
+                    } else {
+                        showTimer()
+                        setDictantDate(response.data.time)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+                
+                showDictant()
+            } else {
+                showDictantRead()
+            }
         })
-        .catch(e => console.log(e))
-    }, [])
+        .catch((err) => {
+            console.log(err)
+        })
+
+    },[])
+
+    
 
     const handleDictantChange = (text:string) => {
         setDictant(text)
@@ -79,8 +123,17 @@ const Dictant: React.FC = () => {
             if (!filesForUpload.find(f => file.name===f.name)) {
                 fileSize = file.size + fileSize
                 console.log(fileSize)
-                if ( fileSize > 200000 ) {
-                    
+                if ( fileSize > 30000000 ) {
+                                Toast.show({
+                                text: language.errors.fileSize,
+                                buttonText: 'OK',
+                                duration: 4000,
+                                type: 'warning',
+                                position: 'bottom',
+                                style: {
+                                    backgroundColor: '#ff7961',
+                                }
+                            })
                     break;
                 } else {
                     filesForUpload.push(file)
@@ -92,24 +145,127 @@ const Dictant: React.FC = () => {
     }
 
 
+    const closeSuccess = () => {
+        showDictantRead()
+        setShowSuccess(false)
+    }
+
+
     const deleteFile = (fileName: string) => {
         const newFiles = files.filter((file) => file.name!==fileName)
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+        if (newFiles.length>0) {
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+        } else {
+            
+            LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'scaleXY' }, update: { type: 'spring', springDamping: 0.4 }, delete: { type: 'spring', springDamping: 0.4, property: 'scaleXY' } })
+        }
         setFiles(newFiles)
     }
 
     const handleSendDictant = () => {
-        if (files.length===0&&!dictant) {
-            Toast.show({
-                text: language.errors.noDictant,
-                buttonText: 'OK',
-                duration: 2000,
-                type: 'warning',
-                position: 'bottom',
-                style: {
-                    backgroundColor: '#ff7961',
-                }
-            })
+        if (!isSubmiting) {
+            if (files.length===0&&!dictant) {
+                Toast.show({
+                    text: language.errors.noDictant,
+                    buttonText: 'OK',
+                    duration: 2000,
+                    type: 'warning',
+                    position: 'bottom',
+                    style: {
+                        backgroundColor: '#ff7961',
+                    }
+                })
+            } else if (files.length>0&&dictant) {
+                Toast.show({
+                    text: language.errors.chooseType,
+                    buttonText: 'OK',
+                    duration: 4000,
+                    type: 'warning',
+                    position: 'bottom',
+                    style: {
+                        backgroundColor: '#ff7961',
+                    }
+                })
+            } else if (files.length>0) {
+                setIsSubmiting(true)
+                dispatch(openProgressModal(0))
+                const formData = new FormData()
+                const blobData:any = []
+                files.forEach(file => {
+                    formData.append('file', file)
+                    blobData.push({
+                        name : 'file',
+                        filename : file.name,
+                        data: RNFetchBlob.wrap(file.uri)
+                        
+                    })
+                })
+                RNFetchBlob.fetch('POST', `${API_URL}/dictation/upload`,{
+                    "X-api-token": `${jwt}`,
+                    "Content-Type": 'multipart/form-data',
+                }, blobData)
+                .uploadProgress((written, total) => {
+                    const progress = Math.round(written/total*100)
+                    dispatch(setProgressModal(progress))
+                })
+                .then((response) => {
+                    console.log(response)
+                    setIsSubmiting(false)
+                    dispatch(closeProgressModal())
+                    setShowSuccess(true)
+                })
+                .catch((err) => {
+                    console.log('error',err.response)
+                    setIsSubmiting(false)
+                    dispatch(closeProgressModal())
+                    Toast.show({
+                        text: language.errors.serverError,
+                        buttonText: 'OK',
+                        duration: 4000,
+                        type: 'warning',
+                        position: 'bottom',
+                        style: {
+                            backgroundColor: '#ff7961',
+                        }
+                    })
+                })
+            } else if (dictant) {
+                setIsSubmiting(true)
+                dispatch(openProgressModal(0))
+                axios({
+                    method: 'post',
+                    headers: {
+                        "Content-Type": 'application/json',
+                        "X-api-token": `${jwt}`
+                    },
+                    url: `${API_URL}/dictation/write`,
+                    data: {
+                        text: dictant
+                    },
+                })
+                .then((response) => {
+                    console.log(response)
+                    dispatch(closeProgressModal())
+                    setIsSubmiting(false)
+                    setShowSuccess(true)
+
+                })
+                .catch((err) => {
+                    console.log('error',err.response)
+                    setIsSubmiting(false)
+                    dispatch(closeProgressModal())
+                    Toast.show({
+                        text: language.errors.serverError,
+                        buttonText: 'OK',
+                        duration: 4000,
+                        type: 'warning',
+                        position: 'bottom',
+                        style: {
+                            backgroundColor: '#ff7961',
+                        }
+                    })
+                })
+            }
         }
     }
 
@@ -117,13 +273,31 @@ const Dictant: React.FC = () => {
         setElementShown('write')
     }
 
+    const showDictantRead = () => {
+        setElementShown('read')
+    }
+
+    const showTimer = () => {
+        setElementShown('timer')
+    }
+
+    const parseYoutubeURL = (url:string):string  => {
+        const query = url.split('?')[1]
+        const [key, value] =  query.split('=')
+        if (key==='v') {
+            return value
+        }
+        return "5qap5aO4i9A"
+    }
+
+    console.log(parseYoutubeURL('https://www.youtube.com/watch?v=ZNdPHViu96E'))
 
     return (
         <Container
         edges={['bottom']}
         >
             {
-                elementShown==='write'?
+                elementShown==='write'&&videoId?
                     <InnerContainer
                     >
                         {/* <Header>
@@ -163,13 +337,40 @@ const Dictant: React.FC = () => {
                         height='50px'
                         />
                     </InnerContainer>
-                : elementShown==='timer'?
+                : elementShown==='timer'&&dictantDate?
                 <DictantWaitingZone
                 showDictant={showDictant}
-                startingDate={new Date(202, 0, 1, 0, 0, 0, 0)}
+                startingDate={dictantDate}
                 />
-                :null
+                : elementShown==='read' ?
+                <DictantRead/>
+                :<Fallback/>
             }
+            <Overlay
+            isVisible={showSuccess}
+            onBackdropPress={closeSuccess}
+            overlayStyle={{
+                backgroundColor: theme.palette.background.main,
+                width: '85%',
+                maxWidth: 350,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 8,
+                minHeight: 200,
+                padding: 30
+            }}
+            >
+                <InfoContainer>
+                    <InfoText>{language.messages.dictantSuccess}</InfoText>
+                    <Button
+                    text={language.continue}
+                    bg={theme.palette.buttons.primary}
+                    font={theme.palette.text.primary}
+                    height='50px'
+                    onPress={closeSuccess}
+                    />
+                </InfoContainer>
+            </Overlay>
         </Container>
     )
 }

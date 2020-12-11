@@ -1,13 +1,14 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
-import {Platform, UIManager} from 'react-native';
+import {Platform, UIManager, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Toast} from 'native-base';
+import RNPickerSelect from 'react-native-picker-select';
 
 import { userSelectors } from '../../../redux/user/user.selectors';
 import {changeUser, clearError} from '../../../redux/user/user.actions';
-
+import ArrowDownSVG from '../../../assets/arrowDown.svg';
 
 import {
     ProfileForm
@@ -18,6 +19,10 @@ import Button from '../../../UI/Button/Button.component';
 import { Error } from '../../common/Error/error.styles';
 import Input from '../../../UI/Input/Input.component';
 import { useLanguage } from '../../LanguageProvider/language.provider';
+import { IStudent } from '../../../@types/common';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
+import { redirectSelectors } from '../../../redux/redirect/redirect.selectors';
+import { setRedirect } from '../../../redux/redirect/redirect.actions';
 
 
 
@@ -58,11 +63,15 @@ const StudentProfile: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const theme = useTheme()
     const {language} = useLanguage()
-    const currentUser = useSelector(userSelectors.currentUser)
+    const currentUser = useSelector(userSelectors.currentUser) as IStudent|undefined
     const changeSuccess = useSelector(userSelectors.changeSuccess)
+    const [focusLevel, setFocusLevel] = useState(false)
     const jwt = useSelector(userSelectors.jwt)
     const changeError = useSelector(userSelectors.error)
+    const redirectRoute = useSelector(redirectSelectors.redirectRoute)
     const dispatch = useDispatch()
+    const {width} = useSafeAreaFrame()
+    const pickerRef = useRef<RNPickerSelect>(null)
     const [initialValues, setInitialValues] = useState({
         email: '', 
         password: '', 
@@ -71,11 +80,30 @@ const StudentProfile: React.FC = () => {
         firstName: '',
         middleName: '',
         city: '',
-        extraEmails: []
+        extraEmails: [],
+        level: ''
     })
+
+
+    useEffect(() => {
+        let timeout:NodeJS.Timeout;
+        if (redirectRoute==='noLevel') {
+            setFocusLevel(true)
+            timeout = setTimeout(()=> {
+                setFocusLevel(false)
+            }, 8000)
+        }
+        return () => {
+            if(timeout) {
+                dispatch(setRedirect(undefined))
+                clearTimeout(timeout)
+            }
+        }
+    }, [redirectRoute])
 
     useEffect(() => {
         if (currentUser) {
+            console.log(currentUser)
             setInitialValues({
                 email: currentUser.email,
                 city: currentUser.address,
@@ -84,11 +112,13 @@ const StudentProfile: React.FC = () => {
                 middleName: currentUser.middle_name,
                 extraEmails: [],
                 password: '',
-                newPassword: ''
+                newPassword: '',
+                level: currentUser.level
             })
         }
     }, [currentUser])
 
+    
 
     useEffect(() => {
         if (changeError) {
@@ -132,7 +162,8 @@ const StudentProfile: React.FC = () => {
         firstName: string;
         middleName: string;
         city: string;
-        extraEmails: string[]
+        extraEmails: string[],
+        level:string
     }) => {
         if(!isSubmitting&&jwt) {
             setIsSubmitting(true)
@@ -155,7 +186,7 @@ const StudentProfile: React.FC = () => {
             validateOnChange={false}
             enableReinitialize={true}
             >
-                {({ handleChange, handleSubmit, values, errors }) => (
+                {({ handleChange, handleSubmit, values, errors, setFieldValue }) => (
                     <Fragment>
                         <FieldArray
                         name='extraEmails'
@@ -233,6 +264,23 @@ const StudentProfile: React.FC = () => {
                         edit={true}
                         />
                         <Error>{errors.city}</Error>
+                        <RNPickerSelect
+                        ref={pickerRef}
+                        onValueChange={(value) => {
+                            setFieldValue('level', value)
+                        }}
+                        value={values.level}
+                        placeholder={{label:language.registration.tabs.student.level.choose, value: null}}
+                        items={[
+                            { label:language.registration.tabs.student.level.start, value:'start' },
+                            { label:language.registration.tabs.student.level.advanced, value:'advanced' },
+                            { label:language.registration.tabs.student.level.dialect, value:'dialect' },
+                        ]}
+                        Icon={ArrowDownSVG}
+                        style={pickerSelectStyles(width, focusLevel)}
+                        useNativeAndroidPickerStyle={false}
+                        />
+                        <Error>{errors.level}</Error>
                         <Button
                         bg={theme.palette.buttons.primary}
                         font={theme.palette.text.primary}
@@ -247,6 +295,55 @@ const StudentProfile: React.FC = () => {
         </ProfileForm>
     )   
 }
+
+
+const pickerSelectStyles = (width:number, focus:boolean) => StyleSheet.create({
+    inputIOS: {
+      fontSize: 14,
+      paddingVertical: 8,
+      borderBottomWidth: 1,
+      borderColor: '#6E6E6E',
+      color: 'black',
+      paddingRight: 45, 
+      maxWidth: 500,
+      width: '100%'
+    },
+    inputAndroid: {
+        fontSize: 14,
+        paddingVertical: 8,
+        borderBottomWidth: 1,
+        borderColor: '#6E6E6E',
+        color: 'black',
+        paddingRight: 45, 
+        maxWidth: 500,
+        width: '100%'
+    },
+    placeholder: {
+        color: focus? 'red':'#AAAAAA',
+        fontSize: 14
+    },
+    viewContainer: {
+        width:'100%',
+        alignSelf: 'center',
+        maxWidth: 440,
+        
+
+    },
+    iconContainer: {
+        height: '100%',
+        justifyContent: 'center',
+        paddingRight: 5
+    },
+    inputIOSContainer: {
+        width: '100%'
+    },
+    inputAndroidContainer: {
+        width: width-40,
+        maxWidth: 440
+    },
+
+  });
+
 
 
 export default StudentProfile;

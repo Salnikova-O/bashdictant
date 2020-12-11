@@ -16,33 +16,31 @@ import PendingSVG from '../../../assets/pending.svg';
 import ReadySVG from '../../../assets/ready.svg';
 import WarningSVg from '../../../assets/warning.svg';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { userSelectors } from '../../../redux/user/user.selectors';
 
-const currentUser = {
-    firstName: 'Олег',
-    middleName: 'Иванович',
-    type: 'expert'
-}
 
 
 interface ItemProps  {
     user: IStudent|IExpert,
     index: number,
-    togglePopup: (user?: IStudent | IExpert | undefined) => void
+    togglePopup: (user?: IStudent | IExpert | undefined) => void,
+    pinned?: boolean
 }
 
 
-const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup}) => {
+const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup, pinned}) => {
     const navigation = useNavigation()
-
+    const currentUser = useSelector(userSelectors.currentUser)
 
 
     const getStatusIcon = (status: DictantStatus) => {
         switch (status) {
-            case 'ready':
+            case 'Проверен':
                 return <ReadySVG width={20} height={20}/>
-            case 'notChecked': 
+            case 'Не проверен': 
                 return <NotCheckedSVG width={20} height={20}/>
-            case 'pending':
+            case 'Проверяется':
                 return <PendingSVG width={20} height={20}/>
             case 'warning': 
                 return <WarningSVg width={20} height={20}/>
@@ -57,7 +55,8 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup}) => {
     }
     
     const openDictant = () => {
-        if ((user as IStudent).dictantStatus&&(user as IStudent).dictantStatus==='notChecked'&&currentUser.type==='expert') {
+        // (user as IStudent).status&&(user as IStudent).status==='Не проверен'&&
+        if (currentUser?.role==='teacher'&&pinned) {
             navigation.navigate('DictantCheck', {student: JSON.stringify(user)})
         }
     }
@@ -68,19 +67,19 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup}) => {
             <IndexColumn>
                 <TableText>{index}</TableText>
             </IndexColumn>
-            <NameColumn>
+            <NameColumn onPress={openDictant} activeOpacity={pinned?0.6:1}>
                 <TableText>
-                    {user.lastName + ' '+ user.firstName.slice(0,1) + '.' + user.middleName.slice(0,1)+ '.' }
+                    {user.last_name + ' '+ user.first_name.slice(0,1) + '.' + user.middle_name.slice(0,1)+ '.' }
                 </TableText>
             </NameColumn>
-            <EmailColumn>
+            <EmailColumn onPress={openDictant} activeOpacity={pinned?0.6:1}>
                 <TableText>
                     {user.email}
                 </TableText>
             </EmailColumn>
             <IconColumn>
                 {
-                    user.type==='student'? 
+                    user.role==='student'? 
                     <IconButton onPress={openInfo}>
                             <InfoSVG width={20} height={20}/>
                     </IconButton>
@@ -89,9 +88,9 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup}) => {
             </IconColumn>
             <IconColumn>
                     {
-                        user.type==='student'?
-                        <IconButton onPress={openDictant}>
-                            {getStatusIcon((user as IStudent).dictantStatus)}
+                        user.role==='student'?
+                        <IconButton onPress={openDictant} activeOpacity={pinned?0.6:1}>
+                            {getStatusIcon((user as IStudent).status)}
                         </IconButton>
                         : 
                         <IconButton onPress={openInfo}>

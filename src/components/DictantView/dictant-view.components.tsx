@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, {  useEffect, useRef, useState } from 'react';
 import {TouchableOpacity,  View,NativeSyntheticEvent, TextLayoutEventData,  GestureResponderEvent, LayoutChangeEvent } from 'react-native';
 
 import Fallback from '../common/Fallback/fallback.component';
@@ -21,6 +21,8 @@ import PopUp from 'react-native-popover-view';
 import Button from '../../UI/Button/Button.component';
 import { useTheme } from 'styled-components';
 import { useLanguage } from '../LanguageProvider/language.provider';
+import { Text } from 'react-native';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
 interface DictantProps {
     dictant: {
@@ -30,9 +32,10 @@ interface DictantProps {
             position:number
         }[]
     }|undefined,
-    createMarker: (index:number) => void,
-    saveMarker:any, 
-    deleteMarker: (index:number) => void,
+    createMarker?: (index:number) => void,
+    saveMarker?:any, 
+    deleteMarker?: (index:number) => void,
+    grade?:any
 }
 const numberOfLines = 30
 
@@ -43,6 +46,7 @@ const DictantView:React.FC<DictantProps> = ({
     createMarker,
     deleteMarker,
     saveMarker,
+    grade
 }) => {
     const [lines, setPages] = useState<any>([])
     const [currentPage, setCurrentPage]= useState(1)
@@ -53,7 +57,8 @@ const DictantView:React.FC<DictantProps> = ({
     const [markerRefs, setMarkerRefs] = useState<{[index:number]: React.RefObject<TouchableOpacity> }>({})
     const theme = useTheme()
     const {language}  = useLanguage()
-
+    const textRef = useRef<Text>(null)
+    const {width} = useSafeAreaFrame()
 
     useEffect(() => {
         
@@ -73,6 +78,7 @@ const DictantView:React.FC<DictantProps> = ({
 
     const handlePagination = (event: NativeSyntheticEvent<TextLayoutEventData>) =>{
         let wordCount = 0
+        
         const newLines = event.nativeEvent.lines.map(line => {
             const words = line.text.split(' ')
             const newWordCount = wordCount
@@ -90,9 +96,11 @@ const DictantView:React.FC<DictantProps> = ({
         setCurrentPage(index)
     }
     
-    const handleWordPress = (event:GestureResponderEvent, index: number) => {
+    const handleWordPress = (event:GestureResponderEvent, index: number, ref:React.RefObject<View>) => {
         event.preventDefault()
-        createMarker(index)
+        if (createMarker) {
+            createMarker(index)
+        }
     }
 
 
@@ -130,10 +138,11 @@ const DictantView:React.FC<DictantProps> = ({
                                 line.words.map((word, index) => {
                                     const wordIndex = index+line.wordCount
                                     const marker = markers.find((marker:any) => marker.position===wordIndex)
+                                    const ref = React.createRef<View>()
                                     return (
-                                        <View key={index  }>
+                                        <View key={index  } ref={ref}>
                                             <DictantText
-                                            onLongPress={(event) => handleWordPress(event, wordIndex)}
+                                            onLongPress={(event) => handleWordPress(event, wordIndex, ref)}
                                             >
                                                 {word + `${index===line.words.length-1? '': ' '}`}
                                             </DictantText>
@@ -143,7 +152,7 @@ const DictantView:React.FC<DictantProps> = ({
                                                 ref={markerRefs[wordIndex]}
                                                 onPress={() =>openPopover(markerRefs[wordIndex], marker)}
                                                 >
-                                                    <PinSVg height={25}/>
+                                                    <PinSVg height={30}/>
                                                 </MarkerContainer>
                                                 :null
                                             }
@@ -158,6 +167,10 @@ const DictantView:React.FC<DictantProps> = ({
                 </DC>
                 <ShadowText
                 onTextLayout={handlePagination}
+                ref={textRef}
+                style={{
+                    width: width<452? width-88: 452
+                }}
                 >
                     {dictant?.text}
                 </ShadowText>
@@ -170,6 +183,11 @@ const DictantView:React.FC<DictantProps> = ({
                 totalAmount={(Math.ceil(lines.length/numberOfLines))}
                 setCurrentPage={handlePageChange}
                 />
+                :null
+            }
+            {
+                grade?
+                grade
                 :null
             }
             {
