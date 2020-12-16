@@ -32,6 +32,7 @@ font-size: 16px;
 text-align: center;
 margin-bottom: 30px;
 max-width: 95%;
+align-self: center;
 `
 
 export const IconButton = styled.TouchableOpacity`
@@ -42,4 +43,17 @@ align-items: center;
 position: absolute;
 top: 0px;
 right: 0px;
+`
+
+
+export const CheckboxContainer = styled.View`
+width: 100%;
+`
+
+
+export const Header = styled(CustomText)`
+color: ${props => props.theme.palette.text.main};
+font-size: 16px;
+text-align: left;
+max-width: 95%;
 `

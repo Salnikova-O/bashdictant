@@ -217,11 +217,11 @@ const OrganizerProfile: React.FC = () => {
                             value={values.email}
                             placeholder={language.registration.tabs.organizer.email}
                             edit={true}
-                            showAdd={true}
-                            onAdd={() =>{
-                                LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-                                helpers.push({[`extraEmails${values.extraEmails.length}`]:''})
-                            }}
+                            // showAdd={true}
+                            // onAdd={() =>{
+                            //     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+                            //     helpers.push({[`extraEmails${values.extraEmails.length}`]:''})
+                            // }}
                             />
                             <Error>{errors.email}</Error>
                             {
@@ -291,7 +291,7 @@ const OrganizerProfile: React.FC = () => {
                                 showAdd={true}
                                 onAdd={() =>{
                                     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-                                    helpers.push({[`extraPhones${values.extraEmails.length}`]:''})
+                                    helpers.push('')
                                 }}
                                 />
                                 <Error>{errors.phone}</Error>

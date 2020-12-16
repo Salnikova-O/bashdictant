@@ -38,14 +38,14 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup, pinne
         switch (status) {
             case 'Проверен':
                 return <ReadySVG width={20} height={20}/>
-            case 'Не проверен': 
+            case 'Не написан': 
                 return <NotCheckedSVG width={20} height={20}/>
             case 'Проверяется':
                 return <PendingSVG width={20} height={20}/>
-            case 'warning': 
+            case 'Отклонен': 
                 return <WarningSVg width={20} height={20}/>
             default: 
-                return <ReadySVG width={20} height={20}/>
+                return <NotCheckedSVG width={20} height={20}/>
         }
     }
     
@@ -55,8 +55,8 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup, pinne
     }
     
     const openDictant = () => {
-        // (user as IStudent).status&&(user as IStudent).status==='Не проверен'&&
-        if (currentUser?.role==='teacher'&&pinned) {
+        
+        if ((user as IStudent).status&&(user as IStudent).status==='Проверяется'&&currentUser?.role==='teacher'&&pinned) {
             navigation.navigate('DictantCheck', {student: JSON.stringify(user)})
         }
     }

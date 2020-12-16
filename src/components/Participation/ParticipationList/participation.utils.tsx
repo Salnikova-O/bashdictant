@@ -39,7 +39,7 @@ export const getExperts = (jwt:string|undefined, param: string, limit:number, of
             }
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err.response)
             return {
                 total: null,
                 users: null

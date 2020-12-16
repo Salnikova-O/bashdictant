@@ -25,7 +25,7 @@ const DictantRead: React.FC = () => {
     const jwt = useSelector(userSelectors.jwt)
     const {language} = useLanguage()
     const [grade, setGrade] = useState<GradeTypes|null>(null)
-
+    const [certReceived, setCertReceived] = useState(false)
 
 
     useEffect(() => {
@@ -47,6 +47,8 @@ const DictantRead: React.FC = () => {
             if (response.data.rating) {
                 setGrade(response.data.rating)
             }
+            console.log(response.data.send_cert)
+            setCertReceived(response.data.send_cert)
         })
         .catch((err) => {
             console.log(err)
@@ -63,14 +65,19 @@ const DictantRead: React.FC = () => {
     }
 
 
-
+    const receiveCert = () => {
+        setCertReceived(true)
+    }
 
 
     return (
         <Container>
             {
                 grade?
-                <GetCertificate/>
+                <GetCertificate
+                received={certReceived}
+                setReceived={receiveCert}
+                />
                 :null
             }
             {

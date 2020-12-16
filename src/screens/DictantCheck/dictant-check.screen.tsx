@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import {Toast} from 'native-base';
 import {Overlay} from 'react-native-elements';
+import {Platform, UIManager, LayoutAnimation} from 'react-native';
 
 import { GradeTypes, IStudent } from '../../@types/common';
 import DictantView from '../../components/DictantView/dictant-view.components';
 import GradePicker from '../../components/GradePicker/grade-picker.component';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
-import { dummyDictant } from '../../dummyList';
 import { MainStackParamList } from '../../navigation/MainStack/main.stack';
 import Button from '../../UI/Button/Button.component';
 import axios from 'axios'
@@ -28,6 +28,12 @@ import { useSelector } from 'react-redux';
 import { userSelectors } from '../../redux/user/user.selectors';
 import FileDownload from '../../components/FileDownload/file-download.component';
 
+
+if (Platform.OS === 'android') {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
 
 
 
@@ -65,6 +71,7 @@ const DictantCheck: React.FC = () => {
                 .then((response) => {
                     console.log(response.data)
                     const markers = response.data.markers
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
                     setDictant({
                         text: response.data.text,
                         markers: markers? markers: []
@@ -84,6 +91,7 @@ const DictantCheck: React.FC = () => {
                     navigation.goBack()
                 })
             } else {
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
                 setFiles(response.data.names)
             }
         })

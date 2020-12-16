@@ -156,7 +156,8 @@ export interface ILanguage {
         serverError: string,
         fileDownload: string,
         noDictantLevel:string,
-        noEmailSocial: string
+        noEmailSocial: string,
+        chooseLang:string
     },
     messages: {
         successRegister: string,
@@ -164,7 +165,8 @@ export interface ILanguage {
         dictantSuccess:  string,
         dictantCheckSuccess: string,
         downloadSuccess: string,
-        downloadSuccessAndroid: string
+        downloadSuccessAndroid: string,
+        certSuccess: string
     },
     continue: string,
     reset: {
@@ -187,8 +189,11 @@ export interface ILanguage {
         mainInfo: string,
         check:string,
         confirm: string,
-        success: string
-    }
+        success: string,
+        chooseLang: string,
+        bash: string,
+        rus: string
+    },
     
 }
 
@@ -225,7 +230,7 @@ export interface IOrganizer extends IUser {
 
 
 
-export type DictantStatus = 'Проверен'| 'Проверяется'| 'warning'|'Не проверен'
+export type DictantStatus = 'Проверен'| 'Проверяется'| 'Отклонен'|'Не написан'
 
 
 export type GradeTypes = '1'|'2'|'3'| '4'| '5'

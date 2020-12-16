@@ -85,7 +85,8 @@ if (Platform.OS === 'android') {
                 axios.get(`${API_URL}/timedictation?level=${currentUser.level}`)
                 .then((response) => {
                     setVideoId(parseYoutubeURL(response.data.url))
-                    if (moment().isAfter(moment(response.data.time))) {
+                    // moment().isAfter(moment(response.data.time))
+                    if (true) {
                         showDictant()
                     } else {
                         showTimer()
@@ -95,8 +96,6 @@ if (Platform.OS === 'android') {
                 .catch((err) => {
                     console.log(err)
                 })
-                
-                showDictant()
             } else {
                 showDictantRead()
             }

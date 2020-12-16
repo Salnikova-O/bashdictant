@@ -22,6 +22,9 @@ import {
     VK_AUTH_URL_TEACHER,
     OK_AUTH_URL,
     VK_AUTH_URL,
+    FB_AUTH_URL,
+    FB_AUTH_URL_STUDENT,
+    FB_AUTH_URL_TEACHER,
     API_URL
 } from '../../config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,67 +55,68 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
     const navigation = useNavigation()
     const {language}= useLanguage()
 
-
+    const handleSocialAuth = (event:any) => {
+        if (event.url) {
+            let params = event.url.split('?')
+            if (params.length>1) {
+                params = params[1].split('=')
+                if (params.length===2&&params[0]==='jwt') {
+                    const jwt = params[1]
+                    console.log(jwt)
+                    if (jwt) {
+                        dispatch(openProgressModal(null))
+                        axios({
+                            method: 'get',
+                            headers: {
+                                "Content-Type": 'application/json',
+                                "X-api-token": `${jwt}`
+                            },
+                            url: `${API_URL}/cabinet`,
+                        })
+                        .then((response)=> {
+                            dispatch(saveJWT(jwt))
+                            dispatch(loginUserSuccess(response.data))
+                        })
+                        .catch((err) => {
+                            dispatch(closeProgressModal())
+                            console.log(err)
+                        })
+                    }
+                } else if (params[0]==='error') {
+                    const error = decodeURIComponent(params[1])
+                    console.log(error)
+                    if (error==='Email не получен!') {
+                        Toast.show({
+                            text: language.errors.noEmailSocial,
+                            buttonText: 'OK',
+                            duration: 8000,
+                            type: 'warning',
+                            position: 'bottom',
+                            style: {
+                                backgroundColor: '#ff7961',
+                            }
+                        })
+                    } else {
+                        Toast.show({
+                            text: error,
+                            buttonText: 'OK',
+                            duration: 4000,
+                            type: 'warning',
+                            position: 'bottom',
+                            style: {
+                                backgroundColor: '#ff7961',
+                            }
+                        })
+                    }
+                }
+            }
+        }
+    }
 
 
     useEffect(() => {
         Linking.removeAllListeners('url')
-        Linking.addEventListener('url', (event) => {
-            if (event.url) {
-                let params = event.url.split('?')
-                if (params.length>1) {
-                    params = params[1].split('=')
-                    if (params.length===2&&params[0]==='jwt') {
-                        const jwt = params[1]
-                        console.log(jwt)
-                        if (jwt) {
-                            dispatch(openProgressModal(null))
-                            axios({
-                                method: 'get',
-                                headers: {
-                                    "Content-Type": 'application/json',
-                                    "X-api-token": `${jwt}`
-                                },
-                                url: `${API_URL}/cabinet`,
-                            })
-                            .then((response)=> {
-                                dispatch(saveJWT(jwt))
-                                dispatch(loginUserSuccess(response.data))
-                            })
-                            .catch((err) => {
-                                dispatch(closeProgressModal())
-                                console.log(err)
-                            })
-                        }
-                    } else if (params[0]==='error') {
-                        const error = decodeURIComponent(params[1])
-                        if (error==='Email не получен!') {
-                            Toast.show({
-                                text: language.errors.noEmailSocial,
-                                buttonText: 'OK',
-                                duration: 8000,
-                                type: 'warning',
-                                position: 'bottom',
-                                style: {
-                                    backgroundColor: '#ff7961',
-                                }
-                            })
-                        } else {
-                            Toast.show({
-                                text: error,
-                                buttonText: 'OK',
-                                duration: 4000,
-                                type: 'warning',
-                                position: 'bottom',
-                                style: {
-                                    backgroundColor: '#ff7961',
-                                }
-                            })
-                        }
-                    }
-                }
-            }
-        })
+        Linking.addEventListener('url', handleSocialAuth)
         return () => {
             Linking.removeAllListeners('url')
         }
@@ -149,7 +153,7 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
         WebBrowser.openAuthSessionAsync(currentTab===1?VK_AUTH_URL_STUDENT: currentTab===0? VK_AUTH_URL_TEACHER: VK_AUTH_URL, 'bashdikt://')
         .then(res => {
-            console.log(res)
+            handleSocialAuth(res)
         })
         .catch(err => {
             console.log(err)
@@ -161,7 +165,7 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
         WebBrowser.openAuthSessionAsync(currentTab===1?OK_AUTH_URL_STUDENT: currentTab===0? OK_AUTH_URL_TEACHER: OK_AUTH_URL, 'bashdikt://')
         .then(res => {
-            console.log(res)
+            handleSocialAuth(res)
         })
         .catch(err => {
             console.log(err)
@@ -170,7 +174,13 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
 
     const handleFacebookAuth = () => {
-
+        WebBrowser.openAuthSessionAsync(currentTab===1?FB_AUTH_URL_STUDENT: currentTab===0? FB_AUTH_URL_TEACHER: FB_AUTH_URL, 'bashdikt://')
+        .then(res => {
+            handleSocialAuth(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
 

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
-import {Root} from 'native-base';
 import SplashScreen from 'react-native-splash-screen';
+import {Root} from 'native-base';
 
 import Navigation from './src/navigation/navigation';
 import {themes} from './src/theme/theme';
@@ -32,6 +32,7 @@ const Layout: React.FC = () => {
 
     return (
         <Root>
+
             <SafeAreaProvider>
                 <ThemeProvider
                 theme={themes[theme]}
@@ -39,7 +40,7 @@ const Layout: React.FC = () => {
                     <OrientationProvider>
                         <LanguageProvider>
                             <Header/>
-                            <Navigation/>
+                                <Navigation/>
                             <InfoModal
                             message={infoMessage}
                             open={infoOpen}

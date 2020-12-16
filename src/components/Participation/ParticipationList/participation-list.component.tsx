@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import {Platform, LayoutAnimation, UIManager} from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -36,59 +37,113 @@ const ParticipationList: React.FC<ItemsList> = ({ header, togglePopup, tabIndex}
     const currentUser = useSelector(userSelectors.currentUser)
     const jwt = useSelector(userSelectors.jwt)
 
-    useEffect(() => {
-        if (currentUser?.role==='teacher') {
-            if (tabIndex===0) {
-                getStudents(jwt, 'student', perPage, (currentPage-1)*perPage)
-                .then(({total, students}) => {
-                    setTotal(total?total:1)
-                    LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
-                    setFilteredUsers(students)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-            } else if (tabIndex===1) {
-                getStudents(jwt, 'pinstudent', perPage, (currentPage-1)*perPage)
-                .then(({total, students}) => {
-                    setTotal(total?total:1)
-                    LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
-                    setFilteredUsers(students)
-
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+    useFocusEffect(
+        useCallback(() => {
+            console.log('focus')
+            if (currentUser?.role==='teacher') {
+                if (tabIndex===0) {
+                    getStudents(jwt, 'student', perPage, (currentPage-1)*perPage)
+                    .then(({total, students}) => {
+                        setTotal(total?total:1)
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        setFilteredUsers(students?students: [])
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                } else if (tabIndex===1) {
+                    getStudents(jwt, 'pinstudent', perPage, (currentPage-1)*perPage)
+                    .then(({total, students}) => {
+                        setTotal(total?total:1)
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        setFilteredUsers(students?students: [])
+                        console.log(students)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                }
+            } else  if (currentUser?.role==='organizer') {
+                if (tabIndex===0) {
+                    getExperts(jwt, 'student', perPage, (currentPage-1)*perPage)
+                    .then(({total, users}) => {
+                        setTotal(total?total:1)
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        setFilteredUsers(users?users:[])
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                } else if (tabIndex===1) {
+                    getExperts(jwt, 'teacher', perPage, (currentPage-1)*perPage)
+                    .then(({total, users}) => {
+                        setTotal(total?total:1)
+                        console.log('teachers',users)
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        setFilteredUsers(users?users:[])
+    
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                }
             }
-        } else  if (currentUser?.role==='organizer') {
-            if (tabIndex===0) {
-                getExperts(jwt, 'student', perPage, (currentPage-1)*perPage)
-                .then(({total, users}) => {
-                    setTotal(total?total:1)
-                    LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
-                    setFilteredUsers(users)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-            } else if (tabIndex===1) {
-                getExperts(jwt, 'teacher', perPage, (currentPage-1)*perPage)
-                .then(({total, users}) => {
-                    setTotal(total?total:1)
-                    console.log('teachers',users)
-                    LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
-                    setFilteredUsers(users)
-
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-            }
-        }
-    }, [currentPage])
+        }, [currentPage])
+    )
 
 
-    console.log(filteredUsers.length)
+    // useEffect(() => {
+    //     if (currentUser?.role==='teacher') {
+    //         if (tabIndex===0) {
+    //             getStudents(jwt, 'student', perPage, (currentPage-1)*perPage)
+    //             .then(({total, students}) => {
+    //                 setTotal(total?total:1)
+    //                 LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+    //                 setFilteredUsers(students)
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //             })
+    //         } else if (tabIndex===1) {
+    //             getStudents(jwt, 'pinstudent', perPage, (currentPage-1)*perPage)
+    //             .then(({total, students}) => {
+    //                 setTotal(total?total:1)
+    //                 LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+    //                 setFilteredUsers(students)
+
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //             })
+    //         }
+    //     } else  if (currentUser?.role==='organizer') {
+    //         if (tabIndex===0) {
+    //             getExperts(jwt, 'student', perPage, (currentPage-1)*perPage)
+    //             .then(({total, users}) => {
+    //                 setTotal(total?total:1)
+    //                 LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+    //                 setFilteredUsers(users)
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //             })
+    //         } else if (tabIndex===1) {
+    //             getExperts(jwt, 'teacher', perPage, (currentPage-1)*perPage)
+    //             .then(({total, users}) => {
+    //                 setTotal(total?total:1)
+    //                 console.log('teachers',users)
+    //                 LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+    //                 setFilteredUsers(users)
+
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //             })
+    //         }
+    //     }
+    // }, [currentPage])
+
+
 
     const changeCurrentPage = (page: number) => {
         setCurrentPage(page)
