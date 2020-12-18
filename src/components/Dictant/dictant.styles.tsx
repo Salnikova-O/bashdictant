@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { ScreenContainer } from '../common/ScreenContainer/screen-container.styles';
 import { CustomText } from '../common/Text/text.styles';
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 
 
@@ -12,7 +12,7 @@ flex:1;
 
 `
 
-export const InnerContainer = styled.ScrollView`
+export const InnerContainer = styled.View`
 max-width:500px;
 width: 100%;
 `
@@ -46,7 +46,7 @@ overflow: hidden;
 
 margin: 24px 0px 12px 0px;
 `
-export const DictantInputContainer = styled.View`
+export const DictantInputContainer = styled.TouchableOpacity`
 padding: 8px 12px;
 border-radius: 8px;
 background-color: ${props => props.theme.palette.background.light};

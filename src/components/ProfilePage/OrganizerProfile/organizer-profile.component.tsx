@@ -20,41 +20,41 @@ import { useLanguage } from '../../LanguageProvider/language.provider';
 import Input from '../../../UI/Input/Input.component';
 import { Error } from '../../common/Error/error.styles';
 import Button from '../../../UI/Button/Button.component';
-import { IOrganizer } from '../../../@types/common';
+import { ILanguage, IOrganizer } from '../../../@types/common';
 
 
 
 
 
-const validationSchema = yup.object().shape({
+const validationSchema = (language: ILanguage) => yup.object().shape({
     email: yup.string()
-       .email('Введите корректный email')
+       .email(language.errors.email)
        .required('Введите email'),
     firstName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     lastName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     middleName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     city: yup.string()
         .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     password: yup.string()
         .min(6, 'Минимум 6 символов'),
     newPassword: yup.string()
         .min(6, 'Минимум 6 символов'),
     phone: yup.string()
         .matches(/^(\s*|\d+)$/, 'Введите корректный номер')
-        .required('Обязательное поле'),
+        .required(language.errors.required),
     social: yup.string()
         .trim()
-        .required('Обязательное поле'),
+        .required(language.errors.required),
     studentCount: yup.number()
         .min(1, 'Минимум 1 участник')
-        .required('Обязательное поле'),
+        .required(language.errors.required),
     extraEmails: yup.array()
     .of(
         yup.string()
@@ -67,6 +67,7 @@ const validationSchema = yup.object().shape({
         .min(1, 'Введите корректный номер')
         )
  })
+
 
  if (Platform.OS === 'android') {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -202,7 +203,7 @@ const OrganizerProfile: React.FC = () => {
             <Formik
             initialValues={initialValues}
             onSubmit={(values) => handleSubmitForm(values as any) }
-            validationSchema={validationSchema}
+            validationSchema={validationSchema(language)}
             validateOnChange={false}
             enableReinitialize={true}
             >
@@ -216,7 +217,8 @@ const OrganizerProfile: React.FC = () => {
                             onChangeText={handleChange('email')}
                             value={values.email}
                             placeholder={language.registration.tabs.organizer.email}
-                            edit={true}
+                            // edit={true}
+                            disabled={true}
                             // showAdd={true}
                             // onAdd={() =>{
                             //     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
@@ -246,7 +248,7 @@ const OrganizerProfile: React.FC = () => {
                         password={true}
                         value={values.password}
                         placeholder={language.registration.tabs.organizer.password}
-                        edit={true}
+                        // edit={true}
                         />
                         <Error>{errors.password}</Error>
                         <Input
@@ -254,7 +256,7 @@ const OrganizerProfile: React.FC = () => {
                         password={true}
                         value={values.newPassword}
                         placeholder={language.profile.form.newPassword}
-                        edit={true}
+                        // edit={true}
                         />
                         <Error>{errors.newPassword}</Error>
                         <Input

@@ -77,7 +77,8 @@ const RegistrationOrganizer: React.FC<RegistrationProps> = ({toggleSuccessWindow
 
 
     return (
-        <RegistrationForm>
+        <RegistrationForm
+        >
 
             <Formik
             initialValues={{

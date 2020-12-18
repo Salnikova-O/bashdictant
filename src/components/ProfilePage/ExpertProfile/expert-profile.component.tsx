@@ -16,30 +16,30 @@ import Input from '../../../UI/Input/Input.component';
 import { userSelectors } from '../../../redux/user/user.selectors';
 import {changeUser, clearError} from '../../../redux/user/user.actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { IExpert } from '../../../@types/common';
+import { IExpert, ILanguage } from '../../../@types/common';
 
 
-const validationSchema = yup.object().shape({
+const validationSchema = (language: ILanguage) => yup.object().shape({
     email: yup.string()
-       .email('Введите корректный email')
+       .email(language.errors.email)
        .required('Введите email'),
     firstName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     lastName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     middleName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     city: yup.string()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     password: yup.string()
         .min(6, 'Минимум 6 символов'),
     newPassword: yup.string()
         .min(6, 'Минимум 6 символов'),
     jobTitle: yup.string()
-        .required('Обязательное поле'),
+        .required(language.errors.required),
     extraEmails: yup.array()
     .of(
         yup.string()
@@ -154,7 +154,7 @@ const ExpertProfile: React.FC = () => {
             <Formik
             initialValues={initialValues}
             onSubmit={(values) => handleSubmitForm(values) }
-            validationSchema={validationSchema}
+            validationSchema={validationSchema(language)}
             validateOnChange={false}
             enableReinitialize={true}
             >
@@ -168,7 +168,8 @@ const ExpertProfile: React.FC = () => {
                             onChangeText={handleChange('email')}
                             value={values.email}
                             placeholder={language.registration.tabs.expert.email}
-                            edit={true}
+                            // edit={true}
+                            disabled={true}
                             // showAdd={true}
                             // onAdd={() =>{
                             //     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
@@ -199,7 +200,7 @@ const ExpertProfile: React.FC = () => {
                         password={true}
                         value={values.password}
                         placeholder={language.profile.form.oldPassword}
-                        edit={true}
+                        // edit={true}
                         />
                         <Error>{errors.password}</Error>
                         <Input
@@ -207,7 +208,7 @@ const ExpertProfile: React.FC = () => {
                         password={true}
                         value={values.newPassword}
                         placeholder={language.profile.form.newPassword}
-                        edit={true}
+                        // edit={true}
                         />
                         <Error>{errors.newPassword}</Error>
                         <Input

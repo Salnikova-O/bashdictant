@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import {Overlay} from 'react-native-elements';
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {
     Subtitle,
@@ -59,12 +59,15 @@ const RegistrationScreen: React.FC = () => {
         <ScreenContainer
         edges={[ 'bottom']}
         >
-            <ScrollView
+            <KeyboardAwareScrollView
+            
             style={{flex: 1, width: '100%'}}
             contentContainerStyle={{
                 alignItems: 'center'
             }}
             showsVerticalScrollIndicator={false}
+            enableOnAndroid={false}
+            extraScrollHeight={100}
             >
                 <SocialAuth title={language.registration.social.social} size='lg' currentTab={currentOpenTab}/>
                 <Subtitle>{language.registration.social.or}</Subtitle>
@@ -81,7 +84,7 @@ const RegistrationScreen: React.FC = () => {
                     <RegistrationExpert toggleSuccessWindow={toggleSuccessWindow}/>
                     <RegistrationStudent toggleSuccessWindow={toggleSuccessWindow}/>
                 </Tabs>
-            </ScrollView>
+            </KeyboardAwareScrollView>
             <Overlay
             isVisible={showSuccessWindow}
             onBackdropPress={() => toggleSuccessWindow()}

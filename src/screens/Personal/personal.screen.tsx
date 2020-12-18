@@ -1,7 +1,7 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState, useRef} from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
 import { ScreenContainer } from '../../components/common/ScreenContainer/screen-container.styles';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
@@ -19,6 +19,7 @@ import Participation from '../../components/Participation/Participation/particip
 import { IExpert, IStudent } from '../../@types/common';
 import Dictant from '../../components/Dictant/dictant.component';
 import { userSelectors } from '../../redux/user/user.selectors';
+import { useOrientation } from '../../components/OrientationProvider/orientation.provider';
 
 
 
@@ -27,6 +28,8 @@ import { userSelectors } from '../../redux/user/user.selectors';
 const PersonalScreen: React.FC = () => {
     const {language} = useLanguage()
     const currentUser = useSelector(userSelectors.currentUser)
+    const {orientation} = useOrientation()
+    const scrollRef:any = useRef(null)
 
 
     const getTabNames = (type: string) => {
@@ -48,7 +51,7 @@ const PersonalScreen: React.FC = () => {
             case 'student':
                 return [
                     <StudentProfile key={1}/>,
-                    <Dictant  key={2}/>
+                    <Dictant  key={2}  scrollRef={scrollRef}/>
             ]
             case 'teacher':
                 return [
@@ -78,12 +81,15 @@ const PersonalScreen: React.FC = () => {
         >
             {
                 currentUser?
-                <ScrollView
+                <KeyboardAwareScrollView
                 style={{width: '100%',flex:1}}
                 contentContainerStyle={{
                     alignItems: 'center'
                 }}
                 showsVerticalScrollIndicator={false}
+                enableOnAndroid={false}
+                extraHeight={orientation==='LANDSCAPE'? 150: 200}
+                ref={scrollRef}
                 >
                     <ScreenHeader>
                         <Title>{(language.profile.header as any)[currentUser.role]}</Title>
@@ -94,7 +100,7 @@ const PersonalScreen: React.FC = () => {
                     >
                         {getTabs(currentUser.role)}
                     </Tabs>
-                </ScrollView>
+                </KeyboardAwareScrollView>
                 :null
             }
         </ScreenContainer>

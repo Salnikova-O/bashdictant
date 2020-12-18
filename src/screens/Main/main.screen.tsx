@@ -3,7 +3,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
-import {PixelRatio} from 'react-native';
+import {Alert, PixelRatio} from 'react-native';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -56,6 +56,7 @@ const MainScreen:React.FC = () => {
                 setDictantStart(response.data.time)
             })
             .catch((err) => {
+                Alert.alert(JSON.stringify(err.response),JSON.stringify(err) )
                 console.log(err.response)
             })
         },[])

@@ -4,7 +4,7 @@ import { ILanguage } from "../../@types/common";
 interface Languages {
     'en': ILanguage,
     'Russian': ILanguage,
-    'bash': ILanguage | {}
+    'bash': ILanguage 
 }
 
 export const languages:Languages = {
@@ -14,198 +14,203 @@ export const languages:Languages = {
             exit: 'Logout',
             back: 'Back'
         },
+        main: {
+            welcome: `Welcome to the registration page!`,
+            registration: 'Registration',
+            authorization: 'Authorization',
+            loginWith: 'Or login with'
+        },
         auth: {
             authorizationHeader: 'Authorization',
-            or: 'Or',
-            social: 'Login with social profile',
+            or: 'Or:',
+            social: 'Social networks:',
             email: 'Email',
             password: 'Password',
             rememberMe: 'Remember me',
             enter: 'Login',
-            forgotPass: 'Забыл(а) пароль'
-        },
-        main: {
-            welcome: 'Welcome to the dictantion registration page',
-            registration: 'Registration',
-            authorization: 'Authorization',
-            loginWith: 'Or Login with'
+            forgotPass: 'Forgot password'
         },
         registration: {
             social: {
-                social: '',
-                or: '',
+                social: 'Social networks:',
+                or: 'Or:',
             },
+            successMessage: 'We sent a confirmation code to your email',
+            code: 'Confirmation code',
             tabs: {
                 header: {
-                    student: '',
-                    organizer: '',
-                    expert: ''
+                    student: 'Participant',
+                    organizer: 'Organizer',
+                    expert: 'Expert'
                 },
                 organizer: {
-                    email: '',
-                    password: '',
-                    confirm: '',
-                    lastName:'',
-                    firstName: '',
-                    middleName: '',
-                    phone: '',
-                    social: '',
-                    city: '',
-                    studentNumber: '',
-                    secretCode: '',
-                    online: '',
-                    video: '',
-                    offline: '',
-                    send: 'send',
-                    chooseType: ''
+                    email: 'Email',
+                    password: 'Password',
+                    confirm: 'Confirm password',
+                    lastName:'Last name',
+                    firstName: 'First name',
+                    middleName: 'Middle name',
+                    phone: 'Phone',
+                    social: 'Social profile link',
+                    city: 'City',
+                    studentNumber: 'Expected number of participants',
+                    secretCode: 'secret code',
+                    online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
+                    video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
+                    offline: `Организатор определяет диктора на месте, оффлайн участие.`,
+                    send: 'Send',
+                    chooseType: 'Choose dictation type:'
                 },
                 expert: {
-                    email: '',
-                    password: '',
-                    confirm: '',
-                    lastName:'',
-                    firstName: '',
-                    middleName: '',
-                    city: '',
-                    jobTitle: '',
-                    send: 'send'
+                    email: 'Email',
+                    password: 'Password',
+                    confirm: 'Confirm password',
+                    lastName:'Last name',
+                    firstName: 'First name',
+                    middleName: 'Middle name',
+                    city: 'City',
+                    jobTitle: 'Place of work',
+                    send: 'Send'
                 },
                 student: {
-                    email: '',
-                    password: '',
-                    confirm: '',
-                    lastName:'',
-                    firstName: '',
-                    middleName: '',
-                    city: '',
-                    send: 'send',
+                    email: 'Email',
+                    password: 'Password',
+                    confirm: 'Confirm password',
+                    lastName:'Last name',
+                    firstName: 'First name',
+                    middleName: 'Middle name',
+                    city: 'City',
+                    send: 'Send',
                     level: {
-                        advanced: 'Продвинутый уровень',
-                        choose: 'Выберите свой  уровень',
-                        dialect: 'Северо-западный диалект',
-                        start: 'Начальный уровень'
+                        advanced: 'Advanced',
+                        choose: 'Choose you level',
+                        dialect: 'North-western dialect',
+                        start: 'Elementary level'
                     }
                 }
-            },
-            successMessage: 'Please enter the code sent to the registered email',
-            code: 'Confirmation code'
-
+            }
         },
         profile: {
-            greeting: 'Hello,',
+            greeting: 'Welcome,',
             header: {
                 title: '',
-                teacher: '',
-                student: '',
-                organizer: ''
+                teacher: 'Expert profile',
+                student: 'Participant profile',
+                organizer: 'Organizer profile'
             },
             tabs: {
                 first: 'Profile',
                 second: {
-                    student: '',
-                    expert: '',
-                    organizer: ''
+                    student: 'My dictation',
+                    expert: 'Participants',
+                    organizer: 'Registered participants'
                 }
             },
             form: {
-                extraEmail: '',
-                extraPhone: '',
-                newPassword: '',
-                oldPassword: ''
+                extraEmail: 'Additional email',
+                extraPhone: 'additional phone',
+                newPassword: 'New password',
+                oldPassword: 'Current password'
             }
         },
         participation: {
-            expert: '',
+            expert: 'Experts:',
             form:{
-                headerExpert: '',
-                headerStudent: '',
-                headerRegistered: 'Зарегистрированные участники',
-                headerPinned: 'Прикрепленные участники',
-                subheader: '',
+                headerExpert: 'Expert information',
+                headerStudent: 'Participant information',
+                headerRegistered: 'Registered participants',
+                headerPinned: 'Pinned participants',
+                subheader: 'Dictation type:',
                 testFormat: {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
                 }
             },
-            student: '',
+            student: 'Participants:',
             pagination: {
-                showed: '',
-                of: '',
+                showed: 'Shown',
+                of: 'of',
                 page: 'Page'
             }
         },
         roles: {
-            student: 'Участник',
-            organizer: 'Организатор',
-            expert: 'Эксперт'
+            student: 'Participant',
+            organizer: 'Organizer',
+            expert: 'Expert'
         },
         dictant: {
             previousPage: 'Previous page',
             nextPage: 'Next page',
             sendResult: 'Send result',
             level: {
-                start: '',
-                advanced: '',
-                dialect: ''
+                advanced: 'Advanced',
+                dialect: 'North-western dialect',
+                start: 'Elementary level'
             },
-            upload: 'Upload',
-            uploadTitle: '',
-            backToStudents: 'Back to students page'
+            upload: 'Upload your work',
+            uploadTitle: 'Uploaded files',
+            backToStudents: 'Back to the participants'
         },
         errors: {
-            noGrade: 'Grade is required',
-            noDictant: 'Ни одна форма диктанта не обнаружена',
-            fileSize: '',
+            noGrade: 'You need to grade the work',
+            noDictant: 'No dictant type chosen',
+            fileSize: 'Overall file size can not exceed 30mb',
             email: 'Provide correct email',
-            required: 'This field is required',
-            code: 'Plese enter the code',
-            incorrectCode: 'Invalid code',
-            changeFailed: 'При изменении данных произошла ошибка',
-            connect: 'There was an error',
-            chooseType: 'Нельзя отправить загруженные файлы и текст. Выберите один вариант',
-            serverError: 'Произошла непредвиденная ошибка',
-            fileDownload: 'При загрузке файла произошла ошибка',
-            noDictantLevel: '',
-            noEmailSocial: '',
-            chooseLang: ''
+            required: 'Required field',
+            code: 'Enter code',
+            incorrectCode: 'Incorrect code',
+            changeFailed: 'There was an error changing info',
+            connect: 'Error connecting, please try later',
+            chooseType: 'Please choose one type of dictation. Either remove files or text',
+            serverError: 'Unexpected error',
+            fileDownload: 'There was an error uploading files',
+            noDictantLevel: 'Please provide dictation level',
+            noEmailSocial: "We couldn't get email from social provider, please try another one",
+            chooseLang: 'Choose certificate language'
         },
         messages: {
-            successRegister: 'Вы успешно зарегистрированы',
-            changeSuccess: 'Данные успешно изменены',
-            dictantSuccess: 'Работа успешно отправлена',
-            dictantCheckSuccess: 'Dictant is successfully checked',
-            downloadSuccess: '',
-            downloadSuccessAndroid: '',
-            certSuccess: 'Сертификат успешно получен'
+            successRegister: 'You are successfully registered',
+            changeSuccess: 'Information changed successfully',
+            dictantSuccess: 'Work has been sent',
+            dictantCheckSuccess: 'Work has been successfully graded',
+            downloadSuccess: 'File has been uploaded to:',
+            downloadSuccessAndroid: 'File successfully uploaded',
+            certSuccess: 'Certificate received'
 
         },
         continue: 'Continue',
         reset: {
-            passReset: 'Укажите ваш email для восстановления пароля',
-            success: 'На ваш email отправлено письмо с ссылкой для восстановления доступа.'
+            passReset: 'Enter your email',
+            success: 'Temporary password has been sent to your email'
         },
         timer: {
             connect: 'Connect',
             title: 'Dictation starts in:',
-            longTitle: ''
+            longTitle: 'Dictation starts:'
         },
-        upload: 'Идет загрузка файлов...',
+        upload: 'Uploading...',
         gradeText: {
-            title: 'Ваша оценка',
-            noGrade: 'Диктант проверяется'
+            title: 'Your grade',
+            noGrade: 'Dictation is being graded'
         },
-        getCertificate: 'Получить сертификат',
-        comment: 'Комментарий',
+        getCertificate: 'Get your certificate',
+        comment: 'Your comment',
         certificate: {
-            mainInfo: 'Сертификат можно получить только один раз, пожалуйста проверьте, что у вас корректно заполнены личные данные',
-            check:'Проверить',
-            confirm: 'Подтвердить',
-            success: 'Сертификат отправлен на указанный Вами email',
-            chooseLang: '',
-            bash: '',
-            rus: ''
-        }
+            mainInfo: 'Certificate can only be received once. Please check your information carefully.',
+            check:'Check',
+            confirm: 'Confirm',
+            success: 'Certificate has been sent to your email',
+            chooseLang: 'Choose certificate language',
+            bash: 'Bashkir',
+            rus: 'Russian'
+        },
+        policy: {
+            userAgreement: 'User aggreement',
+            personalData: 'Personal data policy',
+            cookies: 'Cookie usage'
+        },
+        agree: 'Agree with'
     },
     'Russian': {
         languageName: 'РУС',
@@ -251,7 +256,7 @@ export const languages:Languages = {
                     middleName: 'Отчество',
                     phone: 'Номер телефона',
                     social: 'Ссылка на социальную сеть',
-                    city: 'Город или населенный пункт написания диктанта',
+                    city: 'Город или населенный пункт',
                     studentNumber: 'Ожидаемое число участников диктанта',
                     secretCode: 'Секретный код',
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
@@ -403,128 +408,134 @@ export const languages:Languages = {
             chooseLang: 'Выберите язык сертификата',
             bash: 'Башкирский',
             rus: 'Русский'
-        }
+        },
+        policy: {
+            userAgreement: 'Пользовательское соглашение',
+            personalData: 'Политика обработки персональных данных',
+            cookies: 'Использование Cookies'
+        },
+        agree: 'Согласен с'
     },
     'bash': {
         languageName: 'БАШ',
         navigation: {
-            exit: 'Выйти',
-            back: 'Назад'
+            exit: 'Сығырға',
+            back: 'Артҡа'
         },
         main: {
-            welcome: `Здравствуйте! Приветствуем вас на странице регистрации диктанта`,
-            registration: 'Регистрация',
-            authorization: 'Авторизация',
-            loginWith: 'Или войти через'
+            welcome: `Һаумыһығыҙ! Һеҙҙе диктантҡа теркәлеү үтеү битендә сәләмләйбеҙ`,
+            registration: 'Теркәү',
+            authorization: 'Теркәлеү',
+            loginWith: 'йәки ... аша инергә:'
         },
         auth: {
-            authorizationHeader: 'Авторизация',
-            or: 'Или:',
-            social: 'Авторизация через  соц.сеть:',
-            email: 'Адрес электронной почты',
+            authorizationHeader: 'Теркәлеү',
+            or: 'йәки:',
+            social: 'Социаль селтәр аша теркәлеү:',
+            email: 'Электрон почтаның адресы',
             password: 'Пароль',
-            rememberMe: 'Запомнить меня',
-            enter: 'Войти',
-            forgotPass: 'Забыл(а) пароль'
+            rememberMe: 'Мине иҫтә ҡалдырырға',
+            enter: 'Инергә',
+            forgotPass: 'Паролде оноттом'
         },
         registration: {
             social: {
-                social: 'Регистрация через соц.сеть',
-                or: 'Или:',
+                social: 'Социаль селтәр аша теркәү',
+                or: 'йәки:',
             },
-            successMessage: 'Ввведите код подтверждения отправленный на указанный email',
-            code: 'Код подтверждения',
+            successMessage: 'Билдәләнгән email адресына ебәрелгән иҫбатлау кодын яҙығыҙ',
+            code: 'Раҫлау коды',
             tabs: {
                 header: {
-                    student: 'Участник',
-                    organizer: 'Организатор',
+                    student: 'Ҡатнашыусы',
+                    organizer: 'Ойоштороусы',
                     expert: 'Эксперт'
                 },
                 organizer: {
-                    email: 'Адрес электронной почты',
+                    email: 'Электрон почтаның адресы',
                     password: 'Пароль',
-                    confirm: 'Подтвердить пароль',
+                    confirm: 'Паролде раҫларға',
                     lastName:'Фамилия',
-                    firstName: 'Имя',
-                    middleName: 'Отчество',
-                    phone: 'Номер телефона',
-                    social: 'Ссылка на социальную сеть',
-                    city: 'Город или населенный пункт написания диктанта',
-                    studentNumber: 'Ожидаемое число участников диктанта',
-                    secretCode: 'Секретный код',
+                    firstName: 'Исем',
+                    middleName: 'Атаһының исеме',
+                    phone: 'Телефон номеры',
+                    social: 'Социаль селтәргә һылтанма',
+                    city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
+                    studentNumber: 'Диктантта ҡатнашыусыларҙың көтөлгән һаны',
+                    secretCode: 'Серле код',
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
-                    send: 'Отправить',
-                    chooseType: 'Выбор формата диктанта:'
+                    send: 'Ебәрергә',
+                    chooseType: 'Диктант форматын һайлау:'
                 },
                 expert: {
-                    email: 'Адрес электронной почты',
+                    email: 'Электрон почтаның адресы',
                     password: 'Пароль',
-                    confirm: 'Подтвердить пароль',
+                    confirm: 'Паролде раҫларға',
                     lastName:'Фамилия',
-                    firstName: 'Имя',
-                    middleName: 'Отчество',
-                    city: 'Город или населенный пункт написания диктанта',
+                    firstName: 'Исем',
+                    middleName: 'Атаһының исеме',
+                    city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
                     jobTitle: 'Должность, место работы',
-                    send: 'Отправить'
+                    send: 'Ебәрергә'
                 },
                 student: {
-                    email: 'Адрес электронной почты',
+                    email: 'Электрон почтаның адресы',
                     password: 'Пароль',
-                    confirm: 'Подтвердить пароль',
+                    confirm: 'Паролде раҫларға',
                     lastName:'Фамилия',
-                    firstName: 'Имя',
-                    middleName: 'Отчество',
-                    city: 'Город или населенный пункт написания диктанта',
-                    send: 'Отправить',
+                    firstName: 'Исем',
+                    middleName: 'Атаһының исеме',
+                    city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
+                    send: 'Ебәрергә',
                     level: {
-                        advanced: 'Продвинутый уровень',
-                        choose: 'Выберите свой  уровень',
-                        dialect: 'Северо-западный диалект',
-                        start: 'Начальный уровень'
+                        advanced: 'Юғары кимәл',
+                        choose: 'Үҙеңдең кимәлеңде һайлау',
+                        dialect: 'Төньяҡ-көнбайыш диалекты',
+                        start: 'Башланғыс кимәл'
                     }
                 }
             }
         },
         profile: {
-            greeting: 'Здравствуйте,',
+            greeting: 'Һаумыһығыҙ,',
             header: {
                 title: '',
-                teacher: 'Личный кабинет эксперта',
-                student: 'Личный кабинет участника',
-                organizer: 'Личный кабинет организатора'
+                teacher: 'Эксперттың шәхси кабинеты',
+                student: 'Ҡатнашыусының шәхси кабинетыа',
+                organizer: 'Ойоштороусының шәхси кабинеты'
             },
             tabs: {
                 first: 'Профиль',
                 second: {
-                    student: 'Мой диктант',
-                    expert: 'Участники диктанта',
-                    organizer: 'Зарегистрированные участники'
+                    student: 'Минең диктант',
+                    expert: 'Диктантта ҡатнашыусылар',
+                    organizer: 'Теркәлеү үткән ҡатнашыусылар'
                 }
             },
             form: {
-                extraEmail: 'Дополнительный email',
-                extraPhone: 'Дополнительный телефон',
-                newPassword: 'Новый пароль',
-                oldPassword: 'Текущий пароль'
+                extraEmail: 'Өҫтәмә email',
+                extraPhone: 'Өҫтәмә телефон',
+                newPassword: 'Яңы пароль',
+                oldPassword: 'Әлеге пароль'
             }
         },
         participation: {
-            expert: 'Эксперты:',
+            expert: 'Эксперттар:',
             form:{
-                headerExpert: 'Данные эксперта',
-                headerStudent: 'Данные участника',
-                headerRegistered: 'Зарегистрированные участники',
-                headerPinned: 'Прикрепленные участники',
-                subheader: 'Формат диктанта:',
+                headerExpert: 'Эксперт мәғлүмәттәре',
+                headerStudent: 'Ҡатнашыусы мәғлүмәттәре',
+                headerRegistered: 'Теркәлеү үткән ҡатнашыусылар',
+                headerPinned: 'Беркетелгән ҡатнашыусылар',
+                subheader: 'Диктант форматы:',
                 testFormat: {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
                 }
             },
-            student: 'Участники:',
+            student: 'Ҡатнашыусылар:',
             pagination: {
                 showed: 'Показано',
                 of: 'из',
@@ -532,75 +543,83 @@ export const languages:Languages = {
             }
         },
         roles: {
-            student: 'Участник',
-            organizer: 'Организатор',
+            student: 'Ҡатнашыусы',
+            organizer: 'Ойоштороусы',
             expert: 'Эксперт'
         },
         dictant: {
-            previousPage: 'Предыдущая страница',
-            nextPage: 'Следующая страница',
-            sendResult: 'Отправить результат',
+            previousPage: 'Алдағы бит',
+            nextPage: 'Киләһе бит',
+            sendResult: 'Һөҙөмтәне ебәрергә',
             level: {
-                start: 'Начальный уровень',
-                advanced: 'Продвинутый уровень',
-                dialect: 'Северо-западный диалект'
+                advanced: 'Юғары кимәл',
+                dialect: 'Төньяҡ-көнбайыш диалекты',
+                start: 'Башланғыс кимәл'
             },
-            upload: 'Загрузить работу',
-            uploadTitle: 'Файлы загруженные на проверку',
-            backToStudents: 'Назад к списку участников'
+            upload: 'Эште тейәргә',
+            uploadTitle: 'Тикшереүгә ҡуйылған файлдар',
+            backToStudents: 'Ҡатнашыусылар исемлегенә артҡа'
         },
         errors: {
-            noGrade: 'Необходимо проставить оценку',
-            noDictant: 'Ни одна форма диктанта не обнаружена',
-            fileSize: 'Общий размер файлов не должен превышать 30мб',
-            email: 'Введите корректный email',
-            required: 'Обязательное поле',
-            code: 'Введите код',
-            incorrectCode: 'Введен неверный код',
-            changeFailed: 'При изменении данных произошла ошибка',
-            connect: 'При подключении произошла ошибка, попробуйте позднее',
-            chooseType: 'Нельзя отправить загруженные файлы и текст. Выберите один вариант',
-            serverError: 'Произошла непредвиденная ошибка',
-            fileDownload: 'При загрузке файла произошла ошибка',
-            noDictantLevel: 'Пожалуйста укажите уровень диктанта',
-            noEmailSocial: 'Нам не удалось получить email от соц. сети, возпользуйтесь другим способом регистрации',
+            noGrade: 'Баһа ҡуйырға кәрәк',
+            noDictant: 'Диктанттың бер формаһы ла табылманы',
+            fileSize: 'Файлдарҙың дөйөм күләме 30 мб артырға тейеш түгел',
+            email: 'Дөрөҫ email яҙығыҙ',
+            required: 'Мотлаҡ юл',
+            code: 'Кодты индерегеҙ',
+            incorrectCode: 'Код дөрөҫ индерелмәгән',
+            changeFailed: 'Мәғлүмәттәрҙе үҙгәрткәндә хата килеп сыҡты',
+            connect: 'Бәйләнешкә ингәндә хата килеп сыҡты, һуңғараҡ эшләп ҡарағыҙ',
+            chooseType: 'Ҡуйылған файлдарҙы һәм тексты ебәреп булмай. Бер вариантты һайлағыҙ',
+            serverError: 'Көтөлмәгән хата килеп сыҡты',
+            fileDownload: 'Файлды ҡуйғанда хата килеп сыҡты',
+            noDictantLevel: 'Зинһар, диктант кимәлен һайлағыҙ',
+            noEmailSocial: 'Беҙгә социаль селтәрҙән email килеп етмәне, теркәлеү үтеүҙең башҡа ысулын ҡулланығыҙ',
             chooseLang: 'Выберите язык сертификата'
         },
         messages: {
-            successRegister: 'Вы успешно зарегистрированы',
-            changeSuccess: 'Данные успешно изменены',
-            dictantSuccess: 'Работа успешно отправлена',
-            dictantCheckSuccess: 'Работа успешно проверена',
-            downloadSuccess: 'Файл успешно загружен в:',
-            downloadSuccessAndroid: 'Файл успешно загружен',
+            successRegister: 'Һеҙ теркәлеүҙе уңышлы үттегеҙ',
+            changeSuccess: 'Мәғлүмәттәр уңышлы һаҡланылды',
+            dictantSuccess: 'Эш уңышлы ебәрелде',
+            dictantCheckSuccess: 'Эш уңышлы тикшерелде.',
+            downloadSuccess: 'Файл ... уңышлы ҡуйылған:',
+            downloadSuccessAndroid: 'Файл уңышлы ҡуйылған',
             certSuccess: 'Сертификат успешно получен'
 
         },
-        continue: 'Продолжить',
+        continue: 'Дауам итергә',
         reset: {
-            passReset: 'Укажите ваш email для восстановления пароля',
-            success: 'На ваш email отправлено письмо с временным паролем.'
+            passReset: 'Паролде тергеҙеү өсөн үҙегеҙҙең email адресығыҙҙы яҙығыҙ',
+            success: 'Һеҙҙең email адресына ваҡытлыса пароль менән хат ебәрелде.'
         },
         timer: {
-            connect: 'Подключиться',
-            title: 'Начало диктанта через:',
-            longTitle: 'Диктант начнется:'
+            connect: 'Бәйләнешкә инергә',
+            title: '... ваҡыттан диктант башлана:',
+            longTitle: 'Диктант башланасаҡ:'
         },
-        upload: 'Идет загрузка файлов...',
+        upload: 'Файлдарҙы күсереү бара...',
         gradeText: {
-            title: 'Ваша оценка',
-            noGrade: 'Диктант проверяется'
+            title: 'Һеҙҙең баһа',
+            noGrade: 'Диктант тикшерелә'
         },
-        getCertificate: 'Получить сертификат',
-        comment: 'Комментарий',
+        getCertificate: 'Сертификат алырға',
+        comment: 'Аңлатма',
         certificate: {
-            mainInfo: 'Сертификат можно получить только один раз, пожалуйста проверьте, что у вас корректно заполнены личные данные',
-            check:'Проверить',
-            confirm: 'Подтвердить',
-            success: 'Сертификат отправлен на указанный Вами email',
+            mainInfo: 'Сертификатты бер тапҡыр ғына алырға мөмкин, зинһар, шәхси мәғлүмәттәрегеҙҙең дөрөҫлөгөн тикшерегеҙ',
+            check:'Тикшерергә',
+            confirm: 'Раҫларға',
+            success: 'Сертификат күрһәтелгән email адресына ебәрелде',
             chooseLang: 'Выберите язык сертификата',
             bash: 'Башкирский',
             rus: 'Русский'
-        }
+        },
+        policy: {
+            userAgreement: 'User Agreement',
+            personalData: 'Personal Data Processing',
+            cookies: 'Use of cookies'
+        },
+        agree: 'Согласен с',
+        // chooseLang: 'Выберите язык сертификата',
+        // certSuccess: 'Сертификат успешно получен'
     }
 }

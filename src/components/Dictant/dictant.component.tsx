@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {Toast} from 'native-base';
 import {Overlay} from 'react-native-elements';
 import moment from 'moment';
+import { TextInput } from 'react-native';
 
 
 import { useLanguage } from '../LanguageProvider/language.provider';
@@ -34,6 +35,7 @@ import { closeProgressModal, openProgressModal, setProgressModal } from '../../r
 import { userSelectors } from '../../redux/user/user.selectors';
 import DictantRead from '../DictantRead/dictant-read.component';
 import Fallback from '../Fallback/fallback.component';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 const user:IStudent = {
@@ -56,8 +58,11 @@ if (Platform.OS === 'android') {
   }
 
   
+  interface DictantProps {
+      scrollRef:any
+  }
   
-  const Dictant: React.FC = () => {
+  const Dictant: React.FC<DictantProps> = ({scrollRef}) => {
       const [dictant, setDictant] = useState('')
       const [dictantDate, setDictantDate] = useState<Date|undefined>(undefined)
       const jwt = useSelector(userSelectors.jwt)
@@ -71,7 +76,7 @@ if (Platform.OS === 'android') {
       const [isSubmiting, setIsSubmiting] = useState(false)
       const dispatch = useDispatch()
       const [showSuccess, setShowSuccess] = useState(false)
-      
+      const dictantInputRef = useRef<TextInput>(null)
       
       
       useEffect(() => {
@@ -85,12 +90,13 @@ if (Platform.OS === 'android') {
                 axios.get(`${API_URL}/timedictation?level=${currentUser.level}`)
                 .then((response) => {
                     setVideoId(parseYoutubeURL(response.data.url))
-                    // moment().isAfter(moment(response.data.time))
-                    if (true) {
+                    
+                    if (moment().isAfter(moment(response.data.time))) {
                         showDictant()
                     } else {
                         showTimer()
-                        setDictantDate(response.data.time)
+                        // response.data.time
+                        setDictantDate(moment().add(30,'seconds').toDate())
                     }
                 })
                 .catch((err) => {
@@ -140,6 +146,10 @@ if (Platform.OS === 'android') {
             }
         }
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+        console.log(scrollRef.current)
+        setTimeout(() => {
+            scrollRef.current?.scrollToPosition(10000,10000,true)
+        }, 200)
         setFiles(filesForUpload)
     }
 
@@ -192,13 +202,15 @@ if (Platform.OS === 'android') {
                 const blobData:any = []
                 files.forEach(file => {
                     formData.append('file', file)
+                    console.log(RNFetchBlob.wrap(file.uri.replace('file://','')))
                     blobData.push({
                         name : 'file',
                         filename : file.name,
-                        data: RNFetchBlob.wrap(file.uri)
+                        data: Platform.OS==='ios'? RNFetchBlob.wrap(file.uri.replace('file://','')): RNFetchBlob.wrap(file.uri)
                         
                     })
                 })
+                
                 RNFetchBlob.fetch('POST', `${API_URL}/dictation/upload`,{
                     "X-api-token": `${jwt}`,
                     "Content-Type": 'multipart/form-data',
@@ -214,7 +226,7 @@ if (Platform.OS === 'android') {
                     setShowSuccess(true)
                 })
                 .catch((err) => {
-                    console.log('error',err.response)
+                    console.log('error',err.response, err)
                     setIsSubmiting(false)
                     dispatch(closeProgressModal())
                     Toast.show({
@@ -289,7 +301,9 @@ if (Platform.OS === 'android') {
         return "5qap5aO4i9A"
     }
 
-    console.log(parseYoutubeURL('https://www.youtube.com/watch?v=ZNdPHViu96E'))
+    const handleDictantFocus = () => {
+        dictantInputRef.current?.focus()
+    }
 
     return (
         <Container
@@ -298,6 +312,10 @@ if (Platform.OS === 'android') {
             {
                 elementShown==='write'&&videoId?
                     <InnerContainer
+                    // enableOnAndroid={false}
+                    // extraScrollHeight={50}
+                    // showsVerticalScrollIndicator={false}
+                    // ref={scrollRef}
                     >
                         {/* <Header>
                         <HeaderLeft/>
@@ -315,8 +333,12 @@ if (Platform.OS === 'android') {
                             />
                         </VideoContainer>
                         <Chat/>
-                        <DictantInputContainer>
+                        <DictantInputContainer
+                        onPress={handleDictantFocus}
+                        activeOpacity={1}
+                        >
                             <DictantInput 
+                            ref={dictantInputRef}
                             multiline={true} 
                             value={dictant} 
                             onChangeText={handleDictantChange}

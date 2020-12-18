@@ -34,7 +34,7 @@ if (Platform.OS === 'android') {
     }
   }
 
-const levelTypes = ['start', 'advanced', 'dictant']
+const levelTypes = ['start', 'advanced', 'dialect']
 
 const Tabs: React.FC<TabsProps> = ({children, defaultIndex, tabNames, onTabChange}) => {
     const [currentIndex, setCurrentIndex] = useState(defaultIndex? defaultIndex: 0)

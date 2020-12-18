@@ -19,28 +19,28 @@ import Button from '../../../UI/Button/Button.component';
 import { Error } from '../../common/Error/error.styles';
 import Input from '../../../UI/Input/Input.component';
 import { useLanguage } from '../../LanguageProvider/language.provider';
-import { IStudent } from '../../../@types/common';
+import { ILanguage, IStudent } from '../../../@types/common';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { redirectSelectors } from '../../../redux/redirect/redirect.selectors';
 import { setRedirect } from '../../../redux/redirect/redirect.actions';
 
 
 
-const validationSchema = yup.object().shape({
+const validationSchema = (language: ILanguage) => yup.object().shape({
     email: yup.string()
-       .email('Введите корректный email')
+       .email(language.errors.email)
        .required('Введите email'),
     firstName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     lastName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     middleName: yup.string()
        .trim()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     city: yup.string()
-       .required('Обязательное поле'),
+       .required(language.errors.required),
     password: yup.string(),
     newPassword: yup.string()
         .min(6, 'Минимум 6 символов'),
@@ -182,7 +182,7 @@ const StudentProfile: React.FC = () => {
             <Formik
             initialValues={initialValues}
             onSubmit={(values) => handleSubmitForm(values) }
-            validationSchema={validationSchema}
+            validationSchema={validationSchema(language)}
             validateOnChange={false}
             enableReinitialize={true}
             >
@@ -196,7 +196,8 @@ const StudentProfile: React.FC = () => {
                             onChangeText={handleChange('email')}
                             value={values.email}
                             placeholder={language.registration.tabs.student.email}
-                            edit={true}
+                            // edit={true}
+                            disabled={true}
                             // showAdd={true}
                             // onAdd={() =>helpers.push({[`extraEmails${values.extraEmails.length}`]:''})}
                             />
@@ -225,7 +226,8 @@ const StudentProfile: React.FC = () => {
                         password={true}
                         value={values.password}
                         placeholder={language.profile.form.oldPassword}
-                        edit={true}
+                        // edit={true}
+
                         />
                         <Error>{errors.password}</Error>
                         <Input
@@ -233,7 +235,7 @@ const StudentProfile: React.FC = () => {
                         password={true}
                         value={values.newPassword}
                         placeholder={language.profile.form.newPassword}
-                        edit={true}
+                        // edit={true}
                         />
                         <Error>{errors.newPassword}</Error>
                         <Input

@@ -194,7 +194,12 @@ export interface ILanguage {
         bash: string,
         rus: string
     },
-    
+    policy: {
+        userAgreement: string,
+        personalData: string,
+        cookies: string
+    },
+    agree: string
 }
 
 
@@ -233,4 +238,4 @@ export interface IOrganizer extends IUser {
 export type DictantStatus = 'Проверен'| 'Проверяется'| 'Отклонен'|'Не написан'
 
 
-export type GradeTypes = '1'|'2'|'3'| '4'| '5'
+export type GradeTypes = 1|2|3| 4| 5

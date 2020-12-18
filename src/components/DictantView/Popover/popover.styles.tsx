@@ -5,7 +5,7 @@ export const CustomTextInput = styled.TextInput`
 border: none;
 border-width: 0;
 width: 100%;
-padding: 0;
+padding: 5px 0px;
 padding-right: 8px;
 color: ${props => props.theme.palette.text.grey};
 `

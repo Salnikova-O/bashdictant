@@ -20,7 +20,8 @@ interface InputProps {
     edit?: boolean,
     showAdd?: boolean,
     onAdd?: () => void,
-    onlyNumbers?: boolean
+    onlyNumbers?: boolean,
+    disabled?:boolean
 }
 
 
@@ -34,7 +35,8 @@ const Input:React.FC<InputProps> = ({
     edit,
     onAdd,
     showAdd,
-    onlyNumbers
+    onlyNumbers,
+    disabled
 }) => {
     const theme = useTheme()
     const [editable, setEditable] = useState(true)
@@ -59,7 +61,7 @@ const Input:React.FC<InputProps> = ({
             onBlur={onBlur}
             secureTextEntry={password}
             value={value}
-            editable={editable}
+            editable={disabled?false:editable}
             placeholderTextColor={theme.palette.text.light}
             keyboardType={onlyNumbers? 'numeric': 'default'}
             />
