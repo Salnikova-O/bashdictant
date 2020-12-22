@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
 
 import {
@@ -8,6 +8,7 @@ import {
 } from './Input.styles';
 import PlusSVG from '../../assets/plus.svg';
 import EditSVG from '../../assets/edit.svg';
+import { TextInput } from 'react-native';
 
 
 interface InputProps {
@@ -40,8 +41,14 @@ const Input:React.FC<InputProps> = ({
 }) => {
     const theme = useTheme()
     const [editable, setEditable] = useState(true)
+    const inputRef = useRef<TextInput>(null)
+    const [focus, setFocus] = useState(false)
+
 
     const toggleEdit = () => {
+        if(!editable) {
+            setFocus(true)
+        }
         setEditable(c => !c)
     }
 
@@ -51,6 +58,12 @@ const Input:React.FC<InputProps> = ({
         }
     }, [])
 
+    useEffect(() => {
+        if (editable&&focus) {
+            setFocus(false)
+            inputRef.current?.focus()
+        }
+    }, [editable, focus])
 
     return (
         <InputContainer>
@@ -64,6 +77,7 @@ const Input:React.FC<InputProps> = ({
             editable={disabled?false:editable}
             placeholderTextColor={theme.palette.text.light}
             keyboardType={onlyNumbers? 'numeric': 'default'}
+            ref={inputRef}
             />
             {
                 showAdd&&onAdd?

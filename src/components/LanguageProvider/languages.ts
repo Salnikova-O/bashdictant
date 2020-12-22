@@ -167,7 +167,13 @@ export const languages:Languages = {
             fileDownload: 'There was an error uploading files',
             noDictantLevel: 'Please provide dictation level',
             noEmailSocial: "We couldn't get email from social provider, please try another one",
-            chooseLang: 'Choose certificate language'
+            chooseLang: 'Choose certificate language',
+            notRegistered: 'Please register before authorization',
+            agreeWithRules: 'You need to agree with our terms',
+            correctPhone: 'Enter correct phone',
+            min1: 'At least 1 participant',
+            min6: 'At least 6 symbols',
+            passMatch: 'Passwords should match'
         },
         messages: {
             successRegister: 'You are successfully registered',
@@ -371,7 +377,13 @@ export const languages:Languages = {
             fileDownload: 'При загрузке файла произошла ошибка',
             noDictantLevel: 'Пожалуйста укажите уровень диктанта',
             noEmailSocial: 'Нам не удалось получить email от соц. сети, возпользуйтесь другим способом регистрации',
-            chooseLang: 'Выберите язык сертификата'
+            chooseLang: 'Выберите язык сертификата',
+            notRegistered: 'Данный пользователь не зарегистрирован',
+            agreeWithRules: 'Необходимо согласиться с правилами ',
+            correctPhone: 'Введите корректный номер ',
+            min1: 'Минимум 1 участник ',
+            min6: 'Минимум 6 символов ',
+            passMatch: 'Пароли должны совпадать '
         },
         messages: {
             successRegister: 'Вы успешно зарегистрированы',
@@ -575,7 +587,13 @@ export const languages:Languages = {
             fileDownload: 'Файлды ҡуйғанда хата килеп сыҡты',
             noDictantLevel: 'Зинһар, диктант кимәлен һайлағыҙ',
             noEmailSocial: 'Беҙгә социаль селтәрҙән email килеп етмәне, теркәлеү үтеүҙең башҡа ысулын ҡулланығыҙ',
-            chooseLang: 'Выберите язык сертификата'
+            chooseLang: 'өсөн телде һайлағыҙ',
+            notRegistered: 'Данный пользователь не зарегистрирован',
+            agreeWithRules: 'Ҡағиҙәләр менән ризалашырға кәрәк',
+            correctPhone: 'Дөрөҫ номерҙы индерегеҙ',
+            min1: 'Кәмендә 1 ҡатнашыусы',
+            min6: 'Кәмендә 6 символ',
+            passMatch: 'Паролдәр тап килергә тейеш'
         },
         messages: {
             successRegister: 'Һеҙ теркәлеүҙе уңышлы үттегеҙ',
@@ -584,7 +602,7 @@ export const languages:Languages = {
             dictantCheckSuccess: 'Эш уңышлы тикшерелде.',
             downloadSuccess: 'Файл ... уңышлы ҡуйылған:',
             downloadSuccessAndroid: 'Файл уңышлы ҡуйылған',
-            certSuccess: 'Сертификат успешно получен'
+            certSuccess: 'уңышлы алынды'
 
         },
         continue: 'Дауам итергә',
@@ -610,15 +628,15 @@ export const languages:Languages = {
             confirm: 'Раҫларға',
             success: 'Сертификат күрһәтелгән email адресына ебәрелде',
             chooseLang: 'Выберите язык сертификата',
-            bash: 'Башкирский',
-            rus: 'Русский'
+            bash: 'Башҡорт',
+            rus: 'Рус'
         },
         policy: {
-            userAgreement: 'User Agreement',
-            personalData: 'Personal Data Processing',
-            cookies: 'Use of cookies'
+            userAgreement: 'Ҡулланыусы килешеүе',
+            personalData: 'Шәхси мәғлүмәттәрҙе эшкәртеү политикаһы',
+            cookies: 'Cookies ҡулланыу'
         },
-        agree: 'Согласен с',
+        agree: 'менән риза',
         // chooseLang: 'Выберите язык сертификата',
         // certSuccess: 'Сертификат успешно получен'
     }

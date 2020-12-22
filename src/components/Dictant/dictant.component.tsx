@@ -96,7 +96,7 @@ if (Platform.OS === 'android') {
                     } else {
                         showTimer()
                         // response.data.time
-                        setDictantDate(moment().add(30,'seconds').toDate())
+                        setDictantDate(moment().add(10,'seconds').toDate())
                     }
                 })
                 .catch((err) => {
@@ -298,7 +298,7 @@ if (Platform.OS === 'android') {
         if (key==='v') {
             return value
         }
-        return "5qap5aO4i9A"
+        return "XTaPHuXGLvA"
     }
 
     const handleDictantFocus = () => {

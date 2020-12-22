@@ -157,7 +157,13 @@ export interface ILanguage {
         fileDownload: string,
         noDictantLevel:string,
         noEmailSocial: string,
-        chooseLang:string
+        chooseLang:string,
+        notRegistered: string,
+        passMatch: string,
+        agreeWithRules: string,
+        min6:string,
+        min1:string,
+        correctPhone: string
     },
     messages: {
         successRegister: string,

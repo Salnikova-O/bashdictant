@@ -22,7 +22,7 @@ import { IExpert, ILanguage } from '../../../@types/common';
 const validationSchema = (language: ILanguage) => yup.object().shape({
     email: yup.string()
        .email(language.errors.email)
-       .required('Введите email'),
+       .required(language.errors.required),
     firstName: yup.string()
        .trim()
        .required(language.errors.required),
@@ -35,15 +35,15 @@ const validationSchema = (language: ILanguage) => yup.object().shape({
     city: yup.string()
        .required(language.errors.required),
     password: yup.string()
-        .min(6, 'Минимум 6 символов'),
+        .min(6, language.errors.min6),
     newPassword: yup.string()
-        .min(6, 'Минимум 6 символов'),
+        .min(6, language.errors.min6),
     jobTitle: yup.string()
         .required(language.errors.required),
     extraEmails: yup.array()
     .of(
         yup.string()
-        .email('Введите корректный email')
+        .email(language.errors.email)
         )
  })
 

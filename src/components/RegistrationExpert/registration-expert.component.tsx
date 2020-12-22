@@ -28,7 +28,7 @@ import { ILanguage } from '../../@types/common';
 const validationSchema = (language: ILanguage) =>  yup.object().shape({
     email: yup.string()
        .email(language.errors.email)
-       .required('Введите email'),
+       .required(language.errors.required),
     firstName: yup.string()
        .trim()
        .required(language.errors.required),
@@ -41,15 +41,15 @@ const validationSchema = (language: ILanguage) =>  yup.object().shape({
     city: yup.string()
        .required(language.errors.required),
     password: yup.string()
-        .min(6, 'Минимум 6 символов')
+        .min(6, language.errors.min6)
         .required(language.errors.required),
     confirmPassword: yup.string()
-        .oneOf([yup.ref('password')], 'Пароли должны совпадать')
+        .oneOf([yup.ref('password')], language.errors.passMatch)
         .required(language.errors.required),
     jobTitle: yup.string()
         .required(language.errors.required),
     agree: yup.string()
-    .required('Необходимо согласиться с правилами')
+    .required(language.errors.agreeWithRules)
  })
 
 
@@ -210,6 +210,12 @@ const RegistrationExpert: React.FC<RegistrationProps> = ({toggleSuccessWindow}) 
                             onPress={() => {
                                 setFieldValue('agree',values.agree? '': 'agree')
                             }}
+                            containerStyle={{
+                                margin: 0,
+                                padding: 0,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
                             checkedColor={theme.palette.buttons.primary}
                             uncheckedColor={theme.palette.buttons.primary}
                             />
@@ -217,21 +223,15 @@ const RegistrationExpert: React.FC<RegistrationProps> = ({toggleSuccessWindow}) 
                                 <AgreementText>
                                     {language.agree}:{'  '}
                                 </AgreementText>
-                                <AgreementLink
-                                onPress={() => handleLinking('user')}
-                                >
-                                    <LinkText>{language.policy.userAgreement}, </LinkText>
-                                </AgreementLink>
-                                <AgreementLink
-                                onPress={() => handleLinking('data')}
-                                >
-                                    <LinkText>{language.policy.personalData}, </LinkText>
-                                </AgreementLink>
-                                <AgreementLink
-                                onPress={() => handleLinking('cookie')}
-                                >
-                                    <LinkText>{language.policy.cookies}</LinkText>
-                                </AgreementLink>
+
+                                <LinkText onPress={() => handleLinking('user')}>{language.policy.userAgreement}, </LinkText>
+
+
+                                <LinkText onPress={() => handleLinking('data')}>{language.policy.personalData}, </LinkText>
+                            
+
+                                <LinkText onPress={() => handleLinking('cookie')}>{language.policy.cookies}</LinkText>
+
                             </AgreementContainer>
                         </CheckboxContainer>
                         <Error>{errors.agree}</Error>

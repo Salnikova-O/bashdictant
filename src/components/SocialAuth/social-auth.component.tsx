@@ -59,12 +59,17 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
         if (event.url) {
             let params = event.url.split('?')
             if (params.length>1) {
-                params = params[1].split('=')
-                if (params.length===2&&params[0]==='jwt') {
+                params = params[1].replace('#_=_', '').split('=')
+                console.log(params)
+                if (params[0]==='jwt') {
                     const jwt = params[1]
                     console.log(jwt)
                     if (jwt) {
                         dispatch(openProgressModal(null))
+                        axios.interceptors.request.use(config => {
+                            console.log(config)
+                            return config
+                        })
                         axios({
                             method: 'get',
                             headers: {
@@ -79,7 +84,17 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
                         })
                         .catch((err) => {
                             dispatch(closeProgressModal())
-                            console.log(err)
+                            console.log(err.response)
+                            Toast.show({
+                                text: language.errors.serverError,
+                                buttonText: 'OK',
+                                duration: 4000,
+                                type: 'warning',
+                                position: 'bottom',
+                                style: {
+                                    backgroundColor: '#ff7961',
+                                }
+                            })
                         })
                     }
                 } else if (params[0]==='error') {
@@ -96,7 +111,18 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
                                 backgroundColor: '#ff7961',
                             }
                         })
-                    } else {
+                    } else if (error === 'Пользователь не зарегистрирован') {
+                        Toast.show({
+                            text: language.errors.notRegistered,
+                            buttonText: 'OK',
+                            duration: 4000,
+                            type: 'warning',
+                            position: 'bottom',
+                            style: {
+                                backgroundColor: '#ff7961',
+                            }
+                        })
+                    }  else {
                         Toast.show({
                             text: error,
                             buttonText: 'OK',
@@ -115,11 +141,11 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
 
     useEffect(() => {
-        Linking.removeAllListeners('url')
-        Linking.addEventListener('url', handleSocialAuth)
-        return () => {
-            Linking.removeAllListeners('url')
-        }
+        // Linking.removeAllListeners('url')
+        // Linking.addEventListener('url', handleSocialAuth)
+        // return () => {
+        //     Linking.removeAllListeners('url')
+        // }
     }, [])
 
     useEffect(() => {
@@ -134,6 +160,7 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
     useEffect(() => {
         if (loginError) {
+            console.log('err', loginError)
             dispatch(closeProgressModal())
             dispatch(clearError())
             Toast.show({
@@ -153,6 +180,7 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
 
         WebBrowser.openAuthSessionAsync(currentTab===1?VK_AUTH_URL_STUDENT: currentTab===0? VK_AUTH_URL_TEACHER: VK_AUTH_URL, 'bashdikt://')
         .then(res => {
+            
             handleSocialAuth(res)
         })
         .catch(err => {
@@ -176,10 +204,11 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
     const handleFacebookAuth = () => {
         WebBrowser.openAuthSessionAsync(currentTab===1?FB_AUTH_URL_STUDENT: currentTab===0? FB_AUTH_URL_TEACHER: FB_AUTH_URL, 'bashdikt://')
         .then(res => {
+            console.log(res)
             handleSocialAuth(res)
         })
         .catch(err => {
-            console.log(err)
+            console.log('err',err)
         })
     }
 

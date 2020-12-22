@@ -29,7 +29,7 @@ import { ILanguage, IOrganizer } from '../../../@types/common';
 const validationSchema = (language: ILanguage) => yup.object().shape({
     email: yup.string()
        .email(language.errors.email)
-       .required('Введите email'),
+       .required(language.errors.required),
     firstName: yup.string()
        .trim()
        .required(language.errors.required),
@@ -43,28 +43,28 @@ const validationSchema = (language: ILanguage) => yup.object().shape({
         .trim()
        .required(language.errors.required),
     password: yup.string()
-        .min(6, 'Минимум 6 символов'),
+        .min(6, language.errors.min6),
     newPassword: yup.string()
-        .min(6, 'Минимум 6 символов'),
+        .min(6, language.errors.min6),
     phone: yup.string()
-        .matches(/^(\s*|\d+)$/, 'Введите корректный номер')
+        .matches(/^(\s*|\d+)$/, language.errors.correctPhone)
         .required(language.errors.required),
     social: yup.string()
         .trim()
         .required(language.errors.required),
     studentCount: yup.number()
-        .min(1, 'Минимум 1 участник')
+        .min(1, language.errors.min1)
         .required(language.errors.required),
     extraEmails: yup.array()
     .of(
         yup.string()
-        .email('Введите корректный email')
+        .email(language.errors.email)
         ),
     extraPhones: yup.array()
     .of(
         yup.string()
-        .matches(/^\d+$/, 'Введите корректный номер')
-        .min(1, 'Введите корректный номер')
+        .matches(/^\d+$/, language.errors.correctPhone)
+        .min(1, language.errors.correctPhone)
         )
  })
 
