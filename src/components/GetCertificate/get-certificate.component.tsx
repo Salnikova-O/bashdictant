@@ -61,7 +61,7 @@ const GetCertificate: React.FC<GetCertificateProps> = ({received, setReceived}) 
         if (!isSubmiting&&certLang) {
             setIsSubmiting(true)
             dispatch(openProgressModal(null))
-            axios.get(`${API_URL}/cabinet/student/info/certificate`,{
+            axios.get(`${API_URL}/cabinet/student/info/certificate?lang=${certLang}`,{
                 headers: {
                     "X-api-token": `${jwt}`
                 }

@@ -32,9 +32,11 @@ import ForgotPassOverlay from '../../components/ForgotPassOverlay/forgot-passwor
 
 const validationSchema = yup.object().shape({
     email: yup.string()
+       .trim()
        .email('Введите корректный email')
        .required('Введите email'),
     password: yup.string()
+        .trim()
        .required('Введите пароль')
        .min(4, 'Пароль должен содержать минимум 4 символа')
  })

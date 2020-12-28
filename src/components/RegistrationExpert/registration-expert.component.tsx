@@ -27,6 +27,7 @@ import { ILanguage } from '../../@types/common';
 
 const validationSchema = (language: ILanguage) =>  yup.object().shape({
     email: yup.string()
+    .trim()
        .email(language.errors.email)
        .required(language.errors.required),
     firstName: yup.string()

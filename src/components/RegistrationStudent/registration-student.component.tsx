@@ -31,6 +31,7 @@ import { ILanguage } from '../../@types/common';
 
 const validationSchema = (language: ILanguage) => yup.object().shape({
     email: yup.string()
+    .trim()
        .email(language.errors.email)
        .required(language.errors.required),
     firstName: yup.string()
@@ -43,11 +44,14 @@ const validationSchema = (language: ILanguage) => yup.object().shape({
        .trim()
        .required(language.errors.required),
     city: yup.string()
+    .trim()
        .required(language.errors.required),
     password: yup.string()
+    .trim()
         .min(6, language.errors.min6)
         .required(language.errors.required),
     confirmPassword: yup.string()
+    .trim()
         .oneOf([yup.ref('password')], language.errors.passMatch)
         .required(language.errors.required),
     level: yup.string()
@@ -55,6 +59,7 @@ const validationSchema = (language: ILanguage) => yup.object().shape({
         .min(1,language.errors.required)
         .required(language.errors.required),
     agree: yup.string()
+        
         .required(language.errors.agreeWithRules)
  })
 
