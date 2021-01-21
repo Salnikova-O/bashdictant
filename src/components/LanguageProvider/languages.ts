@@ -35,7 +35,7 @@ export const languages:Languages = {
                 social: 'Social networks:',
                 or: 'Or:',
             },
-            successMessage: 'We sent a confirmation code to your email',
+            successMessage: 'We sent you a confirmation email',
             code: 'Confirmation code',
             tabs: {
                 header: {
@@ -59,7 +59,9 @@ export const languages:Languages = {
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
                     send: 'Send',
-                    chooseType: 'Choose dictation type:'
+                    chooseType: 'Choose dictation type:',
+                    addExpert: 'Add Expert',
+                    add: 'Add'
                 },
                 expert: {
                     email: 'Email',
@@ -182,7 +184,8 @@ export const languages:Languages = {
             dictantCheckSuccess: 'Work has been successfully graded',
             downloadSuccess: 'File has been uploaded to:',
             downloadSuccessAndroid: 'File successfully uploaded',
-            certSuccess: 'Certificate received'
+            certSuccess: 'Certificate received',
+            addExpertSuccess: 'Expert has been successfully added'
 
         },
         continue: 'Continue',
@@ -245,7 +248,7 @@ export const languages:Languages = {
                 social: 'Регистрация через соц.сеть',
                 or: 'Или:',
             },
-            successMessage: 'Ввведите код подтверждения отправленный на указанный email',
+            successMessage: 'Ссылка для подтверждения отправлена на указанную почту',
             code: 'Код подтверждения',
             tabs: {
                 header: {
@@ -269,7 +272,9 @@ export const languages:Languages = {
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
                     send: 'Отправить',
-                    chooseType: 'Выбор формата диктанта:'
+                    chooseType: 'Выбор формата диктанта:',
+                    addExpert: 'Добавить эксперта',
+                    add: 'Добавить'
                 },
                 expert: {
                     email: 'Адрес электронной почты',
@@ -392,7 +397,8 @@ export const languages:Languages = {
             dictantCheckSuccess: 'Работа успешно проверена',
             downloadSuccess: 'Файл успешно загружен в:',
             downloadSuccessAndroid: 'Файл успешно загружен',
-            certSuccess: 'Сертификат успешно получен'
+            certSuccess: 'Сертификат успешно получен',
+            addExpertSuccess: 'Эксперт успешно добавлен'
 
         },
         continue: 'Продолжить',
@@ -455,7 +461,7 @@ export const languages:Languages = {
                 social: 'Социаль селтәр аша теркәү',
                 or: 'йәки:',
             },
-            successMessage: 'Билдәләнгән email адресына ебәрелгән иҫбатлау кодын яҙығыҙ',
+            successMessage: 'Ссылка для подтверждения отправлена на указанную почту',
             code: 'Раҫлау коды',
             tabs: {
                 header: {
@@ -479,7 +485,9 @@ export const languages:Languages = {
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
                     send: 'Ебәрергә',
-                    chooseType: 'Диктант форматын һайлау:'
+                    chooseType: 'Диктант форматын һайлау:',
+                    addExpert: 'Добавить эксперта',
+                    add: 'Добавить'
                 },
                 expert: {
                     email: 'Электрон почтаның адресы',
@@ -602,7 +610,8 @@ export const languages:Languages = {
             dictantCheckSuccess: 'Эш уңышлы тикшерелде.',
             downloadSuccess: 'Файл ... уңышлы ҡуйылған:',
             downloadSuccessAndroid: 'Файл уңышлы ҡуйылған',
-            certSuccess: 'уңышлы алынды'
+            certSuccess: 'уңышлы алынды',
+            addExpertSuccess: 'Эксперт успешно добавлен'
 
         },
         continue: 'Дауам итергә',

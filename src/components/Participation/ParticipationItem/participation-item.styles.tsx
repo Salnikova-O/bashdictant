@@ -6,7 +6,8 @@ import { CustomText } from '../../common/Text/text.styles';
 export const ItemContainer = styled.View`
 flex-direction: row;
 width: 100%;
-height: 32px;
+min-height: 32px;
+/* max-height: 60px; */
 padding: 8px 0;
 align-items: center;
 border-bottom-width: 1px;
@@ -37,8 +38,6 @@ font-size: 12px;
 
 
 export const IconButton = styled.TouchableOpacity`
-height: 100%;
-width: 100%;
 align-items: center;
 justify-content: center;
 `

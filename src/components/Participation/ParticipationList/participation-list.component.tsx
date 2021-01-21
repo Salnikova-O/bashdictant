@@ -45,7 +45,7 @@ const ParticipationList: React.FC<ItemsList> = ({ header, togglePopup, tabIndex}
                     getStudents(jwt, 'student', perPage, (currentPage-1)*perPage)
                     .then(({total, students}) => {
                         setTotal(total?total:1)
-                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.8, property: 'scaleY' }, update: { type: 'spring', springDamping: 0.4 },  })
                         setFilteredUsers(students?students: [])
                     })
                     .catch((err) => {
@@ -55,7 +55,7 @@ const ParticipationList: React.FC<ItemsList> = ({ header, togglePopup, tabIndex}
                     getStudents(jwt, 'pinstudent', perPage, (currentPage-1)*perPage)
                     .then(({total, students}) => {
                         setTotal(total?total:1)
-                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.8, property: 'scaleY' }, update: { type: 'spring', springDamping: 0.4 },  })
                         setFilteredUsers(students?students: [])
                         console.log(students)
                     })
@@ -68,7 +68,7 @@ const ParticipationList: React.FC<ItemsList> = ({ header, togglePopup, tabIndex}
                     getExperts(jwt, 'student', perPage, (currentPage-1)*perPage)
                     .then(({total, users}) => {
                         setTotal(total?total:1)
-                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.8, property: 'scaleY' }, update: { type: 'spring', springDamping: 0.4 },  })
                         setFilteredUsers(users?users:[])
                     })
                     .catch((err) => {
@@ -79,7 +79,7 @@ const ParticipationList: React.FC<ItemsList> = ({ header, togglePopup, tabIndex}
                     .then(({total, users}) => {
                         setTotal(total?total:1)
                         console.log('teachers',users)
-                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.4, property: 'opacity' }, update: { type: 'spring', springDamping: 0.4 },  })
+                        LayoutAnimation.configureNext({ duration: 700, create: { type: 'spring', springDamping: 0.8, property: 'scaleY' }, update: { type: 'spring', springDamping: 0.4 },  })
                         setFilteredUsers(users?users:[])
     
                     })

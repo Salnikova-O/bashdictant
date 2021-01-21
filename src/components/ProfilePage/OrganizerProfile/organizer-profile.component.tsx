@@ -21,6 +21,7 @@ import Input from '../../../UI/Input/Input.component';
 import { Error } from '../../common/Error/error.styles';
 import Button from '../../../UI/Button/Button.component';
 import { ILanguage, IOrganizer } from '../../../@types/common';
+import AddExpertModal from './AddExpertModal/add-expert.component';
 
 
 
@@ -113,6 +114,7 @@ const OrganizerProfile: React.FC = () => {
         extraEmails: [],
         extraPhones: []
     })
+    const [showAddExpert, setShowAddExpert] = useState(false)
 
     useEffect(() => {
         if (currentUser) {
@@ -197,9 +199,23 @@ const OrganizerProfile: React.FC = () => {
     }
 
 
+    const toggleAddExpert = () => {
+        setShowAddExpert(c => !c)
+    }
+
+
     return (
         <RegistrationForm>
-
+            <Button
+            bg={theme.palette.background.main}
+            font={theme.palette.buttons.primary}
+            border={theme.palette.buttons.primary}
+            height='50px'
+            text={language.registration.tabs.organizer.addExpert}
+            onPress={toggleAddExpert}
+            marginTop={0}
+            marginBottom={15}
+            />
             <Formik
             initialValues={initialValues}
             onSubmit={(values) => handleSubmitForm(values as any) }
@@ -341,13 +357,17 @@ const OrganizerProfile: React.FC = () => {
                         bg={theme.palette.buttons.primary}
                         font={theme.palette.text.primary}
                         height='50px'
-                        text='Отправить'
+                        text={language.registration.tabs.organizer.send}
                         onPress={handleSubmit}
                         marginTop={10}
                         />
                     </Fragment>
                 )}
             </Formik>
+            <AddExpertModal
+            show={showAddExpert}
+            onClose={toggleAddExpert}
+            />
         </RegistrationForm>
     )   
 }

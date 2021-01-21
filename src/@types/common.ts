@@ -47,7 +47,9 @@ export interface ILanguage {
                 video: string,
                 offline: string,
                 send: string,
-                chooseType: string
+                chooseType: string,
+                addExpert: string,
+                add: string,
             },
             expert: {
                 email: string,
@@ -172,7 +174,8 @@ export interface ILanguage {
         dictantCheckSuccess: string,
         downloadSuccess: string,
         downloadSuccessAndroid: string,
-        certSuccess: string
+        certSuccess: string,
+        addExpertSuccess: string
     },
     continue: string,
     reset: {

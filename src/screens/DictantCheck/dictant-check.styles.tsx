@@ -23,11 +23,12 @@ width:100%;
 
 
 export const HeaderLeft = styled.View`
-
+max-width: 50%;
 `
 
 export const HeaderRight = styled.View`
 align-items: flex-end;
+max-width: 50%;
 `
 
 

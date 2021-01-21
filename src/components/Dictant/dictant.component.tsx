@@ -95,8 +95,7 @@ if (Platform.OS === 'android') {
                         showDictant()
                     } else {
                         showTimer()
-                        // response.data.time
-                        setDictantDate(moment().add(10,'seconds').toDate())
+                        setDictantDate(moment(response.data.time).toDate())
                     }
                 })
                 .catch((err) => {

@@ -48,12 +48,13 @@ interface SocialAuthProps {
 
 // export const VK_AUTH_URL_STUDENT = 'https://oauth.vk.com/authorize?client_id=7687118&display=page&redirect_uri=http://bashdikt.lilekov-studio.com/api/vk/callback&scope=email&response_type=code&v=5.126'
 
-const SocialAuth: React.FC<SocialAuthProps> = ({title, size, currentTab}) =>{
+const SocialAuth: React.FC<SocialAuthProps> = ({title, size}) =>{
     const dispatch = useDispatch()
     const loginError = useSelector(userSelectors.error)
     const currentUser = useSelector(userSelectors.currentUser)
     const navigation = useNavigation()
     const {language}= useLanguage()
+    const currentTab = 1
 
     const handleSocialAuth = (event:any) => {
         if (event.url) {
