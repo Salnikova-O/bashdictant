@@ -10,11 +10,11 @@ import {
     TableText,
     IconButton
 } from './participation-item.styles';
-import InfoSVG from '../../../assets/info.svg';
-import NotCheckedSVG from '../../../assets/notchecked.svg';
-import PendingSVG from '../../../assets/pending.svg';
-import ReadySVG from '../../../assets/ready.svg';
-import WarningSVg from '../../../assets/warning.svg';
+import InfoSVG from '../../../assets/info-new.svg';
+import NotCheckedSVG from '../../../assets/notchecked-new.svg';
+import PendingSVG from '../../../assets/pending-new.svg';
+import ReadySVG from '../../../assets/ready-new.svg';
+import WarningSVG from '../../../assets/warning-new.svg';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { userSelectors } from '../../../redux/user/user.selectors';
@@ -43,7 +43,7 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup, pinne
             case 'Проверяется':
                 return <PendingSVG width={20} height={20}/>
             case 'Отклонен': 
-                return <WarningSVg width={20} height={20}/>
+                return <WarningSVG width={20} height={20}/>
             default: 
                 return <NotCheckedSVG width={20} height={20}/>
         }

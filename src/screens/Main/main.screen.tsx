@@ -23,6 +23,7 @@ import { useLanguage } from '../../components/LanguageProvider/language.provider
 import DictantWaitingZone from '../../components/DictantWaitingZone/dictant-waiting-zone.component';
 import { Text } from 'react-native-svg';
 import { View } from 'native-base';
+import BackgroundImage from '../../components/BackgroundImage/background-image.component';
 
 const MainScreen:React.FC = () => {
     const theme = useTheme()
@@ -68,6 +69,7 @@ const MainScreen:React.FC = () => {
         orientation={orientation}
         edges={['left', 'right', 'bottom']}
         >
+            <BackgroundImage />
             {
                 orientation==='PORTRAIT'?
                 <Title>{language.main.welcome}</Title>

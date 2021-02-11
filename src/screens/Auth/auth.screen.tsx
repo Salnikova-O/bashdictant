@@ -27,6 +27,7 @@ import {loginUser, clearError} from '../../redux/user/user.actions';
 import { userSelectors } from '../../redux/user/user.selectors';
 import { useNavigation } from '@react-navigation/native';
 import ForgotPassOverlay from '../../components/ForgotPassOverlay/forgot-password-overlay.component';
+import BackgroundImage from '../../components/BackgroundImage/background-image.component';
 
 
 
@@ -118,6 +119,7 @@ const AuthScreen: React.FC = () => {
                 orientation={orientation}
                 edges={[ 'bottom', 'left','right']}
                 >
+                    <BackgroundImage />
                     <FormContainer
                     orientation={orientation}
                     >

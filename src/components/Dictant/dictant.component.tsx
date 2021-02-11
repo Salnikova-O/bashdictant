@@ -36,6 +36,7 @@ import { userSelectors } from '../../redux/user/user.selectors';
 import DictantRead from '../DictantRead/dictant-read.component';
 import Fallback from '../Fallback/fallback.component';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Instructions from './Instructions/instructions.component';
 
 
 const user:IStudent = {
@@ -77,6 +78,7 @@ if (Platform.OS === 'android') {
       const dispatch = useDispatch()
       const [showSuccess, setShowSuccess] = useState(false)
       const dictantInputRef = useRef<TextInput>(null)
+      const [instructionsShown, setInstructionsShown] = useState<boolean>(true)
       
       
       useEffect(() => {
@@ -324,6 +326,10 @@ if (Platform.OS === 'android') {
                                 <HeaderText>{currentUser? language.dictant.level[currentUser.level]: ''}</HeaderText>
                             </HeaderRight>
                         </Header> */}
+                        <Instructions
+                        isShown={instructionsShown}
+                        close={() => setInstructionsShown(false)}
+                        />
                         <VideoContainer>
                             <YoutubePlayer
                                 height={PixelRatio.roundToNearestPixel(((width>500? 500: width)-40)*9/16)}

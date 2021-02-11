@@ -16,6 +16,7 @@ import RegistrationStudent from '../../components/RegistrationStudent/registrati
 // import RegistrationOrganizer from '../../components/RegistrationOrganizer/registration-organizer.component';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
 import PhoneConfirmation from '../../components/PhoneConfirmation/phone-confirmation.component';
+import BackgroundImage from '../../components/BackgroundImage/background-image.component';
 
 export interface RegistrationProps {
     toggleSuccessWindow: (email?:string) => void
@@ -58,6 +59,7 @@ const RegistrationScreen: React.FC = () => {
         <ScreenContainer
         edges={[ 'bottom']}
         >
+            <BackgroundImage />
             <KeyboardAwareScrollView
             
             style={{flex: 1, width: '100%'}}

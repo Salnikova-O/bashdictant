@@ -27,6 +27,7 @@ import {
 import { useSelector } from 'react-redux';
 import { userSelectors } from '../../redux/user/user.selectors';
 import FileDownload from '../../components/FileDownload/file-download.component';
+import BackgroundImage from '../../components/BackgroundImage/background-image.component';
 
 
 if (Platform.OS === 'android') {
@@ -192,6 +193,7 @@ const DictantCheck: React.FC = () => {
     return (
         <Container
         >
+            <BackgroundImage />
             <InnerContainer
             showsVerticalScrollIndicator={false}
             >

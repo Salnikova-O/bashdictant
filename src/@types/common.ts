@@ -132,6 +132,7 @@ export interface ILanguage {
         expert: string
     },
     dictant: {
+        instructions: string,
         previousPage: string,
         nextPage: string,
         sendResult: string,

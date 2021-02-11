@@ -16,6 +16,7 @@ padding:24px;
 position: relative;
 overflow: hidden;
 height: 574px;
+background-color: white;
 
 `
 

@@ -3,7 +3,8 @@ import { GradeTypes } from '../../@types/common';
 
 import {
     GradeContainer,
-    GradeText
+    GradeText,
+    GradeBorder
 } from './grade.styles';
 
 interface GradeProps {
@@ -12,16 +13,26 @@ interface GradeProps {
     active: boolean
 }
 
+interface GradeBorderProps {
+    grade: GradeTypes
+    active: boolean
+}
+
 const Grade: React.FC<GradeProps> = ({grade,onPress, active}) => {
     return (
-        <GradeContainer
+        <GradeBorder
         grade={grade}
-        onPress={onPress? () => onPress(grade): undefined}
         active={active}
-        disabled={active}
         >
-            <GradeText>{grade}</GradeText>
-        </GradeContainer>
+            <GradeContainer
+            grade={grade}
+            onPress={onPress? () => onPress(grade): undefined}
+            active={active}
+            disabled={active}
+            >
+                <GradeText>{grade}</GradeText>
+            </GradeContainer>
+        </GradeBorder>
     )
 }
 

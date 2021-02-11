@@ -142,6 +142,7 @@ export const languages:Languages = {
             expert: 'Expert'
         },
         dictant: {
+            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить работу одну или более страниц.',
             previousPage: 'Previous page',
             nextPage: 'Next page',
             sendResult: 'Send result',
@@ -355,6 +356,7 @@ export const languages:Languages = {
             expert: 'Эксперт'
         },
         dictant: {
+            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить работу одну или более страниц.',
             previousPage: 'Предыдущая страница',
             nextPage: 'Следующая страница',
             sendResult: 'Отправить результат',
@@ -568,6 +570,7 @@ export const languages:Languages = {
             expert: 'Эксперт'
         },
         dictant: {
+            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить работу одну или более страниц.',
             previousPage: 'Алдағы бит',
             nextPage: 'Киләһе бит',
             sendResult: 'Һөҙөмтәне ебәрергә',

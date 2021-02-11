@@ -20,6 +20,7 @@ import { IExpert, IStudent } from '../../@types/common';
 import Dictant from '../../components/Dictant/dictant.component';
 import { userSelectors } from '../../redux/user/user.selectors';
 import { useOrientation } from '../../components/OrientationProvider/orientation.provider';
+import BackgroundImage from '../../components/BackgroundImage/background-image.component';
 
 
 
@@ -79,6 +80,7 @@ const PersonalScreen: React.FC = () => {
         }}
         edges={[ 'bottom']}
         >
+            <BackgroundImage />
             {
                 currentUser?
                 <KeyboardAwareScrollView
