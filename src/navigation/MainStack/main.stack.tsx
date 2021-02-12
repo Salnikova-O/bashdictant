@@ -62,7 +62,8 @@ const MainStack = () => {
                         <Text
                         style={{
                             color: theme.palette.text.grey,
-                            marginLeft: 10
+                            marginLeft: 10,
+                            fontSize: 16
                         }}
                         >{language.navigation.back}</Text>
                     </TouchableOpacity>

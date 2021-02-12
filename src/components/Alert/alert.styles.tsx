@@ -17,7 +17,7 @@ margin-bottom: 10px;
 `
 
 export const AlertText = styled(CustomText)`
-font-size: 12px;
+font-size: 14px;
 color: #181818;
 `
 

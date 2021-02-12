@@ -19,7 +19,7 @@ height: 16px;
 `
 
 export const Language = styled(CustomText)`
-font-size: 14px;
+font-size: 16px;
 color: ${props => props.theme.palette.text.main};
 
 `

@@ -27,7 +27,7 @@ justify-content:center;
 
 export const SuccessMessage = styled(CustomText)`
 color: ${props => props.theme.palette.text.main};
-font-size: 16px;
+font-size: 18px;
 text-align: center;
 margin-bottom: 30px;
 `

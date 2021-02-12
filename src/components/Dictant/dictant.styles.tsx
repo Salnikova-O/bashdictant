@@ -9,6 +9,7 @@ export const Container = styled(ScreenContainer)`
 width:100%;
 padding: 0;
 flex:1;
+background-color: transparent;
 
 `
 
@@ -60,7 +61,7 @@ export const DictantInput = styled.TextInput`
 border-width: 0;
 width:100%;
 color: ${props => props.theme.palette.text.grey};
-font-size: 14px;
+font-size: 16px;
 padding:0;
 `
 export const InfoContainer = styled.View`

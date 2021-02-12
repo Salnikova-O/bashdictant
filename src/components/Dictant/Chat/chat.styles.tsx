@@ -16,14 +16,14 @@ margin: 2px;
 
 export const Time = styled(CustomText)`
 color: ${props => props.theme.palette.text.grey};
-font-size: 14px;
+font-size: 16px;
 margin-right: 5px;
 `
 
 
 export const MessageText = styled(CustomText)`
 color: ${props => props.theme.palette.text.grey};
-font-size: 14px;
+font-size: 16px;
 width: 80%;
 `
 

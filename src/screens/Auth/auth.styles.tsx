@@ -29,12 +29,12 @@ margin-bottom: 20px;
 `
 
 export const AuthTitle = styled(CustomText)`
-font-size: 18px;
+font-size: 20px;
 color: ${props => props.theme.palette.text.main};
 `
 
 export const Subtitle = styled(CustomText)`
-font-size: 16px;
+font-size: 18px;
 color: ${props => props.theme.palette.text.grey};
 margin-bottom: 15px;
 `
@@ -49,5 +49,5 @@ margin-top: 10px;
 
 export const ForgotPasswordText = styled(CustomText)`
 color: ${props => props.theme.palette.text.light};
-font-size: 12px;
+font-size: 14px;
 `

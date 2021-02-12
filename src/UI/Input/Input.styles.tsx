@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 export const CustomInput = styled.TextInput`
 width: 100%;
 border-width: 0px;
-font-size:14px;
+font-size:16px;
 border-bottom-width:1px;
 border-bottom-color: ${props => props.theme.palette.text.grey};
 color: ${props => props.theme.palette.text.main};

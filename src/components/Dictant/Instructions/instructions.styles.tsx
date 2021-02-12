@@ -28,6 +28,7 @@ export const InstructionsWrapper = styled.View<InsctructionsProps>`
 export const InstructionsText = styled(CustomText)`
     width: 80%;
     color: #5A5A5A;
+    font-size: 16px;
 `
 
 export const ButtonWrapper =styled.TouchableOpacity<CloseButtonProps>`

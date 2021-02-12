@@ -10,7 +10,7 @@ padding: 20px;
 
 
 export const InfoHeader = styled(CustomText)`
-font-size: 16px;
+font-size: 18px;
 color: ${props => props.theme.palette.text.main};
 margin-bottom: 24px;
 `
@@ -26,7 +26,7 @@ margin-bottom: 17px;
 
 export const InfoText = styled(CustomText)`
 color: ${props => props.theme.palette.text.main}; 
-font-size: 14px;
+font-size: 16px;
 `
 
 

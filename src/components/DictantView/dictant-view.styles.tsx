@@ -22,12 +22,12 @@ background-color: white;
 
 
 export const DictantText = styled.Text`
-font-size: 14px;
+font-size: 16px;
 line-height: 17px;
 color: ${props => props.theme.palette.text.main};
 `
 export const DictantTextContainer = styled.Text`
-font-size: 14px;
+font-size: 16px;
 line-height: 17px;
 color: ${props => props.theme.palette.text.main};
 position: relative;

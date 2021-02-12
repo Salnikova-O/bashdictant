@@ -22,7 +22,7 @@ border-bottom-color: ${props => props.theme.palette.buttons.primary};
 `
 
 export const OptionText = styled(CustomText)<OptionProps>`
-font-size: 16px;
+font-size: 18px;
 color: ${props => props.active? props.theme.palette.text.main: props.theme.palette.text.grey};
 `
 

@@ -29,5 +29,5 @@ margin-bottom: ${props => props.marginBottom? props.marginBottom : 0}px;
 
 export const ButtonText = styled.Text<ButtonProps>`
 color: ${props => props.font};
-font-size: ${props => props.height==='50px'? '18px': '16px'};
+font-size: ${props => props.height==='50px'? '20px': '18px'};
 `

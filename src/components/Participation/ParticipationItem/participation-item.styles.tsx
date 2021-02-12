@@ -33,7 +33,7 @@ width: 6%;
 `
 export const TableText = styled(CustomText)`
 color: ${props => props.theme.palette.text.grey};
-font-size: 12px;
+font-size: 14px;
 `
 
 

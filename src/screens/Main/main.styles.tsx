@@ -17,7 +17,7 @@ width: 100%;
 `
 
 export const Title = styled(CustomText)`
-font-size: 16px;
+font-size: 18px;
 text-align: center;
 width: 100%;
 max-width: 270px;

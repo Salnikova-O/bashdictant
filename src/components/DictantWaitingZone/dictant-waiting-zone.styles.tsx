@@ -17,12 +17,12 @@ height: 300px;
 
 
 export const TimerTitle = styled(CustomText)<ColorProps>`
-    font-size:14px;
+    font-size:16px;
     color: ${props => props.reverse? '#fff': props.theme.palette.text.grey};
 `
 
 export const Time = styled(CustomText)<ColorProps>`
-    font-size:16px;
+    font-size:18px;
     color: ${props => props.reverse? '#fff':props.theme.palette.text.main};
     margin: 24px 0;
 `

@@ -8,7 +8,7 @@ border-radius: 8px;
 `
 
 export const UploadTitle = styled(CustomText)`
-font-size: 14px;
+font-size: 16px;
 margin: 20px 0px 10px 0px;
 text-align: center;
 align-self: center;

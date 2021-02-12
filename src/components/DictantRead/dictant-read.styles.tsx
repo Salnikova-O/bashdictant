@@ -19,7 +19,7 @@ margin-top: 10px;
 `
 
 export const GradeText = styled(CustomText)`
-font-size: 14px;
+font-size: 16px;
 color: ${props => props.theme.palette.text.main};
 margin-right: 15px;
 `

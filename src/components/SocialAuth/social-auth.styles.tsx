@@ -10,7 +10,7 @@ align-items: center;
 
 
 export const Subtitle = styled(CustomText)<SocialButtonProps>`
-font-size: ${props => props.size==='lg'? '16px': '12px'};;
+font-size: ${props => props.size==='lg'? '18px': '14px'};;
 color: ${props => props.theme.palette.text.grey};
 margin: ${props => props.size==='lg'? '30px 0': '20px 0'};;
 `

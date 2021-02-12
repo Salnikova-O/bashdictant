@@ -40,6 +40,6 @@ export const GradeBorder = styled.View<GradeBorderProps>`
 
 
 export const GradeText = styled(CustomText)`
-font-size: 16px;
+font-size: 18px;
 color: #ffffff;
 `
