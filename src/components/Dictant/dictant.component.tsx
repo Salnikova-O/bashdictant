@@ -306,6 +306,11 @@ if (Platform.OS === 'android') {
         dictantInputRef.current?.focus()
     }
 
+    const handleCloseInstructions = () => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+        setInstructionsShown(false)
+    }
+
     return (
         <Container
         edges={['bottom']}
@@ -328,7 +333,7 @@ if (Platform.OS === 'android') {
                         </Header> */}
                         <Instructions
                         isShown={instructionsShown}
-                        close={() => setInstructionsShown(false)}
+                        close={handleCloseInstructions}
                         />
                         <VideoContainer>
                             <YoutubePlayer

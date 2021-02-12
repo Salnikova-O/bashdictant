@@ -19,7 +19,7 @@ export const InstructionsWrapper = styled.View<InsctructionsProps>`
     background-color: #FBFBFB;
     max-height: ${props => props.isShown ? '200px' : '0px'};
 
-    padding: 19px;
+    padding: ${props => props.isShown ? '19px' : '0px'};
     align-items: center;
     justify-content: space-between;
     opacity: ${props => props.isShown ? 1 : 0};
@@ -31,6 +31,8 @@ export const InstructionsText = styled(CustomText)`
 `
 
 export const ButtonWrapper =styled.TouchableOpacity<CloseButtonProps>`
+    /* height: ${props => props.isOpen ? '42px' : '0px'};
+    width: ${props => props.isOpen ? '42px' : '0px'}; */
     height: 42px;
     width: 42px;
     border-radius: 6px;
