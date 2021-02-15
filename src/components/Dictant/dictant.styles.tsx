@@ -63,6 +63,7 @@ width:100%;
 color: ${props => props.theme.palette.text.grey};
 font-size: 16px;
 padding:0;
+
 `
 export const InfoContainer = styled.View`
 flex:1;

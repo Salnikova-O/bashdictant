@@ -16,7 +16,7 @@ padding:24px;
 position: relative;
 overflow: hidden;
 height: 574px;
-background-color: white;
+background-color: rgba(255, 255, 255, 0.6);
 
 `
 

@@ -34,7 +34,8 @@ const Fallback: React.FC = () => {
             height: height-50,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: theme.palette.background.main
+            backgroundColor: 'rgba(255, 255, 255, 0.6)'
+            // backgroundColor: theme.palette.background.main
         }}
         >
             <Animated.View
