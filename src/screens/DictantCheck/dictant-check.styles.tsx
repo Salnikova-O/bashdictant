@@ -53,3 +53,17 @@ font-size: 16px;
 text-align: center;
 margin-bottom: 30px;
 `
+
+export const GradeContainer = styled.View`
+flex-direction: row;
+align-items: center;
+width:100%;
+margin-bottom: 15px;
+margin-top: 10px;
+`
+
+export const GradeText = styled(CustomText)`
+font-size: 16px;
+color: ${props => props.theme.palette.text.main};
+margin-right: 15px;
+`

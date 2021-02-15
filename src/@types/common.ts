@@ -191,7 +191,8 @@ export interface ILanguage {
     upload: string,
     gradeText: {
         title:string,
-        noGrade: string
+        noGrade: string,
+        teacherGrade: string,
     },
     getCertificate: string,
     comment: string,
@@ -228,6 +229,7 @@ export interface IStudent extends IUser {
     format_dictation: 'offline'|'online'|'video',
     status: DictantStatus
     level: 'start'|'advanced'|'dialect'
+    rating: 0|1|2|3| 4| 5
 }
 
 

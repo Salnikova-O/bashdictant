@@ -24,7 +24,8 @@ export type MainStackParamList = {
     Registration: {},
     Personal: {},
     DictantCheck: {
-        student: IStudent
+        student: IStudent,
+        dictantStatus: string
     }
   };
 

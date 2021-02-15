@@ -201,8 +201,9 @@ export const languages:Languages = {
         },
         upload: 'Uploading...',
         gradeText: {
-            title: 'Your grade',
-            noGrade: 'Dictation is being graded'
+            title: 'Your mark',
+            noGrade: 'Dictation is being marked',
+            teacherGrade: 'Mark'
         },
         getCertificate: 'Get your certificate',
         comment: 'Your comment',
@@ -416,7 +417,8 @@ export const languages:Languages = {
         upload: 'Идет загрузка файлов...',
         gradeText: {
             title: 'Ваша оценка',
-            noGrade: 'Диктант проверяется'
+            noGrade: 'Диктант проверяется',
+            teacherGrade: 'Оценка',
         },
         getCertificate: 'Получить сертификат',
         comment: 'Комментарий',
@@ -630,7 +632,8 @@ export const languages:Languages = {
         upload: 'Файлдарҙы күсереү бара...',
         gradeText: {
             title: 'Һеҙҙең баһа',
-            noGrade: 'Диктант тикшерелә'
+            noGrade: 'Диктант тикшерелә',
+            teacherGrade: 'Баһа',
         },
         getCertificate: 'Сертификат алырға',
         comment: 'Аңлатма',

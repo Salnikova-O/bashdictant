@@ -57,7 +57,7 @@ const ParticipationItem: React.FC<ItemProps> = ({user, index, togglePopup, pinne
     const openDictant = () => {
         
         if ((user as IStudent).status&&((user as IStudent).status==='Проверяется'||(user as IStudent).status==='Проверен'||(user as IStudent).status==='Отклонен')&&currentUser?.role==='teacher'&&pinned) {
-            navigation.navigate('DictantCheck', {student: JSON.stringify(user)})
+            navigation.navigate('DictantCheck', {student: JSON.stringify(user), dictantStatus: (user as IStudent).status})
         }
     }
 

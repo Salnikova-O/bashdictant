@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import {Toast} from 'native-base';
 import {Overlay} from 'react-native-elements';
-import {Platform, UIManager, LayoutAnimation} from 'react-native';
+import {Platform, UIManager, LayoutAnimation, View} from 'react-native';
 
 import { GradeTypes, IStudent } from '../../@types/common';
 import DictantView from '../../components/DictantView/dictant-view.components';
@@ -22,12 +22,15 @@ import {
     HeaderText,
     InnerContainer,
     InfoContainer,
-    InfoText
+    InfoText,
+    GradeContainer,
+    GradeText
 } from './dictant-check.styles';
 import { useSelector } from 'react-redux';
 import { userSelectors } from '../../redux/user/user.selectors';
 import FileDownload from '../../components/FileDownload/file-download.component';
 import BackgroundImage from '../../components/BackgroundImage/background-image.component';
+import Grade from '../../UI/Grade/grade.component';
 
 
 if (Platform.OS === 'android') {
@@ -56,6 +59,7 @@ const DictantCheck: React.FC = () => {
 
 
     useEffect(() => {
+        if (student.rating !== 0) setGrade(student.rating)
         axios.get(`${API_URL}/dictation/${student.id}`,{
             headers: {
                 "X-api-token": `${jwt}`
@@ -93,6 +97,7 @@ const DictantCheck: React.FC = () => {
                 })
             } else {
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+                // setGrade(response.data.rating)
                 setFiles(response.data.names)
             }
         })
@@ -223,7 +228,9 @@ const DictantCheck: React.FC = () => {
                     <FileDownload files={files} studentId={student.id}/>
                     :null
                 }
-                <GradePicker
+                {route.params.dictantStatus === 'Проверяется' ? 
+                <View>
+                    <GradePicker
                 currentGrade={grade}
                 changeGrade={changeGrade}
                 />
@@ -234,6 +241,20 @@ const DictantCheck: React.FC = () => {
                 font={theme.palette.text.primary}
                 onPress={handleSendResults}
                 />
+                </View>
+                : 
+                route.params.dictantStatus === 'Проверен' ? 
+                    grade?
+                    <GradeContainer>
+                        <GradeText>{language.gradeText.teacherGrade}:</GradeText>
+                        <Grade
+                        grade={grade}
+                        active={true}
+                        />
+                    </GradeContainer>  
+                    : null
+                    : null  
+            }
             </InnerContainer>
             <Overlay
             isVisible={showSuccess}
