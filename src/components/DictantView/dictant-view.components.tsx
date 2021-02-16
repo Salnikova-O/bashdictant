@@ -36,6 +36,7 @@ interface DictantProps {
     saveMarker?:any, 
     deleteMarker?: (index:number) => void,
     grade?:any
+    dictantStatus?: string
 }
 const numberOfLines = 30
 
@@ -46,7 +47,8 @@ const DictantView:React.FC<DictantProps> = ({
     createMarker,
     deleteMarker,
     saveMarker,
-    grade
+    grade,
+    dictantStatus
 }) => {
     const [lines, setPages] = useState<any>([])
     const [currentPage, setCurrentPage]= useState(1)
@@ -61,6 +63,7 @@ const DictantView:React.FC<DictantProps> = ({
     const {width} = useSafeAreaFrame()
 
     useEffect(() => {
+        console.log(dictantStatus)
         
         if (dictant) {
             setMarkers(dictant.markers)
@@ -150,7 +153,7 @@ const DictantView:React.FC<DictantProps> = ({
                                                 marker?
                                                 <MarkerContainer
                                                 ref={markerRefs[wordIndex]}
-                                                onPress={() =>openPopover(markerRefs[wordIndex], marker)}
+                                                onPress={() =>openPopover(markerRefs[wordIndex], marker) }
                                                 >
                                                     <PinSVg height={30}/>
                                                 </MarkerContainer>
@@ -238,6 +241,7 @@ const DictantView:React.FC<DictantProps> = ({
                     {
                         popover?
                         <Popover
+                        editDisabled={dictantStatus !== 'Проверяется'}
                         index={popover.marker.position}
                         onDelete={deleteMarker}
                         saveMarker={saveMarker}

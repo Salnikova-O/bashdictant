@@ -142,7 +142,7 @@ export const languages:Languages = {
             expert: 'Expert'
         },
         dictant: {
-            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить работу одну или более страниц.',
+            instructions: 'The dictant can be written by typing in the text box using your device\'s keyboard or by uploading a text file',
             previousPage: 'Previous page',
             nextPage: 'Next page',
             sendResult: 'Send result',
@@ -357,7 +357,7 @@ export const languages:Languages = {
             expert: 'Эксперт'
         },
         dictant: {
-            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить работу одну или более страниц.',
+            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить одну или более страниц.',
             previousPage: 'Предыдущая страница',
             nextPage: 'Следующая страница',
             sendResult: 'Отправить результат',
@@ -572,7 +572,7 @@ export const languages:Languages = {
             expert: 'Эксперт'
         },
         dictant: {
-            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить работу одну или более страниц.',
+            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить одну или более страниц.',
             previousPage: 'Алдағы бит',
             nextPage: 'Киләһе бит',
             sendResult: 'Һөҙөмтәне ебәрергә',

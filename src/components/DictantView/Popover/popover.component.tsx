@@ -18,13 +18,14 @@ interface PopoverProps {
     index: number,
     saveMarker: (marker: {text:string, position:number}) => void,
     onClose: () => void
+    editDisabled?: boolean
 }
 
 
 
 
 
-const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker, onClose}) => {
+const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker, onClose, editDisabled}) => {
     const [markerText, setMarkerText]= useState('')
     const ref = useRef<string>(text)
     const delRef = useRef(false)
@@ -52,20 +53,25 @@ const Popover: React.FC<PopoverProps> = ({onDelete,text, index,saveMarker, onClo
                 currentUser?.role==='teacher'?
                 <InputContainer>
                     <CustomTextInput
+                    editable={!editDisabled}
                     value={markerText}
                     onChangeText={handleChange}
                     multiline={true}
                     placeholder={language.comment}
                     />
-                    <IconButton
-                    onPress={() => {
-                        delRef.current=true
-                        onDelete? onDelete(index) :null
-                        onClose()
-                    }}
-                    >
-                        <TrashSVG height={16} width={16}/>
-                    </IconButton>
+                    {
+                        editDisabled ?
+                        null :
+                        <IconButton
+                        onPress={() => {
+                            delRef.current=true
+                            onDelete? onDelete(index) :null
+                            onClose()
+                        }}
+                        >
+                            <TrashSVG height={16} width={16}/>
+                        </IconButton>
+                    }
                 </InputContainer>
                 : 
                 <InputContainer>

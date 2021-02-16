@@ -220,6 +220,7 @@ const DictantCheck: React.FC = () => {
                     createMarker={createMarker}
                     deleteMarker={deleteMarker}
                     saveMarker={saveMarker}
+                    dictantStatus={student.status}
                     />
                     :null
                 }
