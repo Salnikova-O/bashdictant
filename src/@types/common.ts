@@ -46,7 +46,7 @@ export interface ILanguage {
                 online: string,
                 video: string,
                 offline: string,
-                send: string,
+                save: string,
                 chooseType: string,
                 addExpert: string,
                 add: string,
@@ -60,7 +60,7 @@ export interface ILanguage {
                 middleName: string,
                 city: string,
                 jobTitle: string,
-                send: string
+                save: string
             },
             student: {
                 email: string,
@@ -70,7 +70,7 @@ export interface ILanguage {
                 firstName: string,
                 middleName: string,
                 city: string,
-                send: string,
+                save: string
                 level: {
                     choose: string,
                     start: string,

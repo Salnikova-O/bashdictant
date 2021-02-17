@@ -357,7 +357,7 @@ const OrganizerProfile: React.FC = () => {
                         bg={theme.palette.buttons.primary}
                         font={theme.palette.text.primary}
                         height='50px'
-                        text={language.registration.tabs.organizer.send}
+                        text={language.registration.tabs.organizer.save}
                         onPress={handleSubmit}
                         marginTop={10}
                         />

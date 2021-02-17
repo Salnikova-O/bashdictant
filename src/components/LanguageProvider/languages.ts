@@ -58,7 +58,7 @@ export const languages:Languages = {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
-                    send: 'Send',
+                    save: 'Save',
                     chooseType: 'Choose dictation type:',
                     addExpert: 'Add Expert',
                     add: 'Add'
@@ -72,7 +72,7 @@ export const languages:Languages = {
                     middleName: 'Middle name',
                     city: 'City',
                     jobTitle: 'Place of work',
-                    send: 'Send'
+                    save: 'Save'
                 },
                 student: {
                     email: 'Email',
@@ -82,7 +82,7 @@ export const languages:Languages = {
                     firstName: 'First name',
                     middleName: 'Middle name',
                     city: 'City',
-                    send: 'Send',
+                    save: 'Save',
                     level: {
                         advanced: 'Advanced',
                         choose: 'Choose you level',
@@ -273,7 +273,7 @@ export const languages:Languages = {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
-                    send: 'Отправить',
+                    save: 'Сохранить',
                     chooseType: 'Выбор формата диктанта:',
                     addExpert: 'Добавить эксперта',
                     add: 'Добавить'
@@ -287,7 +287,7 @@ export const languages:Languages = {
                     middleName: 'Отчество',
                     city: 'Город или населенный пункт написания диктанта',
                     jobTitle: 'Должность, место работы',
-                    send: 'Отправить'
+                    save: 'Сохранить'
                 },
                 student: {
                     email: 'Адрес электронной почты',
@@ -297,7 +297,7 @@ export const languages:Languages = {
                     firstName: 'Имя',
                     middleName: 'Отчество',
                     city: 'Город или населенный пункт написания диктанта',
-                    send: 'Отправить',
+                    save: 'Сохранить',
                     level: {
                         advanced: 'Продвинутый уровень',
                         choose: 'Выберите свой  уровень',
@@ -488,7 +488,7 @@ export const languages:Languages = {
                     online: `Участие онлайн. (участники пишут текст диктанта на сайте)`,
                     video: `Участники слушают диктант онлайн и пишут под диктовку видеотрансляции.`,
                     offline: `Организатор определяет диктора на месте, оффлайн участие.`,
-                    send: 'Ебәрергә',
+                    save: 'Һаҡлау',
                     chooseType: 'Диктант форматын һайлау:',
                     addExpert: 'Добавить эксперта',
                     add: 'Добавить'
@@ -502,7 +502,7 @@ export const languages:Languages = {
                     middleName: 'Атаһының исеме',
                     city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
                     jobTitle: 'Должность, место работы',
-                    send: 'Ебәрергә'
+                    save: 'Һаҡлау'
                 },
                 student: {
                     email: 'Электрон почтаның адресы',
@@ -512,7 +512,7 @@ export const languages:Languages = {
                     firstName: 'Исем',
                     middleName: 'Атаһының исеме',
                     city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
-                    send: 'Ебәрергә',
+                    save: 'Һаҡлау',
                     level: {
                         advanced: 'Юғары кимәл',
                         choose: 'Үҙеңдең кимәлеңде һайлау',
