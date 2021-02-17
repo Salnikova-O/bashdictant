@@ -287,7 +287,7 @@ const StudentProfile: React.FC = () => {
                         bg={theme.palette.buttons.primary}
                         font={theme.palette.text.primary}
                         height='50px'
-                        text={language.registration.tabs.student.send}
+                        text={language.registration.tabs.student.save}
                         onPress={handleSubmit}
                         marginTop={10}
                         />
