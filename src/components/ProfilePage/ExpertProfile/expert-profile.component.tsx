@@ -250,7 +250,7 @@ const ExpertProfile: React.FC = () => {
                         bg={theme.palette.buttons.primary}
                         font={theme.palette.text.primary}
                         height='50px'
-                        text={language.registration.tabs.expert.send}
+                        text={language.registration.tabs.expert.save}
                         onPress={handleSubmit}
                         marginTop={10}
                         />
