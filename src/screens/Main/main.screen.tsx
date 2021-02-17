@@ -51,7 +51,7 @@ const MainScreen:React.FC = () => {
 
     useFocusEffect(
         React.useCallback(() => {
-            axios.get(`${API_URL}/timedictation?level=start`)
+            axios.get(`${API_URL}/timedictation?level=main`)
             .then((response) => {
                 setVideoId(parseYoutubeURL(response.data.url))
                 setDictantStart(response.data.time)
