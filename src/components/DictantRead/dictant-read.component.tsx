@@ -46,7 +46,7 @@ const DictantRead: React.FC = () => {
                     setCurrentFiles(response.data.names)
             }
             if (response.data.rating) {
-                setGrade(response.data.rating)
+                if (response.data.rating !== 0) setGrade(response.data.rating)
             }
             console.log(response.data.send_cert)
             setCertReceived(response.data.send_cert)
