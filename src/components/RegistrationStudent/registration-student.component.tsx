@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import RNPickerSelect from 'react-native-picker-select';
-import {StyleSheet, Linking} from 'react-native';
+import {StyleSheet, Linking, Pressable} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Toast} from 'native-base';
 import {CheckBox} from 'react-native-elements';
@@ -226,7 +226,14 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
                             { label:language.registration.tabs.student.level.advanced, value:'advanced' },
                             { label:language.registration.tabs.student.level.dialect, value:'dialect' },
                         ]}
-                        Icon={ArrowDownSVG}
+                        Icon={() => {
+                            return  (
+                            <Pressable onPress={() => pickerRef.current?.togglePicker()}>
+                                 <ArrowDownSVG />
+                             </Pressable>
+                         )
+                         }
+                        }
                         style={pickerSelectStyles(width)}
                         useNativeAndroidPickerStyle={false}
                         />

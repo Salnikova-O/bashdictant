@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
-import {Platform, UIManager, StyleSheet} from 'react-native';
+import {Platform, UIManager, StyleSheet, Pressable} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Toast} from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
@@ -278,7 +278,14 @@ const StudentProfile: React.FC = () => {
                             { label:language.registration.tabs.student.level.advanced, value:'advanced' },
                             { label:language.registration.tabs.student.level.dialect, value:'dialect' },
                         ]}
-                        Icon={ArrowDownSVG}
+                        Icon={() => {
+                           return  (
+                           <Pressable onPress={() => pickerRef.current?.togglePicker()}>
+                                <ArrowDownSVG />
+                            </Pressable>
+                        )
+                        }
+                        }
                         style={pickerSelectStyles(width, focusLevel)}
                         useNativeAndroidPickerStyle={false}
                         />

@@ -60,7 +60,8 @@ export interface ILanguage {
                 middleName: string,
                 city: string,
                 jobTitle: string,
-                save: string
+                save: string,
+                send: string
             },
             student: {
                 email: string,
@@ -70,7 +71,8 @@ export interface ILanguage {
                 firstName: string,
                 middleName: string,
                 city: string,
-                save: string
+                save: string,
+                send: string
                 level: {
                     choose: string,
                     start: string,

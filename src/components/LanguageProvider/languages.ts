@@ -83,6 +83,7 @@ export const languages:Languages = {
                     middleName: 'Middle name',
                     city: 'City',
                     save: 'Save',
+                    send: 'Send',
                     level: {
                         advanced: 'Advanced',
                         choose: 'Choose you level',
@@ -287,7 +288,8 @@ export const languages:Languages = {
                     middleName: 'Отчество',
                     city: 'Город или населенный пункт написания диктанта',
                     jobTitle: 'Должность, место работы',
-                    save: 'Сохранить'
+                    save: 'Сохранить',
+                    send: 'Отправить',
                 },
                 student: {
                     email: 'Адрес электронной почты',
@@ -298,6 +300,7 @@ export const languages:Languages = {
                     middleName: 'Отчество',
                     city: 'Город или населенный пункт написания диктанта',
                     save: 'Сохранить',
+                    send: 'Отправить',
                     level: {
                         advanced: 'Продвинутый уровень',
                         choose: 'Выберите свой  уровень',
@@ -357,7 +360,7 @@ export const languages:Languages = {
             expert: 'Эксперт'
         },
         dictant: {
-            instructions: 'Уважаемый пользователь! Вы можете написать работу в текстовом поле с использованием клавиатуры устройства или загрузить одну или более страниц.',
+            instructions: 'Уважемый пользователь! У Вас есть возможность написать работу в текстовом поле или загрузить файлом одну или более страниц.',
             previousPage: 'Предыдущая страница',
             nextPage: 'Следующая страница',
             sendResult: 'Отправить результат',
@@ -502,7 +505,8 @@ export const languages:Languages = {
                     middleName: 'Атаһының исеме',
                     city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
                     jobTitle: 'Должность, место работы',
-                    save: 'Һаҡлау'
+                    save: 'Һаҡлау',
+                    send: 'Ебәреү',
                 },
                 student: {
                     email: 'Электрон почтаның адресы',
@@ -513,6 +517,7 @@ export const languages:Languages = {
                     middleName: 'Атаһының исеме',
                     city: 'Диктант яҙыуҙың ҡалаһы йәки тораҡ урыны',
                     save: 'Һаҡлау',
+                    send: 'Ебәреү',
                     level: {
                         advanced: 'Юғары кимәл',
                         choose: 'Үҙеңдең кимәлеңде һайлау',
