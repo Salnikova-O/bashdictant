@@ -22,7 +22,7 @@ const GetTooltip = (
     const marker = useMemo(() => dictant?.markers.find((mark:any) => mark.position===index), [dictant])
     const theme = useTheme()
 
-    console.log('render')
+    // console.log('render')
 
     return (
         <Tooltip

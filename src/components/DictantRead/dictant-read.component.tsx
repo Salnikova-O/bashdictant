@@ -27,7 +27,7 @@ const DictantRead: React.FC = () => {
     const [grade, setGrade] = useState<GradeTypes|null>(null)
     const [certReceived, setCertReceived] = useState(false)
 
-    console.log(grade)
+    // console.log(grade)
 
     useEffect(() => {
         axios.get(`${API_URL}/cabinet/student/info`,{

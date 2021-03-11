@@ -63,7 +63,7 @@ const DictantView:React.FC<DictantProps> = ({
     const {width} = useSafeAreaFrame()
 
     useEffect(() => {
-        console.log(dictantStatus)
+        // console.log(dictantStatus)
         
         if (dictant) {
             setMarkers(dictant.markers)

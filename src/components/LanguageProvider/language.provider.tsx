@@ -15,7 +15,7 @@ const LanguageContext = React.createContext<ContextProps|null>(null);
 
 const LanguageProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const language = useSelector(settingsSelectors.language)
-    console.log(language)
+    // console.log(language)
 
     return (
         <LanguageContext.Provider

@@ -128,7 +128,7 @@ if (Platform.OS === 'android') {
         for (let file of newFiles) {
             if (!filesForUpload.find(f => file.name===f.name)) {
                 fileSize = file.size + fileSize
-                console.log(fileSize)
+                // console.log(fileSize)
                 if ( fileSize > 30000000 ) {
                                 Toast.show({
                                 text: language.errors.fileSize,
@@ -147,7 +147,7 @@ if (Platform.OS === 'android') {
             }
         }
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-        console.log(scrollRef.current)
+        // console.log(scrollRef.current)
         setTimeout(() => {
             scrollRef.current?.scrollToPosition(10000,10000,true)
         }, 200)
@@ -203,11 +203,12 @@ if (Platform.OS === 'android') {
                 const blobData:any = []
                 files.forEach(file => {
                     formData.append('file', file)
-                    console.log(RNFetchBlob.wrap(file.uri.replace('file://','')))
+                    // console.log(decodeURIComponent(file.uri))
+                    // console.log(RNFetchBlob.wrap(file.uri.replace('file://','')))
                     blobData.push({
                         name : 'file',
                         filename : file.name,
-                        data: Platform.OS==='ios'? RNFetchBlob.wrap(file.uri.replace('file://','')): RNFetchBlob.wrap(file.uri)
+                        data: Platform.OS === 'ios' ? decodeURIComponent(file.uri.replace('file://','')) : RNFetchBlob.wrap(file.uri)
                         
                     })
                 })

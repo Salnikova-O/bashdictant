@@ -14,7 +14,7 @@ const UploadProgress: React.FC<ProgressProps> = ({progress}) => {
     const {width,height} = useSafeAreaFrame();
     const {language} = useLanguage()
 
-    console.log(progress)
+    // console.log(progress)
 
     return (
         <View

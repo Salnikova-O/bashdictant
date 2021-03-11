@@ -21,7 +21,7 @@ const Header: React.FC = () => {
     const theme = useTheme()
     const dispatch = useDispatch()
 
-    console.log(theme)
+    // console.log(theme)
 
     const customStyles = {
         triggerText: {
