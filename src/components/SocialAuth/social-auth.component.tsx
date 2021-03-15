@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import {Linking} from 'react-native';
+import {Image, Platform} from 'react-native';
 import axios from 'axios';
 import {Toast} from 'native-base';
 
@@ -25,13 +25,16 @@ import {
     FB_AUTH_URL,
     FB_AUTH_URL_STUDENT,
     FB_AUTH_URL_TEACHER,
-    API_URL
+    API_URL,
+    APPLE_AUTH_URL,
+    APPLE_AUTH_URL_STUDENT
 } from '../../config';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelectors } from '../../redux/user/user.selectors';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../LanguageProvider/language.provider';
 import { closeProgressModal, openProgressModal } from '../../redux/modals/modals.actions';
+import AppleSVG from '../../assets/apple.svg';
 
 
 
@@ -214,6 +217,18 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size}) =>{
     }
 
 
+    const handleAppleAuth = () => {
+        WebBrowser.openAuthSessionAsync(currentTab===1?APPLE_AUTH_URL_STUDENT: APPLE_AUTH_URL, 'bashdikt://')
+        .then(res => {
+            console.log(res)
+            handleSocialAuth(res)
+        })
+        .catch(err => {
+            console.log('err',err)
+        })
+    }
+
+
     return (
         <SocialAuthContainer>
             <Subtitle
@@ -243,6 +258,16 @@ const SocialAuth: React.FC<SocialAuthProps> = ({title, size}) =>{
                 >
                     <OKSVG height={size==='lg'? 25: 18} width={size==='lg'? 25: 18}/>
                 </SocialButton>
+                {
+                    Platform.OS==='ios'&&
+                    <SocialButton 
+                    size={size}
+                    color='#283544'
+                    onPress={handleAppleAuth}
+                    >
+                        <AppleSVG height={size==='lg'? 25: 18} width={size==='lg'? 25: 18}/>
+                    </SocialButton>
+                }
             </SocialButtons>
         </SocialAuthContainer>
     )

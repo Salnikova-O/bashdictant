@@ -10,3 +10,6 @@ export const FB_AUTH_URL_TEACHER = 'https://www.facebook.com/v9.0/dialog/oauth?c
 export const VK_AUTH_URL = 'https://oauth.vk.com/authorize?client_id=7687118&display=page&redirect_uri=https://lk.bashdiktant.ru/api/vk/callback/auth/app&scope=email&response_type=code&v=5.126'
 export const OK_AUTH_URL = 'https://connect.ok.ru/oauth/authorize?client_id=512000641091&scope=VALUABLE_ACCESS;GET_EMAIL&response_type=code&redirect_uri=https://lk.bashdiktant.ru/api/ok/callback/auth/app'
 export const FB_AUTH_URL = 'https://www.facebook.com/v9.0/dialog/oauth?client_id=677170169585903&scope=email&redirect_uri=https://lk.bashdiktant.ru/api/fb/callback/auth/app'
+
+export const APPLE_AUTH_URL_STUDENT = 'https://appleid.apple.com/auth/authorize?client_id=app.bashdictant.com&redirect_uri=https://lk.bashdiktant.ru/api/apple/callback&response_type=code&scope=name%20email&state=sxdcfvgbhn&response_mode=form_post'
+export const APPLE_AUTH_URL = 'https://appleid.apple.com/auth/authorize?client_id=app.bashdictant.com&redirect_uri=https://lk.bashdiktant.ru/api/apple/callback/auth&response_type=code&scope=name%20email&state=sxdcfvgbhn&response_mode=form_post'
