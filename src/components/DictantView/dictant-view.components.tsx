@@ -63,7 +63,7 @@ const DictantView:React.FC<DictantProps> = ({
     const {width} = useSafeAreaFrame()
 
     useEffect(() => {
-        // console.log(dictantStatus)
+        console.log((Math.ceil(lines.length/numberOfLines)))
         
         if (dictant) {
             setMarkers(dictant.markers)
@@ -194,7 +194,7 @@ const DictantView:React.FC<DictantProps> = ({
                 :null
             }
             {
-                lines.length>0?
+                Math.ceil(lines.length/numberOfLines)>1?
                 <PrevNextButtons>
                     <Button
                     bg={theme.palette.buttons.secondary}

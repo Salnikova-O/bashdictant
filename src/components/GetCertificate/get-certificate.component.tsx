@@ -47,6 +47,7 @@ const GetCertificate: React.FC<GetCertificateProps> = ({received, setReceived}) 
     const [isSubmiting, setIsSubmiting] = useState(false)
     const jwt = useSelector(userSelectors.jwt)
     const [error, setError] = useState('')
+    const [modalHeight, setModalHeight] = useState<number>(() => received ? 200 : 450)
 
 
     const interTranslate = translate.interpolate({
@@ -124,7 +125,7 @@ const GetCertificate: React.FC<GetCertificateProps> = ({received, setReceived}) 
             overlayStyle={{
                 width:'90%',
                 maxWidth: 500,
-                height: 450,
+                height: modalHeight,
                 borderRadius: 8,
                 padding: 0
             }}

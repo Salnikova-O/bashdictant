@@ -73,6 +73,7 @@ const AuthScreen: React.FC = () => {
     useEffect(() => {
         if (currentUser) {
             setIsSubmitting(false)
+            console.log('In if')
             navigation.reset({
                 index: 0,
                 routes: [{ name: 'Personal' }],

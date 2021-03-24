@@ -21,21 +21,22 @@ const Header: React.FC = () => {
     const theme = useTheme()
     const dispatch = useDispatch()
 
-    // console.log(theme)
-
     const customStyles = {
         triggerText: {
             fontSize: 14,
-            color: theme.palette.text.main
+            color: theme.palette.text.main,
+            textAlign: 'center'
         },
         triggerTouchable: {
             borderBottomWidth: 1,
-            borderColor: theme.palette.buttons.primary
+            borderColor: theme.palette.buttons.primary,
         },
         triggerWrapper: {
             borderBottomWidth: 1,
-            borderColor: theme.palette.buttons.primary
-        }
+            borderColor: theme.palette.buttons.primary,
+            width: 35,
+        },
+        
     }
 
     
@@ -48,14 +49,14 @@ const Header: React.FC = () => {
                 <Menu>
                     <MenuTrigger 
                     text={`${language.languageName}`}
-                    customStyles={customStyles}
+                    customStyles={(customStyles as any)}
                     />
                     <MenuOptions
                     optionsContainerStyle={{
                         padding: 10,
                         width: 100,
                         borderRadius: 5,
-                        backgroundColor: theme.palette.background.main
+                        backgroundColor: theme.palette.background.main,
                     }}
                     >
                         <MenuOption 

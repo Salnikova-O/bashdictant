@@ -47,8 +47,6 @@ const MainScreen:React.FC = () => {
         return "XTaPHuXGLvA"
     }
 
-
-
     useFocusEffect(
         React.useCallback(() => {
             axios.get(`${API_URL}/timedictation?level=main`)

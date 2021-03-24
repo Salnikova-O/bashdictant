@@ -49,7 +49,8 @@ const user:IStudent = {
     format_dictation: 'offline',
     role: 'student',
     status: 'Проверяется',
-    level: 'start'
+    level: 'start',
+    rating: 4
 }
 
 if (Platform.OS === 'android') {
@@ -174,7 +175,7 @@ if (Platform.OS === 'android') {
 
     const handleSendDictant = () => {
         if (!isSubmiting) {
-            if (files.length===0&&!dictant) {
+            if (files.length===0&&!dictant.trim()) {
                 Toast.show({
                     text: language.errors.noDictant,
                     buttonText: 'OK',
@@ -185,7 +186,7 @@ if (Platform.OS === 'android') {
                         backgroundColor: '#ff7961',
                     }
                 })
-            } else if (files.length>0&&dictant) {
+            } else if (files.length>0&&dictant.trim()) {
                 Toast.show({
                     text: language.errors.chooseType,
                     buttonText: 'OK',
@@ -213,7 +214,7 @@ if (Platform.OS === 'android') {
                     })
                 })
                 
-                RNFetchBlob.fetch('POST', `${API_URL}/dictation/upload`,{
+                RNFetchBlob.fetch('POST', `${API_URL}/dictation/upload`,{   
                     "X-api-token": `${jwt}`,
                     "Content-Type": 'multipart/form-data',
                 }, blobData)

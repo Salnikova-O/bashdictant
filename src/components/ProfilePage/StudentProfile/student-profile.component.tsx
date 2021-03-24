@@ -308,7 +308,7 @@ const StudentProfile: React.FC = () => {
 
 const pickerSelectStyles = (width:number, focus:boolean) => StyleSheet.create({
     inputIOS: {
-      fontSize: 14,
+      fontSize: 16,
       paddingVertical: 8,
       borderBottomWidth: 1,
       borderColor: '#6E6E6E',
@@ -318,7 +318,7 @@ const pickerSelectStyles = (width:number, focus:boolean) => StyleSheet.create({
       width: '100%'
     },
     inputAndroid: {
-        fontSize: 14,
+        fontSize: 16,
         paddingVertical: 8,
         borderBottomWidth: 1,
         borderColor: '#6E6E6E',
@@ -329,7 +329,7 @@ const pickerSelectStyles = (width:number, focus:boolean) => StyleSheet.create({
     },
     placeholder: {
         color: focus? 'red':'#AAAAAA',
-        fontSize: 14
+        fontSize: 16
     },
     viewContainer: {
         width:'100%',

@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState, useRef} from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import { BackHandler } from 'react-native'
 
 import { ScreenContainer } from '../../components/common/ScreenContainer/screen-container.styles';
 import { useLanguage } from '../../components/LanguageProvider/language.provider';
@@ -31,6 +32,15 @@ const PersonalScreen: React.FC = () => {
     const currentUser = useSelector(userSelectors.currentUser)
     const {orientation} = useOrientation()
     const scrollRef:any = useRef(null)
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            return false
+        })
+        return () => BackHandler.removeEventListener('hardwareBackPress', () => {
+            return false
+        })
+    }, [])
 
 
     const getTabNames = (type: string) => {

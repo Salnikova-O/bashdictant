@@ -55,6 +55,7 @@ const validationSchema = (language: ILanguage) => yup.object().shape({
         .oneOf([yup.ref('password')], language.errors.passMatch)
         .required(language.errors.required),
     level: yup.string()
+        .ensure()
         .trim()
         .min(1,language.errors.required)
         .required(language.errors.required),
@@ -75,6 +76,7 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
     const dispatch = useDispatch()
     const emailRef = useRef('')
     const {width} = useSafeAreaFrame()
+    const pickerRef = useRef<RNPickerSelect>(null)
 
 
     const handleSubmitForm = (values: {
@@ -226,6 +228,7 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
                             { label:language.registration.tabs.student.level.advanced, value:'advanced' },
                             { label:language.registration.tabs.student.level.dialect, value:'dialect' },
                         ]}
+                        value={values.level}
                         Icon={() => {
                             return  (
                             <Pressable onPress={() => pickerRef.current?.togglePicker()}>
@@ -280,7 +283,7 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
 
 const pickerSelectStyles = (width:number) => StyleSheet.create({
     inputIOS: {
-      fontSize: 14,
+      fontSize: 16,
       paddingVertical: 8,
       borderBottomWidth: 1,
       borderColor: '#6E6E6E',
@@ -290,7 +293,7 @@ const pickerSelectStyles = (width:number) => StyleSheet.create({
       width: '100%'
     },
     inputAndroid: {
-        fontSize: 14,
+        fontSize: 16,
         paddingVertical: 8,
         borderBottomWidth: 1,
         borderColor: '#6E6E6E',
@@ -301,7 +304,7 @@ const pickerSelectStyles = (width:number) => StyleSheet.create({
     },
     placeholder: {
         color: '#AAAAAA',
-        fontSize: 14
+        fontSize: 16
     },
     viewContainer: {
         width:'100%',

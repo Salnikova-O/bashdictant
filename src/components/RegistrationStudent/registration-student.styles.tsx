@@ -23,7 +23,7 @@ align-items: flex-end;
 export const AgreementLink = styled.TouchableOpacity`
 border-bottom-width: 1px;
 border-bottom-color: ${props => props.theme.palette.buttons.primary};
-margin-left: 5px;
+/* margin-left: 5px; */
 
 `
 
@@ -31,7 +31,7 @@ export const LinkText = styled(AgreementText)`
 color: ${props => props.theme.palette.buttons.primary};
 border-bottom-width: 1px;
 border-bottom-color: ${props => props.theme.palette.buttons.primary};
-margin-left: 5px;
+/* margin-left: 5px; */
 `
 
 

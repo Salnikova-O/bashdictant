@@ -92,7 +92,8 @@ const MainStack = () => {
             name='Main' 
             component={MainScreen} 
             options={{
-                header: () =>null
+                header: () =>null,
+                gestureEnabled: false
             }}
             />
             <Stack.Screen name='Auth' component={AuthScreen}/>
