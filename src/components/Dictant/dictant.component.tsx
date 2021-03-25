@@ -88,7 +88,7 @@ if (Platform.OS === 'android') {
             }
         })
         .then((response) => {
-            if (response.data.status!=='Не написан') {//TODO ===
+            if (response.data.status==='Не написан') {
                 axios.get(`${API_URL}/timedictation?level=${currentUser.level}`)
                 .then((response) => {
                     setVideoId(parseYoutubeURL(response.data.url))
