@@ -25,7 +25,8 @@ const Header: React.FC = () => {
         triggerText: {
             fontSize: 14,
             color: theme.palette.text.main,
-            textAlign: 'center'
+            textAlign: 'center',
+            textAlignVertical: 'bottom'
         },
         triggerTouchable: {
             borderBottomWidth: 1,
@@ -34,7 +35,7 @@ const Header: React.FC = () => {
         triggerWrapper: {
             borderBottomWidth: 1,
             borderColor: theme.palette.buttons.primary,
-            width: 35,
+            width: 40,
         },
         
     }
