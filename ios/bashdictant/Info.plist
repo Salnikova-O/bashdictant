@@ -62,6 +62,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Разрешить $(PRODUCT_NAME) доступ к галерее</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>

@@ -92,6 +92,7 @@ const GetCertificate: React.FC<GetCertificateProps> = ({received, setReceived}) 
 
     const toggleOverlay = () => {
         setShowMenu(c => !c)
+        if(received&&modalHeight===450) setModalHeight(200)
     }
 
     const handleRedirect = () => {

@@ -49,3 +49,31 @@ font-size: 12px;
 color: ${props => props.theme.palette.text.grey};
 
 `
+
+export const FileType = styled.TouchableOpacity`
+width: 100%;
+height: 40px;
+justify-content: center;
+padding: 0 10px;
+`
+
+export const TypeTitle = styled(CustomText)`
+color: ${props => props.theme.palette.text.main};
+font-size: 18px;
+`
+
+export const Backdrop = styled.TouchableWithoutFeedback`
+flex: 1;
+background-color: rgba(0,0,0, 0.6);
+`
+
+export const ModalView = styled.View`
+height: 130px;
+width: 100%;
+padding-top: 10px;
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
+background-color: white;
+position: absolute;
+bottom: 0;
+`

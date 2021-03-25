@@ -37,7 +37,7 @@ import DictantRead from '../DictantRead/dictant-read.component';
 import Fallback from '../Fallback/fallback.component';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Instructions from './Instructions/instructions.component';
-
+import {Image} from 'react-native-image-crop-picker'
 
 const user:IStudent = {
     id: '2',
@@ -72,7 +72,7 @@ if (Platform.OS === 'android') {
       const {language} = useLanguage()
       const {width} = useSafeAreaFrame()
       const [videoId, setVideoId] = useState<string|undefined>(undefined)
-      const [files, setFiles] = useState<DocumentPickerResponse[]>([])
+      const [files, setFiles] = useState<(DocumentPickerResponse&Image)[]>([])
       const theme = useTheme()
       const [elementShown, setElementShown] = useState<'timer'|'write'|'read'|undefined>(undefined)
       const [isSubmiting, setIsSubmiting] = useState(false)
@@ -81,7 +81,6 @@ if (Platform.OS === 'android') {
       const dictantInputRef = useRef<TextInput>(null)
       const [instructionsShown, setInstructionsShown] = useState<boolean>(true)
       
-      
       useEffect(() => {
         axios.get(`${API_URL}/cabinet/student/info`,{
             headers: {
@@ -89,7 +88,7 @@ if (Platform.OS === 'android') {
             }
         })
         .then((response) => {
-            if (response.data.status==='Не написан') {
+            if (response.data.status!=='Не написан') {//TODO ===
                 axios.get(`${API_URL}/timedictation?level=${currentUser.level}`)
                 .then((response) => {
                     setVideoId(parseYoutubeURL(response.data.url))
@@ -120,14 +119,14 @@ if (Platform.OS === 'android') {
         setDictant(text)
     }
 
-    const handleFileChange = (newFiles: DocumentPickerResponse[]) => {
+    const handleFileChange = (newFiles: (DocumentPickerResponse&Image)[]) => {
         let filesForUpload = [...files]
         let fileSize = 0
         filesForUpload.forEach((f) => {
             fileSize = f.size + fileSize
         })
         for (let file of newFiles) {
-            if (!filesForUpload.find(f => file.name===f.name)) {
+            if (!filesForUpload.find(f => file.name===f.name&&file.filename===f.filename)) {
                 fileSize = file.size + fileSize
                 // console.log(fileSize)
                 if ( fileSize > 30000000 ) {
@@ -163,7 +162,7 @@ if (Platform.OS === 'android') {
 
 
     const deleteFile = (fileName: string) => {
-        const newFiles = files.filter((file) => file.name!==fileName)
+        const newFiles = files.filter((file) => file.name!==fileName && file.filename !==fileName)
         if (newFiles.length>0) {
             LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
         } else {
@@ -174,6 +173,15 @@ if (Platform.OS === 'android') {
     }
 
     const handleSendDictant = () => {
+        function getFilePath(file: any){
+            console.log(file)
+             if ( Platform.OS === 'ios' ) {
+                return file.uri ? decodeURIComponent(file.uri.replace('file://','')) : decodeURIComponent(file.sourceURL.replace('file://',''))
+            } else {
+                return RNFetchBlob.wrap(file.uri)
+            }
+        }
+
         if (!isSubmiting) {
             if (files.length===0&&!dictant.trim()) {
                 Toast.show({
@@ -204,12 +212,10 @@ if (Platform.OS === 'android') {
                 const blobData:any = []
                 files.forEach(file => {
                     formData.append('file', file)
-                    // console.log(decodeURIComponent(file.uri))
-                    // console.log(RNFetchBlob.wrap(file.uri.replace('file://','')))
                     blobData.push({
                         name : 'file',
-                        filename : file.name,
-                        data: Platform.OS === 'ios' ? decodeURIComponent(file.uri.replace('file://','')) : RNFetchBlob.wrap(file.uri)
+                        filename : file.name ? file.name : file.filename,
+                        data: getFilePath(file)//Platform.OS === 'ios' ? decodeURIComponent(file.uri.replace('file://','')) : RNFetchBlob.wrap(file.uri)
                         
                     })
                 })

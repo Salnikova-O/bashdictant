@@ -72,7 +72,8 @@ export const languages:Languages = {
                     middleName: 'Middle name',
                     city: 'City',
                     jobTitle: 'Place of work',
-                    save: 'Save'
+                    save: 'Save',
+                    send: 'Send',
                 },
                 student: {
                     email: 'Email',
@@ -153,6 +154,8 @@ export const languages:Languages = {
                 start: 'Elementary level'
             },
             upload: 'Upload your work',
+            uploadDocument: 'Upload document',
+            uploadImage: 'Upload image',
             uploadTitle: 'Uploaded files',
             backToStudents: 'Back to the participants'
         },
@@ -370,6 +373,8 @@ export const languages:Languages = {
                 dialect: 'Северо-западный диалект'
             },
             upload: 'Загрузить работу',
+            uploadDocument: 'Загрузить документ',
+            uploadImage: 'Загрузить изображение',
             uploadTitle: 'Файлы загруженные на проверку',
             backToStudents: 'Назад к списку участников'
         },
@@ -587,6 +592,8 @@ export const languages:Languages = {
                 start: 'Башланғыс кимәл'
             },
             upload: 'Эште тейәргә',
+            uploadDocument: 'Документ тейәргә',
+            uploadImage: 'Һүрәттәр тейәргә',
             uploadTitle: 'Тикшереүгә ҡуйылған файлдар',
             backToStudents: 'Ҡатнашыусылар исемлегенә артҡа'
         },

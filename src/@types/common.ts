@@ -144,6 +144,8 @@ export interface ILanguage {
             dialect: string
         },
         upload: string,
+        uploadDocument: string,
+        uploadImage: string,
         uploadTitle:string,
         backToStudents:string
     },
