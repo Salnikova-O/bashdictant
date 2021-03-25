@@ -83,7 +83,7 @@ const MainStack = () => {
             headerStyle: {
                 shadowColor: 'transparent',
                 elevation: 0,
-                height:20
+                height:25
             },
             headerStatusBarHeight: 0
         })}

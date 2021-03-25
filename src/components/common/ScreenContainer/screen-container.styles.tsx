@@ -8,5 +8,5 @@ background-color: ${props => props.theme.palette.background.main};
 padding: 10px 20px ;
 align-items: center;
 justify-content: flex-start;
-
+margin-top: -1px;
 `

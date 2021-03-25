@@ -28,7 +28,8 @@ const Logout: React.FC<LogoutProps> = ({navigation}) => {
         style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingBottom: 5
         }}
         onPress={handleLogout}
         >
@@ -38,7 +39,7 @@ const Logout: React.FC<LogoutProps> = ({navigation}) => {
                 fontSize: 16,
                 color: theme.palette.text.grey,
                 marginLeft: 10,
-                paddingRight:20
+                paddingRight:20,
             }}
             >
                 {language.navigation.exit}
