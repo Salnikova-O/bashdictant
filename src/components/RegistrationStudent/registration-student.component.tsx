@@ -26,6 +26,7 @@ import { userSelectors } from '../../redux/user/user.selectors';
 import { RegistrationProps } from '../../screens/Registration/registration.screen';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { ILanguage } from '../../@types/common';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -229,17 +230,23 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
                             { label:language.registration.tabs.student.level.dialect, value:'dialect' },
                         ]}
                         value={values.level}
+                        fixAndroidTouchableBug
                         Icon={() => {
                             return  (
                             <Pressable style={{
                                 position: 'absolute', 
                                 right: -10,
                                 bottom: 0,
-                                width: 40,
                                 height: 40,
+                                width: 40,
                                 alignItems: 'center',
-                                justifyContent: 'center'
-                                }} onPress={() => pickerRef.current?.togglePicker()}>
+                                justifyContent: 'center',
+                                }} 
+                                onPress={() => {
+                                    console.log('pressed')
+                                    pickerRef.current?.togglePicker()
+                                }}
+                                >
                                  <ArrowDownSVG />
                              </Pressable>
                          )
@@ -296,7 +303,7 @@ const pickerSelectStyles = (width:number) => StyleSheet.create({
       borderBottomWidth: 1,
       borderColor: '#6E6E6E',
       color: 'black',
-      paddingRight: 45, 
+    //   paddingRight: 45, 
       maxWidth: 500,
       width: '100%'
     },
@@ -306,32 +313,35 @@ const pickerSelectStyles = (width:number) => StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#6E6E6E',
         color: 'black',
-        paddingRight: 45, 
+        // paddingRight: 45, 
         maxWidth: 500,
-        width: '100%'
+        width: '100%',
+
     },
     placeholder: {
         color: '#AAAAAA',
-        fontSize: 16
+        fontSize: 16,
+
     },
     viewContainer: {
         width:'100%',
         alignSelf: 'center',
         maxWidth: 440,
 
-
     },
     iconContainer: {
         height: '100%',
         justifyContent: 'center',
-        paddingRight: 5
+        paddingRight: 5,
     },
     inputIOSContainer: {
-        width: '100%'
+        width: '100%',
+
     },
     inputAndroidContainer: {
         width: width-40,
-        maxWidth: 440
+        maxWidth: 440,
+
     },
 
   });

@@ -272,6 +272,7 @@ const StudentProfile: React.FC = () => {
                             setFieldValue('level', value)
                         }}
                         value={values.level}
+                        fixAndroidTouchableBug
                         placeholder={{label:language.registration.tabs.student.level.choose, value: null}}
                         items={[
                             { label:language.registration.tabs.student.level.start, value:'start' },
@@ -286,7 +287,6 @@ const StudentProfile: React.FC = () => {
                             bottom: 0,
                             width: 40,
                             height: 40,
-                            // backgroundColor: 'yellow',
                             alignItems: 'center',
                             justifyContent: 'center'
                             }} onPress={() => pickerRef.current?.togglePicker()}>
