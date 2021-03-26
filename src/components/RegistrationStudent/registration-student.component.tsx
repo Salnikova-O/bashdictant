@@ -231,7 +231,15 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
                         value={values.level}
                         Icon={() => {
                             return  (
-                            <Pressable onPress={() => pickerRef.current?.togglePicker()}>
+                            <Pressable style={{
+                                position: 'absolute', 
+                                right: -10,
+                                bottom: 0,
+                                width: 40,
+                                height: 40,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                                }} onPress={() => pickerRef.current?.togglePicker()}>
                                  <ArrowDownSVG />
                              </Pressable>
                          )
