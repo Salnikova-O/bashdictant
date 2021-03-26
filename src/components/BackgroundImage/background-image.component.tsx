@@ -16,13 +16,15 @@ const  BackgroundImage: React.FC = () => {
         <View style={{height: screenHeight, position: 'absolute', width: screenWidth}}>
             <ImageSmallSVG  opacity={0.3} height={268} width={268} 
             style={{
-            left: orientation === 'LANDSCAPE' ? (isIOS ? '-15%' : '-15%') : (isIOS ? '-40%' : '5%'), 
-            top: orientation === 'LANDSCAPE' ? '5%' : '5%'}} 
+                left: orientation === 'LANDSCAPE' ? -100 : -150,
+                top: orientation === 'LANDSCAPE' ? -40 : 40
+        }} 
             />
             <ImageBigSVG opacity={0.3} height={470} 
             style={{ 
-            top: orientation === 'LANDSCAPE' ? '-55%' : '-10%', 
-            right: orientation === 'LANDSCAPE' ? (isIOS ? '-40%' : '-40%') : (isIOS ? '15%' : '-15%')}} 
+            top: orientation === 'LANDSCAPE' ? -260 : -80,
+            right: orientation==='LANDSCAPE' ? -300 : 60
+        }} 
             />
         </View>
     )

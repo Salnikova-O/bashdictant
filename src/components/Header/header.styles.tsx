@@ -8,7 +8,7 @@ flex-direction: row;
 justify-content: space-between;
 align-items: center;
 background-color:${props => props.theme.palette.background.main};
-height: 75px;
+min-height: 75px;
 `
 
 export const LanguageContainer = styled.TouchableOpacity`
