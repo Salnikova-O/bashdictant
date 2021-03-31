@@ -170,7 +170,8 @@ export interface ILanguage {
         agreeWithRules: string,
         min6:string,
         min1:string,
-        correctPhone: string
+        correctPhone: string,
+        noInternet: string,
     },
     messages: {
         successRegister: string,

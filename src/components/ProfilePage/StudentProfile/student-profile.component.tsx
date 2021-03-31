@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
-import {Platform, UIManager, StyleSheet, Pressable} from 'react-native';
+import {Platform, UIManager, StyleSheet, Pressable, Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Toast} from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
+import NetInfo from '@react-native-community/netinfo';
 
 import { userSelectors } from '../../../redux/user/user.selectors';
 import {changeUser, clearError} from '../../../redux/user/user.actions';
@@ -83,6 +84,15 @@ const StudentProfile: React.FC = () => {
         extraEmails: [],
         level: ''
     })
+    const [connected, setConnected] = useState<boolean>(true)
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+        if(state.isConnected !== connected && state.isConnected !== null) setConnected(state.isConnected)
+      });
+
+    useEffect(() => {
+        return () => unsubscribe()
+    }, [])
 
 
     useEffect(() => {
@@ -165,13 +175,17 @@ const StudentProfile: React.FC = () => {
         extraEmails: string[],
         level:string
     }) => {
-        if(!isSubmitting&&jwt) {
-            setIsSubmitting(true)
-            dispatch(changeUser({
-                ...values,
-                token: jwt,
-                role: 'student'
-            }))
+        if(connected) {
+            if(!isSubmitting&&jwt) {
+                setIsSubmitting(true)
+                dispatch(changeUser({
+                    ...values,
+                    token: jwt,
+                    role: 'student'
+                }))
+            }
+        } else {
+            Alert.alert(language.errors.noInternet)
         }
     }
 

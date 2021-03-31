@@ -180,7 +180,8 @@ export const languages:Languages = {
             correctPhone: 'Enter correct phone',
             min1: 'At least 1 participant',
             min6: 'At least 6 symbols',
-            passMatch: 'Passwords should match'
+            passMatch: 'Passwords should match',
+            noInternet: 'No Internet connection'
         },
         messages: {
             successRegister: 'You are successfully registered',
@@ -399,7 +400,8 @@ export const languages:Languages = {
             correctPhone: 'Введите корректный номер ',
             min1: 'Минимум 1 участник ',
             min6: 'Минимум 6 символов ',
-            passMatch: 'Пароли должны совпадать '
+            passMatch: 'Пароли должны совпадать ',
+            noInternet: 'Нет подключения к интернету',
         },
         messages: {
             successRegister: 'Вы успешно зарегистрированы',
@@ -618,7 +620,8 @@ export const languages:Languages = {
             correctPhone: 'Дөрөҫ номерҙы индерегеҙ',
             min1: 'Кәмендә 1 ҡатнашыусы',
             min6: 'Кәмендә 6 символ',
-            passMatch: 'Паролдәр тап килергә тейеш'
+            passMatch: 'Паролдәр тап килергә тейеш',
+            noInternet: 'Интернетҡа тоташыу юҡ',
         },
         messages: {
             successRegister: 'Һеҙ теркәлеүҙе уңышлы үттегеҙ',

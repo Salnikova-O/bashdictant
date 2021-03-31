@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
-import {LayoutAnimation, Platform, UIManager} from 'react-native';
+import {Alert, LayoutAnimation, Platform, UIManager} from 'react-native';
 import { useTheme } from 'styled-components';
 import {Toast} from 'native-base';
+import NetInfo from '@react-native-community/netinfo';
 
 import { useLanguage } from '../../LanguageProvider/language.provider';
 import {
@@ -74,6 +75,15 @@ const ExpertProfile: React.FC = () => {
         jobTitle: '',
         extraEmails: []
     })
+    const [connected, setConnected] = useState<boolean>(true)
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+        if(state.isConnected !== connected && state.isConnected !== null) setConnected(state.isConnected)
+      });
+
+    useEffect(() => {
+        return () => unsubscribe()
+    }, [])
 
     useEffect(() => {
         if(currentUser) {
@@ -137,13 +147,17 @@ const ExpertProfile: React.FC = () => {
         jobTitle: string;
         extraEmails: string[]
     }) => {
-        if(!isSubmitting&&jwt) {
-            setIsSubmitting(true)
-            dispatch(changeUser({
-                ...values,
-                token: jwt,
-                role: 'teacher'
-            }))
+        if(connected) {
+            if(!isSubmitting&&jwt) {
+                setIsSubmitting(true)
+                dispatch(changeUser({
+                    ...values,
+                    token: jwt,
+                    role: 'teacher'
+                }))
+            }
+        } else {
+            Alert.alert(language.errors.noInternet)
         }
     }
 

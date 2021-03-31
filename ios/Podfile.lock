@@ -258,6 +258,8 @@ PODS:
   - React-jsinspector (0.63.3)
   - react-native-document-picker (4.1.0):
     - React-Core
+  - react-native-netinfo (6.0.0):
+    - React-Core
   - react-native-orientation-locker (1.2.0):
     - React
   - react-native-safe-area-context (3.1.9):
@@ -425,6 +427,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-orientation-locker (from `../node_modules/react-native-orientation-locker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -530,6 +533,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-orientation-locker:
     :path: "../node_modules/react-native-orientation-locker"
   react-native-safe-area-context:
@@ -646,6 +651,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b56c03e61c0dd5f5801255f2160a815f4a53d451
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
   react-native-document-picker: d870e0a41510b241d5b764e7a2b5ccf129af7967
+  react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-orientation-locker: 47aaa55d59bfc1613804dc22f159e6bb1cca5f30
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865

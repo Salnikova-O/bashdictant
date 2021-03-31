@@ -2,10 +2,11 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import RNPickerSelect from 'react-native-picker-select';
-import {StyleSheet, Linking, Pressable} from 'react-native';
+import {StyleSheet, Linking, Pressable, Alert} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Toast} from 'native-base';
 import {CheckBox} from 'react-native-elements';
+import NetInfo from "@react-native-community/netinfo";
 
 import {clearError, registerUser} from '../../redux/user/user.actions';
 import Input from '../../UI/Input/Input.component';
@@ -78,6 +79,15 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
     const emailRef = useRef('')
     const {width} = useSafeAreaFrame()
     const pickerRef = useRef<RNPickerSelect>(null)
+    const [connected, setConnected] = useState<boolean>(true)
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+        if(state.isConnected !== connected && state.isConnected !== null) setConnected(state.isConnected)
+      });
+
+    useEffect(() => {
+        return () => unsubscribe()
+    }, [])
 
 
     const handleSubmitForm = (values: {
@@ -91,15 +101,19 @@ const RegistrationStudent: React.FC<RegistrationProps> = ({toggleSuccessWindow})
         level: string;
         format: string;
     }) => {
-        
-        if (!isSubmitting) {
-            emailRef.current=values.email
-            setIsSubmitting(true)
-            dispatch(registerUser({
-                ...values,
-                role: 'student'
-            }))
+        if(connected) {
+            if (!isSubmitting) {
+                emailRef.current=values.email
+                setIsSubmitting(true)
+                dispatch(registerUser({
+                    ...values,
+                    role: 'student'
+                }))
+            }
+        } else {
+            Alert.alert(language.errors.noInternet)
         }
+        
     }
 
     useEffect(()=> {

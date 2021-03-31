@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import {View} from 'react-native';
+import {View, Alert as RNAlert} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Toast} from 'native-base';
+import NetInfo from "@react-native-community/netinfo";
 
 import {
     Container,
@@ -52,21 +53,34 @@ const AuthScreen: React.FC = () => {
     const [error, setError] = useState<{text:string,type:'success'|'error'}>({text: '', type: 'error'})
     const {language} = useLanguage()
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [connected, setConnected] = useState<boolean>(true)
     const currentUser = useSelector(userSelectors.currentUser)
     const loginError = useSelector(userSelectors.error)
     const dispatch = useDispatch()
     const navigation = useNavigation()
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+        if(state.isConnected !== connected && state.isConnected !== null) setConnected(state.isConnected)
+      });
+
+    useEffect(() => {
+        return () => unsubscribe()
+    }, [])
 
     const closeError = () => {
         setError({text: '', type: 'error'})
     }
 
     const handleSignIn = ({email, password}: {email: string, password: string}) => {
-        if(!isSubmitting) {
-            setIsSubmitting(true)
-            dispatch(loginUser({
-                email, password
-            }))
+        if(connected) {
+            if(!isSubmitting) {
+                setIsSubmitting(true)
+                dispatch(loginUser({
+                    email, password
+                }))
+            }
+        } else {
+            RNAlert.alert(language.errors.noInternet)
         }
     }
 

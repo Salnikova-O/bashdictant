@@ -55,7 +55,8 @@ const MainScreen:React.FC = () => {
                 setDictantStart(response.data.time)
             })
             .catch((err) => {
-                Alert.alert(JSON.stringify(err.response),JSON.stringify(err) )
+                // Alert.alert(JSON.stringify(err.response),JSON.stringify(err) )
+                Alert.alert(language.errors.noInternet)
                 console.log(err.response)
             })
         },[])

@@ -2,8 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import {Formik, FieldArray} from 'formik';
 import * as yup from 'yup';
 import {CheckBox} from 'react-native-elements'
-import {TouchableOpacity, View, Platform, UIManager, LayoutAnimation} from 'react-native';
+import {TouchableOpacity, View, Platform, UIManager, LayoutAnimation, Alert} from 'react-native';
 import {Toast} from 'native-base';
+import NetInfo from '@react-native-community/netinfo';
 
 import { userSelectors } from '../../../redux/user/user.selectors';
 import {changeUser, clearError, UserFieldTypes} from '../../../redux/user/user.actions';
@@ -115,6 +116,15 @@ const OrganizerProfile: React.FC = () => {
         extraPhones: []
     })
     const [showAddExpert, setShowAddExpert] = useState(false)
+    const [connected, setConnected] = useState<boolean>(true)
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+        if(state.isConnected !== connected && state.isConnected !== null) setConnected(state.isConnected)
+      });
+
+    useEffect(() => {
+        return () => unsubscribe()
+    }, [])
 
     useEffect(() => {
         if (currentUser) {
@@ -184,17 +194,21 @@ const OrganizerProfile: React.FC = () => {
         extraEmails: string[],
         extraPhones: string[]
     }) => {
-        if(!isSubmitting&&jwt) {
-            setIsSubmitting(true)
-            const emails = values.extraEmails.filter((email) => email.length>0)
-            const phones = values.extraPhones.filter((phone) => phone.length>0)
-            dispatch(changeUser({
-                ...values,
-                extraEmails: emails,
-                extraPhones: phones,
-                token: jwt,
-                role: 'organizer'
-            }))
+        if(connected) {
+            if(!isSubmitting&&jwt) {
+                setIsSubmitting(true)
+                const emails = values.extraEmails.filter((email) => email.length>0)
+                const phones = values.extraPhones.filter((phone) => phone.length>0)
+                dispatch(changeUser({
+                    ...values,
+                    extraEmails: emails,
+                    extraPhones: phones,
+                    token: jwt,
+                    role: 'organizer'
+                }))
+            }
+        } else {
+            Alert.alert(language.errors.noInternet)
         }
     }
 
