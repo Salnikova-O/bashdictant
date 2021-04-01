@@ -79,7 +79,7 @@ const MainScreen:React.FC = () => {
                     {
                         isStarted&&videoId?
                         <YoutubePlayer
-                            height={PixelRatio.roundToNearestPixel(((width>500? 500: width)-40)*9/16)}
+                            height={PixelRatio.roundToNearestPixel(((width>500? width : width)-40)*9/16)}
                             play={false}
                             videoId={videoId}
                         />
